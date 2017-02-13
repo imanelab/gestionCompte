@@ -1,0 +1,3 @@
+compte_homepage:
+    path:     /
+    defaults: { _controller: compteBundle:Default:index }
