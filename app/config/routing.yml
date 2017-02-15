@@ -2,6 +2,18 @@ compte:
     resource: "@compteBundle/Resources/config/routing.yml"
     prefix:   /
 
+compte_delegation:
+    resource: "@compteBundle/Resources/config/routing/delegation.yml"
+    prefix:   /delegation
+
+compte_account:
+        resource: "@compteBundle/Resources/config/routing/account.yml"
+        prefix:   /account
+
+compte_masterentity:
+        resource: "@compteBundle/Resources/config/routing/masterentity.yml"
+        prefix:   /masterentity
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

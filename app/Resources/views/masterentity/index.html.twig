@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Masterentities list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Depth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for masterEntity in masterEntities %}
+            <tr>
+                <td><a href="{{ path('masterentity_show', { 'id': masterEntity.id }) }}">{{ masterEntity.id }}</a></td>
+                <td>{{ masterEntity.name }}</td>
+                <td>{{ masterEntity.depth }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('masterentity_show', { 'id': masterEntity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('masterentity_edit', { 'id': masterEntity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('masterentity_new') }}">Create a new masterEntity</a>
+        </li>
+    </ul>
+{% endblock %}

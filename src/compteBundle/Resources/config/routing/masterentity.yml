@@ -1,0 +1,24 @@
+masterentity_index:
+    path:     /
+    defaults: { _controller: "compteBundle:MasterEntity:index" }
+    methods:  GET
+
+masterentity_show:
+    path:     /{id}/show
+    defaults: { _controller: "compteBundle:MasterEntity:show" }
+    methods:  GET
+
+masterentity_new:
+    path:     /new
+    defaults: { _controller: "compteBundle:MasterEntity:new" }
+    methods:  [GET, POST]
+
+masterentity_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "compteBundle:MasterEntity:edit" }
+    methods:  [GET, POST]
+
+masterentity_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:MasterEntity:delete" }
+    methods:  DELETE

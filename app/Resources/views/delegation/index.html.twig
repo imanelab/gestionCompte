@@ -1,0 +1,41 @@
+{% extends 'compteBundle::layout.html.twig' %}
+
+{% block pageContent %}
+    <h1>Delegations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Depth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for delegation in delegations %}
+            <tr>
+                <td><a href="{{ path('delegation_show', { 'id': delegation.id }) }}">{{ delegation.id }}</a></td>
+                <td>{{ delegation.name }}</td>
+                <td>{{ delegation.depth }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('delegation_show', { 'id': delegation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('delegation_edit', { 'id': delegation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('delegation_new') }}">Create a new delegation</a>
+        </li>
+    </ul>
+{% endblock %}
