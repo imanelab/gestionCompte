@@ -1,3 +1,7 @@
+compte_morass:
+    resource: "@compteBundle/Resources/config/routing/morass.yml"
+    prefix:   /morass
+
 compte_homepage:
     path:     /
     defaults: { _controller: compteBundle:Default:index }

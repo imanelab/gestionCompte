@@ -1,0 +1,41 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+{% block pageContent %}
+    <h1>Morasses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for morass in morasses %}
+            <tr>
+                <td><a href="{{ path('morass_show', { 'id': morass.id }) }}">{{ morass.id }}</a></td>
+                <td>{{ morass.name }}</td>
+                <td>{{ morass.year }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('morass_show', { 'id': morass.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('morass_edit', { 'id': morass.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('morass_new') }}">Create a new morass</a>
+        </li>
+    </ul>
+{% endblock %}

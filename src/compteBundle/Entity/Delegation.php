@@ -5,22 +5,23 @@ namespace compteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MasterEntity
+ * Delegation
  *
- * @ORM\Table(name="master_entity")
- * @ORM\Entity(repositoryClass="compteBundle\Repository\MasterEntityRepository")
+ * @ORM\Table(name="delegation")
+ * @ORM\Entity(repositoryClass="compteBundle\Repository\DelegationRepository")
  */
-class MasterEntity
+class Delegation
 {
-         /**
+    
+    /**
 
-   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\MasterEntity")
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Delegation")
 
    * @ORM\JoinColumn(nullable=false)
 
    */
 
-  private $masterEntity;
+  private $delegation;
 
     /**
      * @var int
@@ -41,7 +42,7 @@ class MasterEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="depth", type="integer")
+     * @ORM\Column(name="depth", type="smallint")
      */
     private $depth;
 
@@ -60,7 +61,7 @@ class MasterEntity
      * Set name
      *
      * @param string $name
-     * @return MasterEntity
+     * @return Delegation
      */
     public function setName($name)
     {
@@ -83,7 +84,7 @@ class MasterEntity
      * Set depth
      *
      * @param integer $depth
-     * @return MasterEntity
+     * @return Delegation
      */
     public function setDepth($depth)
     {
@@ -103,25 +104,25 @@ class MasterEntity
     }
 
     /**
-     * Set masterEntity
+     * Set delegation
      *
-     * @param \compteBundle\Entity\MasterEntity $masterEntity
-     * @return MasterEntity
+     * @param \compteBundle\Entity\Delegation $delegation
+     * @return Delegation
      */
-    public function setMasterEntity(\compteBundle\Entity\MasterEntity $masterEntity)
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation)
     {
-        $this->masterEntity = $masterEntity;
+        $this->delegation = $delegation;
 
         return $this;
     }
 
     /**
-     * Get masterEntity
+     * Get delegation
      *
-     * @return \compteBundle\Entity\MasterEntity 
+     * @return \compteBundle\Entity\Delegation 
      */
-    public function getMasterEntity()
+    public function getDelegation()
     {
-        return $this->masterEntity;
+        return $this->delegation;
     }
 }

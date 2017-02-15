@@ -5,13 +5,24 @@ namespace compteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ExternalAccount
+ * Delegation
  *
- * @ORM\Table(name="external_account")
- * @ORM\Entity(repositoryClass="compteBundle\Repository\ExternalAccountRepository")
+ * @ORM\Table(name="delegation")
+ * @ORM\Entity(repositoryClass="compteBundle\Repository\DelegationRepository")
  */
-class ExternalAccount
+class Delegation
 {
+    
+    /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Delegation")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $delegation;
+
     /**
      * @var int
      *
@@ -29,11 +40,11 @@ class ExternalAccount
     private $name;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="depth", type="smallint")
      */
-    private $type;
+    private $depth;
 
 
     /**
@@ -50,7 +61,7 @@ class ExternalAccount
      * Set name
      *
      * @param string $name
-     * @return ExternalAccount
+     * @return Delegation
      */
     public function setName($name)
     {
@@ -70,25 +81,25 @@ class ExternalAccount
     }
 
     /**
-     * Set type
+     * Set depth
      *
-     * @param string $type
-     * @return ExternalAccount
+     * @param integer $depth
+     * @return Delegation
      */
-    public function setType($type)
+    public function setDepth($depth)
     {
-        $this->type = $type;
+        $this->depth = $depth;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get depth
      *
-     * @return string 
+     * @return integer 
      */
-    public function getType()
+    public function getDepth()
     {
-        return $this->type;
+        return $this->depth;
     }
 }
