@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Externalaccounts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for externalAccount in externalAccounts %}
+            <tr>
+                <td><a href="{{ path('externalaccount_show', { 'id': externalAccount.id }) }}">{{ externalAccount.id }}</a></td>
+                <td>{{ externalAccount.name }}</td>
+                <td>{{ externalAccount.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('externalaccount_show', { 'id': externalAccount.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('externalaccount_edit', { 'id': externalAccount.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('externalaccount_new') }}">Create a new externalAccount</a>
+        </li>
+    </ul>
+{% endblock %}

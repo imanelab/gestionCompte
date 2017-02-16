@@ -1,0 +1,24 @@
+externalaccount_index:
+    path:     /
+    defaults: { _controller: "compteBundle:ExternalAccount:index" }
+    methods:  GET
+
+externalaccount_show:
+    path:     /{id}/show
+    defaults: { _controller: "compteBundle:ExternalAccount:show" }
+    methods:  GET
+
+externalaccount_new:
+    path:     /new
+    defaults: { _controller: "compteBundle:ExternalAccount:new" }
+    methods:  [GET, POST]
+
+externalaccount_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "compteBundle:ExternalAccount:edit" }
+    methods:  [GET, POST]
+
+externalaccount_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:ExternalAccount:delete" }
+    methods:  DELETE

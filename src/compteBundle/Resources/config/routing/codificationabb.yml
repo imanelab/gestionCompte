@@ -1,0 +1,24 @@
+codificationabb_index:
+    path:     /
+    defaults: { _controller: "compteBundle:CodificationABB:index" }
+    methods:  GET
+
+codificationabb_show:
+    path:     /{id}/show
+    defaults: { _controller: "compteBundle:CodificationABB:show" }
+    methods:  GET
+
+codificationabb_new:
+    path:     /new
+    defaults: { _controller: "compteBundle:CodificationABB:new" }
+    methods:  [GET, POST]
+
+codificationabb_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "compteBundle:CodificationABB:edit" }
+    methods:  [GET, POST]
+
+codificationabb_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:CodificationABB:delete" }
+    methods:  DELETE

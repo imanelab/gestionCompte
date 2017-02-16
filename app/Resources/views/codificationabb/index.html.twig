@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Codificationabbs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Label</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for codificationABB in codificationABBs %}
+            <tr>
+                <td><a href="{{ path('codificationabb_show', { 'id': codificationABB.id }) }}">{{ codificationABB.id }}</a></td>
+                <td>{{ codificationABB.code }}</td>
+                <td>{{ codificationABB.label }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('codificationabb_show', { 'id': codificationABB.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('codificationabb_edit', { 'id': codificationABB.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('codificationabb_new') }}">Create a new codificationABB</a>
+        </li>
+    </ul>
+{% endblock %}

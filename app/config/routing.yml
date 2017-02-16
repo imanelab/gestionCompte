@@ -14,6 +14,18 @@ compte_masterentity:
         resource: "@compteBundle/Resources/config/routing/masterentity.yml"
         prefix:   /masterentity
 
+compte_codificationabb:
+        resource: "@compteBundle/Resources/config/routing/codificationabb.yml"
+        prefix:   /codificationabb
+
+compte_movement:
+        resource: "@compteBundle/Resources/config/routing/movement.yml"
+        prefix:   /movement
+
+compte_externalaccount:
+        resource: "@compteBundle/Resources/config/routing/externalaccount.yml"
+        prefix:   /externalaccount
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
