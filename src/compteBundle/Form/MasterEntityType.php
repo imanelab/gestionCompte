@@ -13,7 +13,8 @@ class MasterEntityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('depth')->add('masterEntity')        ;
+        $builder->add('name')//->add('depth')
+        ->add('masterEntity')        ;
     }
     
     /**

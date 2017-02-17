@@ -1,5 +1,5 @@
-{% extends 'base.html.twig' %}
-
+{% extends "compteBundle::layout.html.twig" %}
+{% block pageContent %}
 {% block body %}
     <h1>Masterentity edit</h1>
 
@@ -18,4 +18,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+{% endblock %}
 {% endblock %}
