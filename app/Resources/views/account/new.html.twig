@@ -1,16 +1,58 @@
-{% extends 'base.html.twig' %}
+{% extends "compteBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Account creation</h1>
+{% block xTitle %}
+    <h2>اضافة حساب</h2>
+{% endblock %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+{% block content %}
+    
+	 {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.rib, "رقم الحساب")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.rib,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+		
+		
+		<div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.balance, "الرصيد")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.balance,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('account_index') }}">Back to the list</a>
-        </li>
-    </ul>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.delagation, "المندوبية")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.delagation,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.account, "الحساب الرئيسي")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.account,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		
+		
+		 <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ path('account_index') }}">العودة إلى اللائحة</a>
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+		
+  
 {% endblock %}

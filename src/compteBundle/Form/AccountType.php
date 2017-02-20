@@ -13,7 +13,10 @@ class AccountType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('rib')->add('depth')->add('balance')->add('delagation')->add('account')        ;
+        $builder->add('rib')
+		//->add('depth')
+		->add('balance')
+		->add('delagation')->add('account')        ;
     }
     
     /**

@@ -13,7 +13,9 @@ class DelegationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('depth')->add('delegation')        ;
+        $builder->add('name')
+		//->add('depth')
+		->add('delegation')        ;
     }
     
     /**
