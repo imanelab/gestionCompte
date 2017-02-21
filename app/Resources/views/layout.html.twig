@@ -53,7 +53,7 @@
             <br />
 
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                
                 <ul class="nav side-menu">
@@ -64,17 +64,52 @@
                  
                
                  
-                  <li><a><i class="fa fa-desktop"></i> العمليات البنكية <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bank"></i>الوحدات الإدارية <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Virement "Entrée"</a></li>
-                      <li><a href="media_gallery.html">Virement "sortie"</a></li>
+                      <li><a href="AjoutEntite.html"> إضافة وحدة إدارية</a></li>
+                      <li><a href="ListeEntite.html">Consulter entité</a></li>
+					  <li><a href="ModifEntite.html">تعديل وحدة إدارية</a></li>
                      
                     </ul>
                   </li>
 				  
-				  <li><a href="analyser.html"><i class="fa fa-table"></i> Analyser le budget </a>   </li>
+				  
+				  
+				  <li><a><i class="fa fa-desktop"></i> المندوبية <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="AjoutDelegation.html"> إضافة مندوبية </a></li>
+                      <li><a href="ConsulterDelegation.html">Consulter المندوبية</a></li>
+					  <li><a href="ModifDelegation.html">تعديل مندوبية</a></li>
+                     
+                    </ul>
+                  </li>
+				  
+				  
+				   <li><a><i class="fa fa-user"></i> المستخدمين  <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="AjoutUser.html">إضافة مستخدم جديد</a></li>
+                      <li><a href="ConsulterUser.html">Consulter utilisateurs</a></li>
+					  <li><a href="ModifUser.html">تعديل مستخدم</a></li>
+                     
+                    </ul>
+                  </li>
+				  
+				  
+				  
+				    <li><a><i class="fa fa-desktop"></i> الترميز <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="AjoutCode.html">إضافة ترميز جديد</a></li>
+                      <li><a href="ConsulterCode.html">Consulter Codification</a></li>
+					  <li><a href="ModifCode.html">تعديل ترميز</a></li>
+                     
+                    </ul>
+                  </li>
+				  
+				  
+				  
+				  <li><a href="analyser.html"><i class="fa fa-table"></i> Etat actuel de la morasse </a>   </li>
 				    
-				  <li><a href="historique.html"><i class="fa fa-bar-chart-o"></i> Historique </a>   </li>
+				 
                 
                   
                  
@@ -131,7 +166,7 @@
         <!-- /footer content -->
       </div>
     </div>
-
+{% block js %}
     <!-- jQuery -->
     <script src="{{asset('assets/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
@@ -432,5 +467,6 @@
       gauge.setTextField(document.getElementById("gauge-text"));
     </script>
     <!-- /gauge.js -->
+{%endblock%}
   </body>
 </html>

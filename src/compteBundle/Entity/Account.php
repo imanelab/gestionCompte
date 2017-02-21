@@ -17,7 +17,7 @@ class Account
 
    * @ORM\OneToOne(targetEntity="compteBundle\Entity\Delegation")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
