@@ -16,7 +16,7 @@ class MasterEntity
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\MasterEntity")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 

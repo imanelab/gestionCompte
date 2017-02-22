@@ -14,7 +14,7 @@ class MasterEntityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')//->add('depth')
-        ->add('masterEntity')        ;
+        ->add('masterEntity','entity',['class'=>'compteBundle:MasterEntity','property'=>'name','required'=>false,])        ;
     }
     
     /**

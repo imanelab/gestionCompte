@@ -36,6 +36,13 @@ class DelegationController extends Controller
         $delegation = new Delegation();
         $form = $this->createForm('compteBundle\Form\DelegationType', $delegation);
         $form->handleRequest($request);
+        $depth=$delegation->getDepth();
+        if($depth===NULL){
+            $delegation->setDepth(1);
+        }
+        else
+            $delegation->setDepth($delegation->getMasterEntity()->getDepth());
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
