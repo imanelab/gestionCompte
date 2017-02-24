@@ -1,0 +1,56 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div class="span12">
+        {% block pageTitle %}
+                    
+            <h1>Profile de l'utilisateur</h1>
+ 
+        {% endblock %}
+    </div>
+    <div>
+        <div class="span4" id="sidebar">
+        </div>
+        <div class="span8">
+            {% block body -%}
+                <div class="block span6">
+                 <div class="table-resonsive">
+                    <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            {{ form_row(edit_form.immatriculation) }}
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                           
+                        </tr>
+                        <tr>
+                            <td><a class="btn btn-inverse" href="{{ path('eai_gestion_auto_homepage')}}">
+                                <i class="icon-chevron-left icon-white"></i>
+                                Retour à l'accueil
+                            </a></td>
+                            <td><a class="btn btn-primary pull-right" href="{{ path('fos_user_profile_edit') }}">
+                                <i class="icon-edit icon-white"></i>
+                                Editer
+                            </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{#
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+    {{ form_widget(form) }}
+    {{ form_widget(plainPassword) }}
+    <div>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+</form>#}

@@ -1,0 +1,59 @@
+{% extends 'EAIusersBundle::layout.html.twig' %}
+{% block content %}
+    {% trans_default_domain 'FOSUserBundle' %}
+    <div class="span12">
+        {% block pageTitle %}
+                    
+            <h1>Profile de l'utilisateur</h1>
+ 
+        {% endblock %}
+    </div>
+    <div>
+        <div class="span4" id="sidebar">
+        </div>
+        <div class="span8">
+            {% block body -%}
+                <div class="block span6">
+                 <div class="table-responsive">
+                    <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Prénom</th>
+                            <td> {{ user.firstname }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ user.lastName }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'profile.show.username'|trans }}</th>
+                            <td> {{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'profile.show.email'|trans }}</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mot de passe</th>
+                            <td><a class="href" href="{{ path('fos_user_change_password') }}">
+                                <i class="icon-edit"></i>
+                                Changer
+                            </a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="btn btn-inverse" href="{{ path('eai_gestion_auto_homepage')}}">
+                                <i class="icon-chevron-left icon-white"></i>
+                                Retour à l'accueil
+                            </a></td>
+                            <td><a class="btn btn-primary pull-right" href="{{ path('account_edit',{'username':user.username}) }}">
+                                <i class="icon-edit icon-white"></i>
+                                Editer
+                            </a></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+            {% endblock %}
+        </div>
+    </div>
+ {% endblock %}

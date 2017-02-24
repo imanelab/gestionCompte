@@ -2,7 +2,7 @@
 # http://symfony.com/doc/current/security.html
 security:
     encoders:
-        OC\UserBundle\Entity\User: sha512
+        CUserBundle\Entity\User: sha512
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
