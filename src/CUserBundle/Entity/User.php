@@ -94,26 +94,4 @@ class User extends BaseUser
         return $this->lastName;
     }
 
-    /**
-     * Set masterEntity
-     *
-     * @param \compteBundle\Entity\MasterEntity $masterEntity
-     * @return User
-     */
-    public function setMasterEntity(\compteBundle\Entity\MasterEntity $masterEntity)
-    {
-        $this->masterEntity = $masterEntity;
-
-        return $this;
-    }
-
-    /**
-     * Get masterEntity
-     *
-     * @return \compteBundle\Entity\MasterEntity 
-     */
-    public function getMasterEntity()
-    {
-        return $this->masterEntity;
-    }
 }

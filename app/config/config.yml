@@ -68,6 +68,9 @@ swiftmailer:
     spool:     { type: memory }
 
 fos_user:
+    registration:
+        form:
+            type: CUserBundle\Form\RegistrationType
 
     db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
 
