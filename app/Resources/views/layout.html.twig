@@ -16,6 +16,8 @@
     <link href="{{asset('assets/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{asset('assets/build/css/custom.min.css')}}" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -121,7 +123,7 @@
         <!-- /footer content -->
       </div>
     </div>
-
+{% block js %}
     <!-- jQuery -->
     <script src="{{asset('assets/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
@@ -130,6 +132,7 @@
     <script src="{{asset('assets/vendors/fastclick/lib/fastclick.js')}}"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
+{% endblock %}
 
   </body>
 </html>

@@ -16,7 +16,7 @@ class MovementType extends AbstractType
         $builder->add('amountMv')
 	->add('dateMv','date',['widget'=>'single_text'])
 		->add('months')
-		->add('realDateMv')
+		->add('realDateMv','text')
 		->add('line')
 		->add('codificationABB')
 		->add('creditAccount')

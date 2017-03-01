@@ -8,7 +8,7 @@
         {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
         {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
     {% endif %}
-    	                            <a class="btn btn-inverse" href="{{ path('account')}}">
+    	                            <a class="btn btn-inverse" href="{{ path('fos_user_profile_show')}}">
 	                                <i class="icon-chevron-left icon-white"></i>
 	                                Retour à la liste
 	                            </a>
