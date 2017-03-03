@@ -117,6 +117,8 @@
 	
   {% block js %}
   {{ parent() }}
+	 <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 	 <!-- jQuery -->
     <script src="{{asset('assets/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
