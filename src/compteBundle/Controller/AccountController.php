@@ -34,11 +34,20 @@ class AccountController extends Controller
     public function newAction(Request $request)
     {
         $account = new Account();
+        $account->setDepth(1);
         $form = $this->createForm('compteBundle\Form\AccountType', $account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+
+           if($account->getAccount()){
+           $parent= $account->getAccount()->getId();
+           $id=$account->getId();
+           if($parent==$id)
+           $account->removeParentAccount();
+             }
             $em->persist($account);
             $em->flush($account);
 
@@ -76,6 +85,12 @@ class AccountController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if($account->getAccount()){
+           $parent= $account->getAccount()->getId();
+           $id=$account->getId();
+           if($parent==$id)
+           $account->removeParentAccount();
+             }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('account_edit', array('id' => $account->getId()));
