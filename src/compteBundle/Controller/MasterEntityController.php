@@ -34,10 +34,11 @@ class MasterEntityController extends Controller
     public function newAction(Request $request)
     {
         $masterEntity = new Masterentity();
+		$masterEntity->setDepth(1);
         $form = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
+
+       if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($masterEntity);
@@ -83,12 +84,6 @@ class MasterEntityController extends Controller
         $deleteForm = $this->createDeleteForm($masterEntity);
         $editForm = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $editForm->handleRequest($request);
-        // allow null in parent(masterEntity attribute) when persisting the object 
-        /*$parent=$masterEntity->getMasterEntity();
-        if (is_null($parent)){
-            $parentEntity = new MasterEntity();
-            $masterEntity->setMasterEntity($parentEntity); //$setMasterEntity()
-        }*/
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();

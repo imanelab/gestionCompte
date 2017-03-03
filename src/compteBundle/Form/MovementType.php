@@ -14,9 +14,12 @@ class MovementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('amountMv')
-	->add('dateMv','date',['widget'=>'single_text'])
+	->add('dateMv','datetime',array(
+	'widget'=>'single_text',
+	'html5'=>false,
+	))
 		->add('months')
-		->add('realDateMv','text')
+		->add('realDateMv')
 		->add('line')
 		->add('codificationABB')
 		->add('creditAccount')

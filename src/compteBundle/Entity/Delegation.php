@@ -55,6 +55,16 @@ class Delegation
     public function getId()
     {
         return $this->id;
+	}
+		
+	/**
+     * Set id
+	 * @param string $id
+     *
+     */
+    public function setId($id)
+    {
+        $this->id=$id;
     }
 
     /**
@@ -124,5 +134,10 @@ class Delegation
     public function getDelegation()
     {
         return $this->delegation;
+    }
+	
+	    public function removeParentDelegation()
+    {
+        unset($this->delegation);
     }
 }

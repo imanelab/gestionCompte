@@ -1,36 +1,59 @@
 {% extends "compteBundle::layout.html.twig" %}
 
-{% block pageContent %}
-    <h1>Codificationabb</h1>
+{% block xTitle %}
+    <h2> ترميز بريد بنك </h2>
+{% endblock %}
+{% block content %}
+                  
+   
+   
+ <table id="datatable" class="table table-striped table-bordered" dir="rtl">
+           
+      <thead>		
+            <tr>
+			     <th>code</th>
+				 <th>label</th>
+			    <th>العمليات</th>
+				
+               
+				
+				
+                
+            </tr>
+			</thead>
+			
+			 <tbody> 
+            <tr>
+			  <td>{{ codificationABB.code }}</td>
+			   <td>{{ codificationABB.label }}</td>
+			 <td>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ codificationABB.id }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ codificationABB.code }}</td>
-            </tr>
-            <tr>
-                <th>Label</th>
-                <td>{{ codificationABB.label }}</td>
+                          
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                           
+							 
+							 
+							 {{ form_start(delete_form) }}
+                           <input type="submit" value="حذف" class="btn btn-danger">
+						  
+						    <a class="btn btn-info" href="{{ path('codificationabb_edit', { 'id': codificationABB.id }) }}">تعديل
+							
+							</a>
+                             {{ form_end(delete_form) }}
+							 
+							
+							 
+							</div> </div> 
+                       </td>
+					   
+			   
+              
+                
+				
             </tr>
         </tbody>
     </table>
+	<a class="btn btn-primary pull-right" href="{{ path('codificationabb_index') }}">العودة إلى اللائحة</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('codificationabb_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('codificationabb_edit', { 'id': codificationABB.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

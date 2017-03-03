@@ -1,41 +1,113 @@
 {% extends "compteBundle::layout.html.twig" %}
 
-{% block pageContent %}
-    <h1>Codificationabbs list</h1>
-
-    <table>
+{% block xTitle %}
+    <h2> ترميز بريد بنك </h2>
+{% endblock %}
+{% block content %}
+                  
+   
+   
+ <table id="datatable" class="table table-striped table-bordered" dir="rtl">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Label</th>
-                <th>Actions</th>
-            </tr>
+		
         </thead>
         <tbody>
-        {% for codificationABB in codificationABBs %}
-            <tr>
-                <td><a href="{{ path('codificationabb_show', { 'id': codificationABB.id }) }}">{{ codificationABB.id }}</a></td>
-                <td>{{ codificationABB.code }}</td>
-                <td>{{ codificationABB.label }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('codificationabb_show', { 'id': codificationABB.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('codificationabb_edit', { 'id': codificationABB.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+       
+		<div class="row" name="tc1group1" id="tc1group1">
+			<th class="groupe" onClick="cache_div('tc1group1');">groupe1</th>
+			<div class="row" id="1">
+			  <tr class="label">ligne 1</tr>
+			  <tr class="col1">x</tr>
+			  <tr class="col2">x</tr>
+			</div>
+			<div class="row" id="2">
+			  <tr class="label">ligne 2</tr>
+			  <tr class="col1">x</tr>
+			  <tr class="col2">x</tr>
+			</div>
+		</div>
+		
+	    	<tr >
+               
+                <td>testttttt</td>
+  
             </tr>
-        {% endfor %}
+		
+		
+		
+		
+	
+<div >
+    <div class="row">
+      <span class="label">&nbsp;</span>
+	  <span class="col1">Col1</span>
+	  <span class="col2">Col2</span>
+	  <span class="col3">Col3</span>
+	  <span class="col4">Col4</span>
+    </div>
+	<div class="row" name="class1" id="class1">
+		<span class="classe" onClick="cache_div('class1');">classe1</span>
+		<div class="row" name="tc1group1" id="tc1group1">
+			<span class="groupe" onClick="cache_div('tc1group1');">groupe1</span>
+			<div class="row" id="1">
+			  <span class="label">ligne 1</span>
+			  <span class="col1">x</span>
+			  <span class="col2">x</span>
+			  <span class="col3">x</span>
+			  <span class="col4">x</span>
+			</div>
+			<div class="row" id="2">
+			  <span class="label">ligne 2</span>
+			  <span class="col1">x</span>
+			  <span class="col2">x</span>
+			  <span class="col3">x</span>
+			  <span class="col4">x</span>
+			</div>
+		</div>
+		
+	</div>
+  <div class="spacer">
+  &nbsp;
+  </div>
+
+</div>
+
+
+		
+		
+		
+	
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('codificationabb_new') }}">Create a new codificationABB</a>
-        </li>
-    </ul>
+	 
+   
+{% endblock %}
+
+{% block js %}
+{{parent()}}
+ 
+ <!-- Datatables -->
+    <script src="{{asset('assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
+    
+	
+	
+	<script language="JavaScript" type="text/JavaScript">
+function cache_div(elt) {
+var tabDiv=document.getElementById(elt).childNodes;
+for (x=0;x<tabDiv.length;x++) {
+	if (tabDiv[x].nodeName=='DIV')
+		if (tabDiv[x].style.display=="none") {
+			tabDiv[x].style.display="block";
+		} else {
+			tabDiv[x].style.display="none";
+		}
+	}
+}
+</script>
+
 {% endblock %}
