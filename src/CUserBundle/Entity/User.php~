@@ -17,11 +17,11 @@ class User extends BaseUser
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\MasterEntity")
 
-   * @ORM\JoinColumn(nullable=true)
+   * @ORM\JoinColumn(nullable=false)
 
    */
 
-  protected $masterEntity;
+  private $masterEntity;
 
 
     /**
@@ -36,16 +36,16 @@ class User extends BaseUser
  	/**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
      */
-    protected $firstName;
+    private $firstName;
 
      /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
      */
-    protected $lastName;
+    private $lastName;
 
 
     /**
@@ -94,4 +94,26 @@ class User extends BaseUser
         return $this->lastName;
     }
 
+    /**
+     * Set masterEntity
+     *
+     * @param \compteBundle\Entity\MasterEntity $masterEntity
+     * @return User
+     */
+    public function setMasterEntity(\compteBundle\Entity\MasterEntity $masterEntity)
+    {
+        $this->masterEntity = $masterEntity;
+
+        return $this;
+    }
+
+    /**
+     * Get masterEntity
+     *
+     * @return \compteBundle\Entity\MasterEntity 
+     */
+    public function getMasterEntity()
+    {
+        return $this->masterEntity;
+    }
 }

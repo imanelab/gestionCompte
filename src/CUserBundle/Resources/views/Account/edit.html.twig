@@ -1,0 +1,56 @@
+{% extends 'EAIusersBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+	{% block pageTitle %}
+    	<h1>Editer le profile de l'utilisateur  </h1>
+    {% endblock %}
+    <div class="span4" id="sidebar">
+            {% block menu %}
+            {% endblock %}
+        </div>
+        <div class="span7">
+            {% block body -%}
+                <div class="block span6">
+                 <div class="table-resonsive">
+                    {{ form_start(form) }}
+                    <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>{{ form_label(form.firstName) }} </th>
+                            <td>
+                            {{ form_widget(form.firstName) }}    
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_label(form.lastName) }}</th>
+                            <td>{{ form_widget(form.lastName) }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_label(form.username) }}</th>
+                            <td>{{ form_widget(form.username) }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_label(form.email) }}</th>
+                            <td>{{ form_widget(form.email) }}</td>
+                        </tr>
+
+                        <tr>
+                            <td><a class="btn btn-inverse" href="{{ path('account') }}">
+                                <i class="icon-chevron-left icon-white"></i>
+                                Retour à la liste
+                            </a></td>
+                            <td><button class="btn btn-primary pull-right" >{{ 'profile.edit.submit'|trans }}<i class="icon-ok icon-white"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{ form_end(form) }}
+        </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+{#
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    {{ form_widget(form) }}
+</form>
+#}

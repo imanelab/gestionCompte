@@ -19,7 +19,7 @@ class MovementType extends AbstractType
 	'html5'=>false,
 	))
 		->add('months')
-		->add('realDateMv')
+		->add('realDateMv','text')
 		->add('line')
 		->add('codificationABB')
 		->add('creditAccount')

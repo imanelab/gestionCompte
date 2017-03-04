@@ -15,7 +15,7 @@ class DelegationType extends AbstractType
     {
         $builder->add('name')
 		//->add('depth')
-		->add('delegation')        ;
+		->add('delegation','entity',['class'=>'compteBundle:Delegation','property'=>'name','required'=>false])        ;
     }
     
     /**

@@ -34,12 +34,23 @@ class DelegationController extends Controller
     public function newAction(Request $request)
     {
         $delegation = new Delegation();
+<<<<<<< HEAD
 		$delegation->setDepth(1);
+=======
+        $delegation->setDepth(1);
+>>>>>>> ec48ab19ff2919a41c76e6cd5652a8cd0dbf4f10
         $form = $this->createForm('compteBundle\Form\DelegationType', $delegation);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if($delegation->getDelegation()){
+           $parent= $delegation->getDelegation()->getId();
+           $id=$delegation->getId();
+           if($parent==$id){
+           $delegation->removeParentDelegation();
+           $em->flush($delegation);}
+            }
             $em->persist($delegation);
             $em->flush($delegation);
 

@@ -36,10 +36,19 @@ class MasterEntityController extends Controller
         $masterEntity = new Masterentity();
         $form = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($masterEntity);
+            $depth=$masterEntity->getDepth();
+            $parent=$masterEntity->getMasterEntity();
+            if( is_null($parent))
+            $masterEntity->setDepth(1);
+        else{
+            $parentDepth=$parent->getDepth()+1;
+            $masterEntity->setDepth($parentDepth);
+        }
             $em->flush($masterEntity);
 
             return $this->redirectToRoute('masterentity_show', array('id' => $masterEntity->getId()));
@@ -74,6 +83,12 @@ class MasterEntityController extends Controller
         $deleteForm = $this->createDeleteForm($masterEntity);
         $editForm = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $editForm->handleRequest($request);
+        // allow null in parent(masterEntity attribute) when persisting the object 
+        /*$parent=$masterEntity->getMasterEntity();
+        if (is_null($parent)){
+            $parentEntity = new MasterEntity();
+            $masterEntity->setMasterEntity($parentEntity); //$setMasterEntity()
+        }*/
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
