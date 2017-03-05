@@ -126,7 +126,7 @@ class Delegation
         return $this->delegation;
     }
 
-    public function removeParentDelegation()
+    public function removeParent()
     {
         unset($this->delegation);
     }

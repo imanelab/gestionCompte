@@ -14,7 +14,8 @@
         </thead>
         <tbody>
         {% for masterEntity in masterEntities %}
-            <tr>
+            {% if masterEntity.depth < maxDepth %}
+             <tr>
                 <td><a href="{{ path('masterentity_show', { 'id': masterEntity.id }) }}">{{ masterEntity.id }}</a></td>
                 <td>{{ masterEntity.name }}</td>
                 <td>{{ masterEntity.depth }}</td>
@@ -29,6 +30,30 @@
                     </ul>
                 </td>
             </tr>
+
+                {% for masterEntity1 in masterEntities %}
+                    {% if masterEntity1.masterEntity%}
+                        {% if masterEntity1.masterEntity.id == masterEntity.id%}
+                            <tr>
+                             <td></td>
+                                <td><a href="{{ path('masterentity_show', { 'id': masterEntity1.id }) }}">{{ masterEntity1.id }}</a></td>
+                                <td>{{ masterEntity1.name }}</td>
+                                <td>{{ masterEntity1.depth }}</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('masterentity_show', { 'id': masterEntity1.id }) }}">show</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('masterentity_edit', { 'id': masterEntity1.id }) }}">edit</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

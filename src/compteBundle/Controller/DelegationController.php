@@ -34,23 +34,20 @@ class DelegationController extends Controller
     public function newAction(Request $request)
     {
         $delegation = new Delegation();
-<<<<<<< HEAD
-		$delegation->setDepth(1);
-=======
-        $delegation->setDepth(1);
->>>>>>> ec48ab19ff2919a41c76e6cd5652a8cd0dbf4f10
         $form = $this->createForm('compteBundle\Form\DelegationType', $delegation);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if($delegation->getDelegation()){
-           $parent= $delegation->getDelegation()->getId();
-           $id=$delegation->getId();
-           if($parent==$id){
-           $delegation->removeParentDelegation();
-           $em->flush($delegation);}
-            }
+            $em->persist($delegation);
+            $depth=$delegation->getDepth();
+            $parent=$delegation->getDelegation();
+            if( is_null($parent))
+            $delegation->setDepth(1);
+        else{
+            $parentDepth=$parent->getDepth()+1;
+            $delegation->setDepth($parentDepth);
+        }
             $em->persist($delegation);
             $em->flush($delegation);
 
@@ -111,6 +108,24 @@ class DelegationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+
+                if(!$delegation->getDelegation()){
+           // $parent= $delegation->getDelegation()->getId();
+           // $id=$delegation->getId();
+           // if($parent==$id)
+           $delegation->removeParent();
+             }
+
+            $depth=$delegation->getDepth();
+            $parent=$delegation->getDelegation();
+            if( is_null($parent))
+            $delegation->setDepth(1);
+        else{
+            $parentDepth=$parent->getDepth()+1;
+            $delegation->setDepth($parentDepth);
+        }
+
             $em->remove($delegation);
             $em->flush($delegation);
         }

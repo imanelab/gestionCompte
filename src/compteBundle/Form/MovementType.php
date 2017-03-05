@@ -14,18 +14,15 @@ class MovementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('amountMv')
-	->add('dateMv','datetime',array(
-	'widget'=>'single_text',
-	'html5'=>false,
-	))
-		->add('months')
-		->add('realDateMv','text')
-		->add('line')
-		->add('codificationABB')
-		->add('creditAccount')
-		->add('debitAccount')
-		->add('creditEAccount')
-		->add('debitEAccount')        ;
+	->add('dateMv','date',["widget"=>"single_text"])
+		->add('months','number')
+		->add('realDateMv','date',["widget"=>"single_text"])
+		->add('line','entity',['class'=>'compteBundle:Line','property'=>'name'])
+		->add('codificationABB','entity',['class'=>'compteBundle:CodificationABB','property'=>'label','required'=>false]])
+		->add('creditAccount','entity',['class'=>'compteBundle:Account','property'=>'rib'])
+		->add('debitAccount','entity',['class'=>'compteBundle:Account','property'=>'rib'])
+		->add('creditEAccount','entity',['class'=>'compteBundle:Account','property'=>'rib')
+		->add('debitEAccount','entity',['class'=>'compteBundle:Account','property'=>'rib'])        ;
     }
     
     /**

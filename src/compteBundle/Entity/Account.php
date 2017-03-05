@@ -190,7 +190,7 @@ class Account
     }
 
 
-    public function removeParentAccount()
+    public function removeParent()
     {
         unset($this->account);
     }

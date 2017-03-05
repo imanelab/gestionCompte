@@ -108,7 +108,7 @@ class MasterEntity
      * @param \compteBundle\Entity\MasterEntity $masterEntity
      * @return MasterEntity
      */
-    public function setMasterEntity(\compteBundle\Entity\MasterEntity $masterEntity)
+    public function setMasterEntity(\compteBundle\Entity\MasterEntity $masterEntity=null)
     {
         $this->masterEntity = $masterEntity;
 
@@ -123,5 +123,10 @@ class MasterEntity
     public function getMasterEntity()
     {
         return $this->masterEntity;
+    }
+
+        public function removeParent()
+    {
+        unset($this->masterEntity);
     }
 }

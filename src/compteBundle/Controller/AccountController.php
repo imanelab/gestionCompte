@@ -34,20 +34,28 @@ class AccountController extends Controller
     public function newAction(Request $request)
     {
         $account = new Account();
-        $account->setDepth(1);
         $form = $this->createForm('compteBundle\Form\AccountType', $account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            $parent=$account->getAccount();
+            if( is_null($parent))
+            $account->setDepth(1);
+        else{
+                $parentId= $account->getAccount()->getId();
+                $id=$account->getId();
+                if($parentId==$id){
+                $account->removeParent();
+                $account->setDepth(1);
+            } 
+                else{
+                    $parentDepth=$parent->getDepth()+1;
+                    $account->setDepth($parentDepth);
+                }
+            }
 
-           if($account->getAccount()){
-           $parent= $account->getAccount()->getId();
-           $id=$account->getId();
-           if($parent==$id)
-           $account->removeParentAccount();
-             }
             $em->persist($account);
             $em->flush($account);
 
@@ -89,7 +97,7 @@ class AccountController extends Controller
            $parent= $account->getAccount()->getId();
            $id=$account->getId();
            if($parent==$id)
-           $account->removeParentAccount();
+           $account->removeParent();
              }
             $this->getDoctrine()->getManager()->flush();
 

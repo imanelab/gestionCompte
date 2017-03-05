@@ -21,9 +21,10 @@ class MasterEntityController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $masterEntities = $em->getRepository('compteBundle:MasterEntity')->findAll();
-
+        $maxDepthObject=$em->getRepository('compteBundle:MasterEntity')->findOneBy([],array('depth' => 'Desc'));
+        $maxDepth=$maxDepthObject->getDepth();
         return $this->render('masterentity/index.html.twig', array(
-            'masterEntities' => $masterEntities,
+            'masterEntities' => $masterEntities,'maxDepth'=>$maxDepth
         ));
     }
 
@@ -36,12 +37,10 @@ class MasterEntityController extends Controller
         $masterEntity = new Masterentity();
         $form = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($masterEntity);
-            $depth=$masterEntity->getDepth();
+            // penser par la suite à enlever le cas ou entity est parentEntity sont les memes
             $parent=$masterEntity->getMasterEntity();
             if( is_null($parent))
             $masterEntity->setDepth(1);
@@ -49,6 +48,7 @@ class MasterEntityController extends Controller
             $parentDepth=$parent->getDepth()+1;
             $masterEntity->setDepth($parentDepth);
         }
+            $em->persist($masterEntity);
             $em->flush($masterEntity);
 
             return $this->redirectToRoute('masterentity_show', array('id' => $masterEntity->getId()));
@@ -83,16 +83,20 @@ class MasterEntityController extends Controller
         $deleteForm = $this->createDeleteForm($masterEntity);
         $editForm = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $editForm->handleRequest($request);
-        // allow null in parent(masterEntity attribute) when persisting the object 
-        /*$parent=$masterEntity->getMasterEntity();
-        if (is_null($parent)){
-            $parentEntity = new MasterEntity();
-            $masterEntity->setMasterEntity($parentEntity); //$setMasterEntity()
-        }*/
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+           
+        $parent=$masterEntity->getMasterEntity();
+                     if(is_null($parent)){
+                  //$masterEntity->removeParent();
+                    $masterEntity->setDepth(1);
+                }
+                else{
+                    $parentDepth=$parent->getDepth()+1;
+                    $masterEntity->setDepth($parentDepth);
+                }
 
+         $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('masterentity_edit', array('id' => $masterEntity->getId()));
         }
 
