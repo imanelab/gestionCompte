@@ -1,11 +1,7 @@
-{% extends "EAIusersBundle::layout.html.twig" %}
+{% extends "CUserBundle::layout.html.twig" %}
 
 {% block title %}
     {{parent()}} - Gestion des comptes
-{% endblock %}
-{% block css %}
-    {{ parent() }}
-    <link href="{{asset('public/assets/DT_bootstrap.css')}}" rel="stylesheet" media="screen">
 {% endblock %}
 {% block content %}
     {% for key, messages in app.session.flashbag.all() %}
@@ -16,7 +12,7 @@
     {% endfor %}
   {% endfor %}
     <div class="span12">
-        {% block pageTitle %}
+        {% block xTitle %}
                     
             <h1>Gestion des comptes</h1>
  
@@ -25,30 +21,8 @@
     <div>
         <div class="span12">
                 
-            {% block body %}
-                 <div class="block">
-                    <div class="table-responsive">
-                        <div class="table-toolbar">
-                                      <div class="btn-group">
-                                         <span>
-                                            <a class="btn btn-success" href="{{ path('fos_user_registration_register') }}">
-                                                Ajouter un compte
-                                                <i class="icon-plus icon-white"></i>
-                                            </a>
-                                        </span>
-                                      </div>
-                                      <div class="btn-group pull-right">
-                                         <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
-                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                         </ul>
-                                      </div>
-                        </div>
-                        <table  cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
-                            <thead>
-                                <tr>
+            {% block pageContent %}
+
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Identifiant</th>
