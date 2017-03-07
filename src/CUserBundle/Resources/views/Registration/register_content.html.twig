@@ -1,10 +1,11 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 {% block xTitle %}
     <h2> تسجيل مستخدم </h2>
 {% endblock %}
-{% block content %}
+{% block fos_user_content %}
      	{{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
 
      		<div class="form-group">
@@ -54,5 +55,4 @@
                 </a>
         {{ form_rest(form) }}
         {{ form_end(form) }}
-    </form>
-{% endblock %}
+{% endblock fos_user_content%}

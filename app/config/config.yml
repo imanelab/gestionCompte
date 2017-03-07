@@ -71,6 +71,9 @@ fos_user:
     registration:
         form:
             type: CUserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: CUserBundle\Form\ProfileType
 
     db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
 

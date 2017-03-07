@@ -1,32 +1,64 @@
-{% extends "compteBundle::layout.html.twig" %}
+{% extends "CUserBundle::base.html.twig" %}
+  {% block title %}
+     {{parent()}} - Gestion des utilisateurs
+      {% endblock %}
+          
+
+		{% block pageContent %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          
+          <!-- /top tiles -->
+
+          <br />
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="">
+                <div class="x_title">
+             {% block xTitle %}
+			{% endblock 
+			%}
+               
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+		                {% for key, message in app.session.flashbag.all() %}
+
+						    <div class="alert alert-{{ key }}">
+
+						      {{ message|trans({}, 'FOSUserBundle') }}
+
+						    </div>
+
+  						{% endfor %}
+
+                  <div class="dashboard-widget-content">
+                  {% block fos_user_content %}
+
+  					{% endblock fos_user_content %}
+                          </div>
+                        </div>
+                      </li>
+                     
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-{% block xTitle %}
-{% endblock %}
-{% block content %}
-
-  {% for key, message in app.session.flashbag.all() %}
-
-    <div class="alert alert-{{ key }}">
-
-      {{ message|trans({}, 'FOSUserBundle') }}
-
-    </div>
-
-  {% endfor %}
-
-
-  {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
-
-  {% block fos_user_content %}
-
-  {% endblock fos_user_content %}
-
-{% endblock %}
+            <div class="col-md-8 col-sm-8 col-xs-12">
 
 
 
-
-
-
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+          {% endblock %}
 

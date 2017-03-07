@@ -12,3 +12,8 @@ services:
         class: CUserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: cuser_user_registration }
+
+    app.form.profile:
+        class: CUserBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: cuser_user_profile}
