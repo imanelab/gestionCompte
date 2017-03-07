@@ -1,0 +1,43 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
+{% endblock %}
+{% block content %}
+    <h1>Paragraphs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paragraph in paragraphs %}
+            <tr>
+                <td><a href="{{ path('paragraph_show', { 'id': paragraph.id }) }}">{{ paragraph.id }}</a></td>
+                <td>{{ paragraph.idp }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('paragraph_show', { 'id': paragraph.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('paragraph_edit', { 'id': paragraph.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('paragraph_new') }}">Create a new paragraph</a>
+        </li>
+    </ul>
+{% endblock %}

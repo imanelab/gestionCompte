@@ -1,0 +1,44 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
+{% endblock %}
+{% block content %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Version</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for line in lines %}
+            <tr>
+                <td><a href="{{ path('line_show', { 'id': line.id }) }}">{{ line.id }}</a></td>
+                <td>{{ line.amount }}</td>
+                <td>{{ line.version }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('line_show', { 'id': line.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('line_edit', { 'id': line.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('line_new') }}">Create a new line</a>
+        </li>
+    </ul>
+{% endblock %}

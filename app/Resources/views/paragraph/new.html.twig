@@ -1,0 +1,19 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
+{% endblock %}
+{% block content %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('paragraph_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

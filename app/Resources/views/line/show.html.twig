@@ -1,0 +1,39 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
+{% endblock %}
+{% block content %}
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ line.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ line.amount }}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{ line.version }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('line_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('line_edit', { 'id': line.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

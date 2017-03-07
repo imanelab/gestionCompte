@@ -1,0 +1,35 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
+{% endblock %}
+{% block content %}
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ paragraph.id }}</td>
+            </tr>
+            <tr>
+                <th>Idp</th>
+                <td>{{ paragraph.idp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('paragraph_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('paragraph_edit', { 'id': paragraph.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

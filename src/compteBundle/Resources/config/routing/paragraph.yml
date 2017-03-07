@@ -1,0 +1,24 @@
+paragraph_index:
+    path:     /
+    defaults: { _controller: "compteBundle:Paragraph:index" }
+    methods:  GET
+
+paragraph_show:
+    path:     /{id}/show
+    defaults: { _controller: "compteBundle:Paragraph:show" }
+    methods:  GET
+
+paragraph_new:
+    path:     /new
+    defaults: { _controller: "compteBundle:Paragraph:new" }
+    methods:  [GET, POST]
+
+paragraph_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "compteBundle:Paragraph:edit" }
+    methods:  [GET, POST]
+
+paragraph_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:Paragraph:delete" }
+    methods:  DELETE
