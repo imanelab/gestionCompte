@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                         {{ form_start(forms[entity.id])}}
-                                          <a class="btn" href="{{ path('account_profile', { 'username': entity.id }) }}">
+                                          <a class="btn" href="{{ path('account_show', { 'username': entity.username }) }}">
                                             <i class="icon-eye-open"></i> Afficher 
                                         </a>
                                         <a class="btn btn-primary" href="{{ path('account_edit', { 'username': entity.username }) }}">

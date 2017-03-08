@@ -1,10 +1,7 @@
-user_account:
-        resource: "@CUsersBundle/Resources/config/routing/account.yml"
-        prefix:   /account
-
 compte_paragraph:
         resource: "@compteBundle/Resources/config/routing/paragraph.yml"
         prefix:   /paragraph
+
 compte_line:
         resource: "@compteBundle/Resources/config/routing/line.yml"
         prefix:   /line
@@ -40,14 +37,11 @@ fos_user_change_password:
 
     prefix: /profile
 
-c_user:
-    resource: "@CUserBundle/Resources/config/routing.yml"
-    prefix:   /
 
 compte:
     resource: "@compteBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+c_user:
+    resource: "@CUserBundle/Resources/config/routing.yml"
+    prefix:   /
