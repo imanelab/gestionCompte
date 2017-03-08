@@ -82,7 +82,7 @@ class DefaultController extends Controller
     private function createManageForm(User $entity)
     {
          $form = $this->createForm(new RegistrationType(), $entity, array(
-            'action' => $this->generateUrl('User_manage',array('username'=>$entity->getUsername())),
+            'action' => $this->generateUrl('c_user_manage',array('username'=>$entity->getUsername())),
             'method' => 'POST',
         ));
 

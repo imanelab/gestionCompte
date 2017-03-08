@@ -23,14 +23,17 @@
                 
             {% block pageContent %}
 
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Identifiant</th>
-                                    <th>Roles</th>
-                                    <th>Statut</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Identifiant</th>
+                        <th>Roles</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
                             <tbody>
                             {% for entity in entities %}
                                 <tr>
@@ -49,7 +52,7 @@
                                     </td>
                                     <td>
                                         {{ form_start(forms[entity.id])}}
-                                          <a class="btn" href="{{ path('account_show', { 'username': entity.username }) }}">
+                                          <a class="btn" href="{{ path('account_profile', { 'username': entity.id }) }}">
                                             <i class="icon-eye-open"></i> Afficher 
                                         </a>
                                         <a class="btn btn-primary" href="{{ path('account_edit', { 'username': entity.username }) }}">
@@ -77,4 +80,3 @@
             <script src="{{asset('public/assets/DT_bootstrap.js')}}"></script>
          {% endblock %} 
     {% endblock %}
-

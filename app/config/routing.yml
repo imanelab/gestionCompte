@@ -1,3 +1,7 @@
+user_account:
+        resource: "@CUsersBundle/Resources/config/routing/account.yml"
+        prefix:   /account
+
 compte_paragraph:
         resource: "@compteBundle/Resources/config/routing/paragraph.yml"
         prefix:   /paragraph

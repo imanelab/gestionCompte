@@ -1,0 +1,35 @@
+account:
+    path:     /
+    defaults: { _controller: "CUsersBundle:Account:index" }
+
+account_show:
+    path:     /{username}/show
+    defaults: { _controller: "CUsersBundle:Account:show" }
+
+account_new:
+    path:     /new
+    defaults: { _controller: "CUsersBundle:Account:new" }
+
+account_create:
+    path:     /create
+    defaults: { _controller: "CUsersBundle:Account:create" }
+    methods:  POST
+
+account_edit:
+    path:     /{username}/edit
+    defaults: { _controller: "CUsersBundle:Account:edit" }
+
+account_update:
+    path:     /{username}/update
+    defaults: { _controller: "CUsersBundle:Account:update" }
+    methods:  [POST, PUT]
+
+account_manage:
+    path:     /{username}/manage
+    defaults: { _controller: "CUsersBundle:Account:manage" }
+    methods:  [POST, DELETE]
+    
+account_delete:
+    path:     /{username}/delete
+    defaults: { _controller: "CUsersBundle:Account:delete" }
+    methods:  [POST, DELETE]
