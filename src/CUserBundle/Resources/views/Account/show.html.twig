@@ -1,18 +1,18 @@
-{% extends 'EAIusersBundle::layout.html.twig' %}
+{% extends "CUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}
+    {{parent()}} - Gestion des comptes
+{% endblock %}
 {% block content %}
-    {% trans_default_domain 'FOSUserBundle' %}
-    <div class="span12">
-        {% block pageTitle %}
-                    
-            <h1>Profile de l'utilisateur</h1>
- 
-        {% endblock %}
-    </div>
-    <div>
-        <div class="span4" id="sidebar">
+    {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+          {{ message|trans({}, 'FOSUserBundle') }}
         </div>
-        <div class="span8">
-            {% block body -%}
+    {% endfor %}
+  {% endfor %}
+    <div class="span12">
+        {% block xTitle %}
                 <div class="block span6">
                  <div class="table-responsive">
                     <table class="table table-striped">
@@ -41,11 +41,11 @@
                             </a></td>
                         </tr>
                         <tr>
-                            <td><a class="btn btn-inverse" href="{{ path('eai_gestion_auto_homepage')}}">
+                            <td><a class="btn btn-inverse" href="{{ path('compte_homepage')}}">
                                 <i class="icon-chevron-left icon-white"></i>
                                 Retour à l'accueil
                             </a></td>
-                            <td><a class="btn btn-primary pull-right" href="{{ path('account_edit',{'username':user.username}) }}">
+                            <td><a class="btn btn-primary pull-right" href="{{ path('users_edit',{'username':user.username}) }}">
                                 <i class="icon-edit icon-white"></i>
                                 Editer
                             </a></td>

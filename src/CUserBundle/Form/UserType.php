@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AccountType extends AbstractType
+class UserType extends AbstractType
 {
 
     /**
@@ -17,8 +17,8 @@ class AccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('adminRole','submit',array('label'=>'Droits admin', 'attr'=>array('class'=>'btn btn-warning')))
-            ->add('status','submit',array('label'=>'Statut','attr'=>array('class'=>'btn btn-danger')))
+            ->add('adminRole','submit',array('label'=>'Droits admin'))
+            ->add('status','submit',array('label'=>'Statut'))
         ;
     }
 

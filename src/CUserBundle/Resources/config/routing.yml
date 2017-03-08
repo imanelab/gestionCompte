@@ -1,7 +1,7 @@
 c_user_homepage:
-    path:     /users
+    path:     /
     defaults: { _controller: CUserBundle:Default:index }
 
-c_user_manage:
-    path:     /users/manage
-    defaults: { _controller: CUserBundle:Account:edit }
+c_users:
+    resource: "@CUserBundle/Resources/config/routing/account.yml"
+    prefix: /users

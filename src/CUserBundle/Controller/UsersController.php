@@ -2,17 +2,26 @@
 
 namespace CUserBundle\Controller;
 
-use CUserBundle\Entity\User;
-use CUserBundle\Form\RegistrationType;
-
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+use CUserBundle\Entity\User;
+use CUserBundle\Form\UserType;
+
+/**
+ * Users controller.
+ *
+ */
+class UsersController extends Controller
 {
+
+    /**
+     * Lists all Users entities.
+     *
+     */
     public function indexAction()
     {
-
-    	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $forms= array();
 
         $entities = $em->getRepository('CUserBundle:User')->findAll();
@@ -26,11 +35,9 @@ class DefaultController extends Controller
             'entities' => $entities,
             'forms'     => $forms,
         ));
-
     }
-
-
-     /* Creates a new User entity.
+    /**
+     * Creates a new Users entity.
      *
      */
     public function createAction(Request $request)
@@ -44,17 +51,17 @@ class DefaultController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('User_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('users_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('EAIusersBundle:User:new.html.twig', array(
+        return $this->render('CUserBundle:Account:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a User entity.
+     * Creates a form to create a Users entity.
      *
      * @param User $entity The entity
      *
@@ -63,7 +70,7 @@ class DefaultController extends Controller
     private function createCreateForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('User_create'),
+            'action' => $this->generateUrl('users_create'),
             'method' => 'POST',
         ));
 
@@ -73,15 +80,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * Creates a form to manage a User entity.
+     * Creates a form to manage a Account entity.
      *
-     * @param User $entity The entity
+     * @param Account $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createManageForm(User $entity)
     {
-         $form = $this->createForm(new RegistrationType(), $entity, array(
+         $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('users_manage',array('username'=>$entity->getUsername())),
             'method' => 'POST',
         ));
@@ -98,14 +105,14 @@ class DefaultController extends Controller
         $entity = new User();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('EAIusersBundle:User:new.html.twig', array(
+        return $this->render('CUserBundle:Account:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a User entity.
+     * Finds and displays a Account entity.
      *
      */
     public function showAction($username)
@@ -114,19 +121,19 @@ class DefaultController extends Controller
         $entity= $userManager->findUserByUsername($username);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Account entity.');
         }
 
         $deleteForm = $this->createDeleteForm($username);
 
-        return $this->render('EAIusersBundle:User:show.html.twig', array(
+        return $this->render('CUserBundle:Account:show.html.twig', array(
             'user'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing User entity.
+     * Displays a form to edit an existing Account entity.
      *
      */
     public function editAction($username)
@@ -142,11 +149,11 @@ class DefaultController extends Controller
         $editForm = $formFactory->createForm();
         $editForm->setData($entity)
                  ->remove('current_password')
-                 /*->setAction($this->generateUrl('User_delete'))*/;
+                 /*->setAction($this->generateUrl('users_delete'))*/;
 
         //$editForm->handleRequest($request);
         
-        return $this->render('EAIusersBundle:User:edit.html.twig', array(
+        return $this->render('CUserBundle:Account:edit.html.twig', array(
             'user'      => $entity,
             'form'   => $editForm->createView(),
             //'delete_form' => $deleteForm->createView(),
@@ -170,7 +177,7 @@ class DefaultController extends Controller
 
 
     /**
-     * Manages an User.
+     * Manages an account.
      *
      */
     public function manageAction(Request $request,$username)
@@ -179,7 +186,7 @@ class DefaultController extends Controller
          $entity=$manager->findUserByUsername($username);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Account entity.');
         }
         $manageForm = $this->createManageForm($entity);
 
@@ -195,9 +202,9 @@ class DefaultController extends Controller
                $manager->updateUser($entity);
             }
             else
-                throw $this->createNotFoundException('Unable to find User entity.');
+                throw $this->createNotFoundException('Unable to find Account entity.');
 
-            return $this->redirect($this->generateUrl('User'));
+            return $this->redirect($this->generateUrl('account'));
         }
 
 
@@ -205,7 +212,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * Enables/Disables an User.
+     * Enables/Disables an account.
      *
      */
     public function manageStatus($username)
@@ -223,11 +230,11 @@ class DefaultController extends Controller
         $this->get('session')->getFlashBag()->add(
             'notice',
             'Vos changements ont été sauvegardés!');
-        return $this->redirect($this->generateUrl('User'));
+        return $this->redirect($this->generateUrl('account'));
     }
 
     /**
-     * attributes/revokes admin role to an User.
+     * attributes/revokes admin role to an account.
      *
      */
     public function manageRole($username)
@@ -245,20 +252,20 @@ class DefaultController extends Controller
         $this->get('session')->getFlashBag()->add(
             'notice',
             'Vos changements ont été sauvegardés!');
-        return $this->redirect($this->generateUrl('User'));
+        return $this->redirect($this->generateUrl('account'));
     }
 
     /**
-    * Creates a form to edit a User entity.
+    * Creates a form to edit a Account entity.
     *
-    * @param User $entity The entity
+    * @param Account $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(User $entity)
+    private function createEditForm(Account $entity)
     {
-        $form = $this->createForm(new UserType($entity), $entity, array(
-            'action' => $this->generateUrl('User_update', array('username' => $entity->getUsername())),
+        $form = $this->createForm(new AccountType($entity), $entity, array(
+            'action' => $this->generateUrl('users_update', array('username' => $entity->getUsername())),
             'method' => 'PUT',
         ));
 
@@ -267,17 +274,17 @@ class DefaultController extends Controller
         return $form;
     }
     /**
-     * Edits an existing User entity.
+     * Edits an existing Account entity.
      *
      */
     public function updateAction(Request $request, $username)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('EAIusersBundle:User')->find($id);
+        $entity = $em->getRepository('CUserBundle:Account')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Account entity.');
         }
 
         $deleteForm = $this->createDeleteForm($username);
@@ -287,17 +294,17 @@ class DefaultController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('User_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('users_edit', array('id' => $id)));
         }
 
-        return $this->render('EAIusersBundle:User:edit.html.twig', array(
+        return $this->render('CUserBundle:Account:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a User entity.
+     * Deletes a Account entity.
      *
      */
     public function deleteAction(Request $request, $username)
@@ -307,21 +314,21 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('EAIusersBundle:User')->find($id);
+            $entity = $em->getRepository('CUserBundle:Account')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
+                throw $this->createNotFoundException('Unable to find Account entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('User'));
+        return $this->redirect($this->generateUrl('account'));
     }
 
     /**
-     * Creates a form to delete a User entity by id.
+     * Creates a form to delete a Account entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -330,7 +337,7 @@ class DefaultController extends Controller
     private function createDeleteForm($username)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('User_delete', array('username' => $username)))
+            ->setAction($this->generateUrl('users_delete', array('username' => $username)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

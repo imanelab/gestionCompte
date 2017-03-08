@@ -1,3 +1,11 @@
+compte_paragraph:
+        resource: "@compteBundle/Resources/config/routing/paragraph.yml"
+        prefix:   /paragraph
+
+compte_line:
+        resource: "@compteBundle/Resources/config/routing/line.yml"
+        prefix:   /line
+
 compte_morass:
     resource: "@compteBundle/Resources/config/routing/morass.yml"
     prefix:   /morass

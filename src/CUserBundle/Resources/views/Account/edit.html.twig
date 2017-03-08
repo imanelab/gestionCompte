@@ -1,15 +1,27 @@
-{% extends 'EAIusersBundle::layout.html.twig' %}
+{% extends "CUserBundle::layout.html.twig" %}
+
 {% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}
+    {{parent()}} - Gestion des comptes
+{% endblock %}
+
 {% block content %}
-	{% block pageTitle %}
-    	<h1>Editer le profile de l'utilisateur  </h1>
-    {% endblock %}
-    <div class="span4" id="sidebar">
-            {% block menu %}
-            {% endblock %}
+    {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+          {{ message|trans({}, 'FOSUserBundle') }}
         </div>
-        <div class="span7">
-            {% block body -%}
+    {% endfor %}
+  {% endfor %}
+    <div class="span12">
+        {% block xTitle %}
+                    
+            <h1>Gestion des comptes</h1>
+ 
+        {% endblock %}
+
+        {% block pageContent %}
                 <div class="block span6">
                  <div class="table-resonsive">
                     {{ form_start(form) }}
@@ -35,7 +47,7 @@
                         </tr>
 
                         <tr>
-                            <td><a class="btn btn-inverse" href="{{ path('account') }}">
+                            <td><a class="btn btn-inverse" href="{{ path('users') }}">
                                 <i class="icon-chevron-left icon-white"></i>
                                 Retour à la liste
                             </a></td>
@@ -45,7 +57,7 @@
                 </table>
                 {{ form_end(form) }}
         </div>
-            {% endblock %}
+        {% endblock %}
         </div>
     </div>
 {% endblock %}

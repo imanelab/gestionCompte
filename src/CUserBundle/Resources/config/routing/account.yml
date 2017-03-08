@@ -1,35 +1,35 @@
-account:
+users:
     path:     /
-    defaults: { _controller: "CUsersBundle:Account:index" }
+    defaults: { _controller: "CUserBundle:Users:index" }
 
-account_show:
+users_show:
     path:     /{username}/show
-    defaults: { _controller: "CUsersBundle:Account:show" }
+    defaults: { _controller: "CUserBundle:Users:show" }
 
-account_new:
+users_new:
     path:     /new
-    defaults: { _controller: "CUsersBundle:Account:new" }
+    defaults: { _controller: "CUserBundle:Users:new" }
 
-account_create:
+users_create:
     path:     /create
-    defaults: { _controller: "CUsersBundle:Account:create" }
+    defaults: { _controller: "CUserBundle:Users:create" }
     methods:  POST
 
-account_edit:
+users_edit:
     path:     /{username}/edit
-    defaults: { _controller: "CUsersBundle:Account:edit" }
+    defaults: { _controller: "CUserBundle:Users:edit" }
 
-account_update:
+users_update:
     path:     /{username}/update
-    defaults: { _controller: "CUsersBundle:Account:update" }
+    defaults: { _controller: "CUserBundle:Users:update" }
     methods:  [POST, PUT]
 
-account_manage:
+users_manage:
     path:     /{username}/manage
-    defaults: { _controller: "CUsersBundle:Account:manage" }
+    defaults: { _controller: "CUserBundle:Users:manage" }
     methods:  [POST, DELETE]
     
-account_delete:
+users_delete:
     path:     /{username}/delete
-    defaults: { _controller: "CUsersBundle:Account:delete" }
+    defaults: { _controller: "CUserBundle:Users:delete" }
     methods:  [POST, DELETE]
