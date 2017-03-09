@@ -4,6 +4,10 @@ security:
     encoders:
         CUserBundle\Entity\User: sha512
 
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_SUPERVISOR,ROLE_APPROVER,ROLE_OPERATOR,ROLE_USER,ROLE_ALLOWED_TO_SWITCH]
+
+
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         main:
@@ -34,8 +38,11 @@ security:
 
                 path:       fos_user_security_logout
 
-                target:     /
+                target:     /login
 
             remember_me:
 
                 key:        %secret%
+
+    access_control:
+        - { path: ^/users, roles: ROLE_SUPER_ADMIN }

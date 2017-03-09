@@ -26,7 +26,7 @@
                 
             {% block pageContent %}
 
-            <table id="datatable" class="table table-striped table-bordered" dir="rtl">
+            <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Nom</th>
@@ -55,10 +55,12 @@
                                     </td>
                                     <td>
                                         {{ form_start(forms[entity.id])}}
+                                        {{ form_widget(forms[entity.id].roles)}}
                                         {{ form_label(forms[entity.id].adminRole)}}
                                         {{ form_widget(forms[entity.id].adminRole)}}
                                         {{ form_label(forms[entity.id].status)}}
                                         {{ form_widget(forms[entity.id].status)}}
+                                        {{ form_end(forms[entity.id])}}
                                           <a class="btn" href="{{ path('users_show', {'username': entity.username }) }}">
                                             <i class="icon-eye-open"></i> Afficher 
                                         </a>

@@ -194,7 +194,9 @@ class UsersController extends Controller
 
         if ($manageForm->isValid()) {
             if($manageForm->get('adminRole')->isClicked()){
-                $this->manageRole($username);
+
+                //$roles=$manageForm['roles']->getData();
+                //$this->manageRole($username);
                 $manager->updateUser($entity);
             }
             elseif ($manageForm->get('status')->isClicked()) {
@@ -204,7 +206,7 @@ class UsersController extends Controller
             else
                 throw $this->createNotFoundException('Unable to find Account entity.');
 
-            return $this->redirect($this->generateUrl('account'));
+            return $this->redirect($this->generateUrl('users'));
         }
 
 
@@ -230,7 +232,7 @@ class UsersController extends Controller
         $this->get('session')->getFlashBag()->add(
             'notice',
             'Vos changements ont été sauvegardés!');
-        return $this->redirect($this->generateUrl('account'));
+        return $this->redirect($this->generateUrl('users'));
     }
 
     /**
@@ -252,7 +254,7 @@ class UsersController extends Controller
         $this->get('session')->getFlashBag()->add(
             'notice',
             'Vos changements ont été sauvegardés!');
-        return $this->redirect($this->generateUrl('account'));
+        return $this->redirect($this->generateUrl('users'));
     }
 
     /**
