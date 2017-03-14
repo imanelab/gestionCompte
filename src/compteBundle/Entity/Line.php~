@@ -53,6 +53,21 @@ class Line
      */
     private $version;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idl", type="smallint")
+     */
+    private $idl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string",length=255)
+     */
+    private $title;
+
+
 
     /**
      * Get id
@@ -131,5 +146,45 @@ class Line
     public function getParagraph()
     {
         return $this->paragraph;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->masterEntities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add masterEntities
+     *
+     * @param \compteBundle\Entity\MasterEntity $masterEntities
+     * @return Line
+     */
+    public function addMasterEntity(\compteBundle\Entity\MasterEntity $masterEntities)
+    {
+        $this->masterEntities[] = $masterEntities;
+
+        return $this;
+    }
+
+    /**
+     * Remove masterEntities
+     *
+     * @param \compteBundle\Entity\MasterEntity $masterEntities
+     */
+    public function removeMasterEntity(\compteBundle\Entity\MasterEntity $masterEntities)
+    {
+        $this->masterEntities->removeElement($masterEntities);
+    }
+
+    /**
+     * Get masterEntities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMasterEntities()
+    {
+        return $this->masterEntities;
     }
 }

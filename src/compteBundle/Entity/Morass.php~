@@ -129,4 +129,27 @@ class Morass
     {
         return $this->delegation;
     }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Morass
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

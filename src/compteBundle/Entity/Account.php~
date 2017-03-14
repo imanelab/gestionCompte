@@ -15,19 +15,19 @@ class Account
 
     /**
 
-   * @ORM\OneToOne(targetEntity="compteBundle\Entity\Delagation")
+   * @ORM\OneToOne(targetEntity="compteBundle\Entity\Delegation")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
-  private $delagation;
+  private $delegation;
 
     /**
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -141,5 +141,57 @@ class Account
     public function getBalance()
     {
         return $this->balance;
+    }
+
+    /**
+     * Set delegation
+     *
+     * @param \compteBundle\Entity\Delegation $delegation
+     * @return Account
+     */
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation)
+    {
+        $this->delegation = $delegation;
+
+        return $this;
+    }
+
+    /**
+     * Get delegation
+     *
+     * @return \compteBundle\Entity\Delegation 
+     */
+    public function getDelegation()
+    {
+        return $this->delegation;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \compteBundle\Entity\Account $account
+     * @return Account
+     */
+    public function setAccount(\compteBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \compteBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+
+    public function removeParent()
+    {
+        unset($this->account);
     }
 }

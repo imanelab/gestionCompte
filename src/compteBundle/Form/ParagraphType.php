@@ -14,6 +14,7 @@ class ParagraphType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('title','text')
         ->add('idp','number')
         ->add('morass','entity',['class'=>'compteBundle:Morass','property'=>'name']);
     }

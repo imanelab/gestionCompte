@@ -213,4 +213,142 @@ class Movement
     {
         return $this->realDateMv;
     }
+
+    /**
+     * Set line
+     *
+     * @param \compteBundle\Entity\Line $line
+     * @return Movement
+     */
+    public function setLine(\compteBundle\Entity\Line $line)
+    {
+        $this->line = $line;
+
+        return $this;
+    }
+
+    /**
+     * Get line
+     *
+     * @return \compteBundle\Entity\Line 
+     */
+    public function getLine()
+    {
+        return $this->line;
+    }
+
+    /**
+     * Set codificationABB
+     *
+     * @param \compteBundle\Entity\CodificationABB $codificationABB
+     * @return Movement
+     */
+    public function setCodificationABB(\compteBundle\Entity\CodificationABB $codificationABB)
+    {
+        $this->codificationABB = $codificationABB;
+
+        return $this;
+    }
+
+    /**
+     * Get codificationABB
+     *
+     * @return \compteBundle\Entity\CodificationABB 
+     */
+    public function getCodificationABB()
+    {
+        return $this->codificationABB;
+    }
+
+    /**
+     * Set creditAccount
+     *
+     * @param \compteBundle\Entity\Account $creditAccount
+     * @return Movement
+     */
+    public function setCreditAccount(\compteBundle\Entity\Account $creditAccount)
+    {
+        $this->creditAccount = $creditAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get creditAccount
+     *
+     * @return \compteBundle\Entity\Account 
+     */
+    public function getCreditAccount()
+    {
+        return $this->creditAccount;
+    }
+
+    /**
+     * Set debitAccount
+     *
+     * @param \compteBundle\Entity\Account $debitAccount
+     * @return Movement
+     */
+    public function setDebitAccount(\compteBundle\Entity\Account $debitAccount)
+    {
+        $this->debitAccount = $debitAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get debitAccount
+     *
+     * @return \compteBundle\Entity\Account 
+     */
+    public function getDebitAccount()
+    {
+        return $this->debitAccount;
+    }
+
+    /**
+     * Set creditEAccount
+     *
+     * @param \compteBundle\Entity\ExternalAccount $creditEAccount
+     * @return Movement
+     */
+    public function setCreditEAccount(\compteBundle\Entity\ExternalAccount $creditEAccount)
+    {
+        $this->creditEAccount = $creditEAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get creditEAccount
+     *
+     * @return \compteBundle\Entity\ExternalAccount 
+     */
+    public function getCreditEAccount()
+    {
+        return $this->creditEAccount;
+    }
+
+    /**
+     * Set debitEAccount
+     *
+     * @param \compteBundle\Entity\ExternalAccount $debitEAccount
+     * @return Movement
+     */
+    public function setDebitEAccount(\compteBundle\Entity\ExternalAccount $debitEAccount)
+    {
+        $this->debitEAccount = $debitEAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get debitEAccount
+     *
+     * @return \compteBundle\Entity\ExternalAccount 
+     */
+    public function getDebitEAccount()
+    {
+        return $this->debitEAccount;
+    }
 }

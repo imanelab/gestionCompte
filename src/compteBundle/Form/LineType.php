@@ -14,6 +14,8 @@ class LineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('title','text')
+        ->add('idl','number')
         ->add('amount','number')
         //->add('version')
         ->add('masterEntities','entity',['class'=>'compteBundle:MasterEntity','property'=>'name','required'=>false])

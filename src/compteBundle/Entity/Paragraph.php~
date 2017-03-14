@@ -39,6 +39,13 @@ class Paragraph
      */
     private $idp;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string",length=255)
+     */
+    private $title;
+
 
     /**
      * Get id
@@ -71,5 +78,28 @@ class Paragraph
     public function getIdp()
     {
         return $this->idp;
+    }
+
+    /**
+     * Set morass
+     *
+     * @param \compteBundle\Entity\Morass $morass
+     * @return Paragraph
+     */
+    public function setMorass(\compteBundle\Entity\Morass $morass)
+    {
+        $this->morass = $morass;
+
+        return $this;
+    }
+
+    /**
+     * Get morass
+     *
+     * @return \compteBundle\Entity\Morass 
+     */
+    public function getMorass()
+    {
+        return $this->morass;
     }
 }

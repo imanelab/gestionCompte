@@ -17,7 +17,7 @@ class Delegation
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Delegation")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -101,5 +101,33 @@ class Delegation
     public function getDepth()
     {
         return $this->depth;
+    }
+
+    /**
+     * Set delegation
+     *
+     * @param \compteBundle\Entity\Delegation $delegation
+     * @return Delegation
+     */
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation)
+    {
+        $this->delegation = $delegation;
+
+        return $this;
+    }
+
+    /**
+     * Get delegation
+     *
+     * @return \compteBundle\Entity\Delegation 
+     */
+    public function getDelegation()
+    {
+        return $this->delegation;
+    }
+
+    public function removeParent()
+    {
+        unset($this->delegation);
     }
 }

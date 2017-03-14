@@ -39,6 +39,13 @@ class Paragraph
      */
     private $idp;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string",length=255)
+     */
+    private $title;
+
 
     /**
      * Get id
@@ -94,5 +101,28 @@ class Paragraph
     public function getMorass()
     {
         return $this->morass;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Paragraph
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

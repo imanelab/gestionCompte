@@ -12,6 +12,7 @@
             <tr>
                 <th>Id</th>
                 <th>Idp</th>
+                <th>description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
             <tr>
                 <td><a href="{{ path('paragraph_show', { 'id': paragraph.id }) }}">{{ paragraph.id }}</a></td>
                 <td>{{ paragraph.idp }}</td>
+                <td>{{ paragraph.title }}</td>
                 <td>
                     <ul>
                         <li>

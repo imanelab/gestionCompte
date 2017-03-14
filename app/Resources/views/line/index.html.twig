@@ -10,6 +10,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Line Id</th>
+                <th>title</th>
                 <th>Amount</th>
                 <th>Version</th>
                 <th>Actions</th>
@@ -19,6 +21,8 @@
         {% for line in lines %}
             <tr>
                 <td><a href="{{ path('line_show', { 'id': line.id }) }}">{{ line.id }}</a></td>
+                <td>{{ line.idl }}</td>
+                <td>{{ line.title }}</td>
                 <td>{{ line.amount }}</td>
                 <td>{{ line.version }}</td>
                 <td>
