@@ -44,9 +44,9 @@ class MovementController extends Controller
             $movement->unsetAccount("DA");
 
         if ($selectCreditAccount=="1")
-            $movement->unsetAccount("CA");
-        elseif ($selectCreditAccount=="2")
             $movement->unsetAccount("CEA");
+        elseif ($selectCreditAccount=="2")
+            $movement->unsetAccount("CA");
 
     }
 

@@ -361,23 +361,19 @@ class Movement
     {
         switch ($par) {
             case 'CA':
-                if (isset($this->creditAccount))
-                unset($this->creditAccount);
+                $this->creditAccount=null;
                 break;
 
             case 'CEA':
-                if (isset($this->creditEAccount))
-                unset($this->creditEAccount);
+                 $this->creditEAccount=null;
                 break;
 
             case 'DA':
-            if (isset($this->debitAccount))
-                unset($this->debitAccount);
+                 $this->debitAccount=null;
                 break;
 
             case 'DEA':
-            if (isset($this->debitEAccount))
-                unset($this->debitEAccount);
+                 $this->debitEAccount=null;
                 break;
             
         }
