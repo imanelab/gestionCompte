@@ -63,49 +63,52 @@
         </div>
         </div>
 
-         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-            Type de compte
+
+
+
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            {{form_label(form.selectCreditAccount,"type de compte Crediteur")}}
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-         <select id="select-Account" class="form-control col-md-7 col-xs-12" >
-           <option>داخلي</option>
-           <option>خارجي</option>
-         </select>
-        </div>
-        </div>
-		
-		<div id="creditAccount" class="form-group">
-         <label   class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.creditAccount, "الحساب الدائن")}}<span class="required"></span>
-         </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="col-md-2 col-sm-2 col-xs-4">
+         {{form_widget(form.selectCreditAccount, {'attr':{'class':'form-control col-md-7 col-xs-12'}})}}
+         </div>
+
+        <div id="creditAccount" class="col-md-4 col-sm-4 col-xs-8">
         {{ form_widget(form.creditAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
         </div>
-        </div>
-		
-		<div id="debitAccount" class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.debitAccount, "الحساب المدين")}}<span class="required"></span>
-         </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form_widget(form.debitAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
-        </div>
-        </div>
 
-        <div id="creditEAccount" class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.creditEAccount, "الحساب الدائن externe")}}<span class="required"></span>
-         </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div id="creditEAccount" class="col-md-4 col-sm-4 col-xs-8">
         {{ form_widget(form.creditEAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
         </div>
         </div>
 
-        <div id="debitEAccount" class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.debitEAccount, "الحساب المدين externe")}}<span class="required"></span>
+
+      <div class="form-group">
+         
+        
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            {{form_label(form.selectDebitAccount,"type de compte Debiteur")}}
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+         <div class="col-md-2 col-sm-2 col-xs-4">
+         {{form_widget(form.selectDebitAccount, {'attr':{'class':'form-control col-md-7 col-xs-12'}})}}
+         </div>
+        <div id="debitAccount" class="col-md-4 col-sm-4 col-xs-8">
+        {{ form_widget(form.debitAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+
+
+      <div id="debitEAccount" class="col-md-4 col-sm-4 col-xs-8">
         {{ form_widget(form.debitEAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
         </div>
-        </div>
+
+
+      </div>
+		
+
+
+
+       
 		
         <div class="ln_solid"></div>
             <div class="form-group">
@@ -146,24 +149,35 @@
           singleDatePicker: true,
           calender_style: "picker_4",
         });
-        changeAccount();
+        changeCreditAccount();
+        changeDebitAccount();
 
-        $("#select-Account").change(changeAccount);
+        $("#comptebundle_movement_selectCreditAccount").change(changeCreditAccount);
+        $("#comptebundle_movement_selectDebitAccount").change(changeDebitAccount);
       });
 
-      function changeAccount(){
-       if($("#select-Account option:selected").text()=="داخلي"){
-          $("#debitEAccount").hide();
+      function changeCreditAccount(){
+       if($("#comptebundle_movement_selectCreditAccount").val()=="1"){
           $("#creditEAccount").hide();
-          $("#debitAccount").show();
           $("#creditAccount").show();
         };
 
-        if($("#select-Account option:selected").text()=="خارجي"){
-          $("#debitAccount").hide();
+        if($("#comptebundle_movement_selectCreditAccount").val()=="2"){
           $("#creditAccount").hide();
-          $("#debitEAccount").show();
           $("#creditEAccount").show();
+        };
+      }
+
+
+       function changeDebitAccount(){
+       if($("#comptebundle_movement_selectDebitAccount").val()=="1"){
+          $("#debitEAccount").hide();
+          $("#debitAccount").show();
+        };
+
+        if($("#comptebundle_movement_selectDebitAccount").val()=="2"){
+          $("#debitAccount").hide();
+          $("#debitEAccount").show();
         };
       }
     </script>

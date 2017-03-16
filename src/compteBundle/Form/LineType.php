@@ -18,7 +18,7 @@ class LineType extends AbstractType
         ->add('idl','number')
         ->add('amount','number')
         //->add('version')
-        ->add('masterEntities','entity',['class'=>'compteBundle:MasterEntity','property'=>'name','required'=>false])
+        ->add('masterEntities','entity',['class'=>'compteBundle:MasterEntity','property'=>'name','required'=>false,'multiple'=>true, 'expanded'=>true ])
         ->add('paragraph','entity',['class'=>'compteBundle:Paragraph','property'=>'idp','required'=>false]);
     }
     

@@ -39,6 +39,7 @@ class LineController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $line->setVersion(1);
             $em->persist($line);
             $em->flush($line);
 

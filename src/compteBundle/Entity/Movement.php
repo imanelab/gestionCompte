@@ -37,7 +37,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -47,7 +47,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -57,7 +57,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\ExternalAccount")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -67,7 +67,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\ExternalAccount")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -351,4 +351,36 @@ class Movement
     {
         return $this->debitEAccount;
     }
+
+
+    /**
+     * unset Account
+     *
+     */
+    public function unsetAccount($par)
+    {
+        switch ($par) {
+            case 'CA':
+                if (isset($this->creditAccount))
+                unset($this->creditAccount);
+                break;
+
+            case 'CEA':
+                if (isset($this->creditEAccount))
+                unset($this->creditEAccount);
+                break;
+
+            case 'DA':
+            if (isset($this->debitAccount))
+                unset($this->debitAccount);
+                break;
+
+            case 'DEA':
+            if (isset($this->debitEAccount))
+                unset($this->debitEAccount);
+                break;
+            
+        }
+    }
+
 }

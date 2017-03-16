@@ -17,12 +17,14 @@ class MovementType extends AbstractType
 	   ->add('dateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
 		->add('months','number')
 		->add('realDateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
-		->add('line','entity',['class'=>'compteBundle:Line','property'=>'name'])
+		->add('line','entity',['class'=>'compteBundle:Line','property'=>'title'])
+        ->add('selectDebitAccount','choice',['choices'=>['1'=>"داخلي",'2'=>'خارجي'],'mapped'=>false])
+        ->add('selectCreditAccount','choice',['choices'=>['1'=>"داخلي",'2'=>'خارجي'],'mapped'=>false])
 		->add('codificationABB','entity',['class'=>'compteBundle:CodificationABB','property'=>'label','required'=>false])
 		->add('creditAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
 		->add('debitAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
-		->add('creditEAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
-		->add('debitEAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])        ;
+		->add('creditEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])
+		->add('debitEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])        ;
     }
     
     /**

@@ -27,6 +27,29 @@ class MovementController extends Controller
         ));
     }
 
+
+    /**
+    * Check the selected accounts
+    *
+    **/
+
+    public function selectedAccount(Movement $movement, Request $request){
+        $form = $this->createForm('compteBundle\Form\MovementType', $movement);
+        $form->handleRequest($request);
+        $selectDebitAccount=$form["selectDebitAccount"]->getData();
+        $selectCreditAccount=$form["selectCreditAccount"]->getData();
+        if ($selectDebitAccount=="1")
+            $movement->unsetAccount("DEA");
+        elseif ($selectDebitAccount=="2")
+            $movement->unsetAccount("DA");
+
+        if ($selectCreditAccount=="1")
+            $movement->unsetAccount("CA");
+        elseif ($selectCreditAccount=="2")
+            $movement->unsetAccount("CEA");
+
+    }
+
     /**
      * Creates a new movement entity.
      *
@@ -38,6 +61,8 @@ class MovementController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->selectedAccount($movement, $request);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($movement);
