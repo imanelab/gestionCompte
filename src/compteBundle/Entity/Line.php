@@ -53,6 +53,14 @@ class Line
      */
     private $version;
 
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="consumed_amount", type="float", nullable=true)
+     */
+    private $consumedAmount;
+
     /**
      * @var int
      *
@@ -232,5 +240,28 @@ class Line
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set consumedAmount
+     *
+     * @param float $consumedAmount
+     * @return Line
+     */
+    public function setConsumedAmount($consumedAmount)
+    {
+        $this->consumedAmount = $consumedAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get consumedAmount
+     *
+     * @return float 
+     */
+    public function getConsumedAmount()
+    {
+        return $this->consumedAmount;
     }
 }

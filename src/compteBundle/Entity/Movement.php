@@ -4,6 +4,10 @@ namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+// Ajoutez ce use pour le contexte
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Movement
  *
@@ -377,6 +381,37 @@ class Movement
                 break;
             
         }
+    }
+
+
+     /**
+    * Check the possibility to execute the movement (line has enough cash) 
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+        $lineAmount= $this->getLine()->getAmount();
+        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
+        $movementAmount= $this->getAmountMv();
+
+        $remainingCash = $lineAmount - $lineConsumedAmount;
+        $postRemainingCash= $remainingCash - $movementAmount;
+
+        if ($postRemainingCash <0) {
+
+            $context
+
+            ->buildViolation('Somme non dotée') // message
+
+            ->atPath('line')                                                   // attribut de l'objet qui est violé
+
+            ->addViolation() ;// ceci déclenche l'erreur, ne l'oubliez pas
+            
+        }
+
+
     }
 
 }

@@ -50,6 +50,30 @@ class MovementController extends Controller
 
     }
 
+
+    /**
+    * Check the possibility to execute the movement (line has enough cash) 
+    *
+    **/
+
+    public function checkCashAvailability(Movement $movement){
+
+        $lineAmount= $movement->getLine()->getAmount();
+        $lineConsumedAmount= $movement->getLine()->getConsumedAmount();
+        $movementAmount= $movement->getAmountMv();
+
+        $remainingCash = $lineAmount - $lineConsumedAmount;
+        $postRemainingCash= $remainingCash - $movementAmount;
+
+        if ($postRemainingCash <0) {
+            
+        }
+
+
+    }
+
+
+
     /**
      * Creates a new movement entity.
      *
@@ -63,6 +87,7 @@ class MovementController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->selectedAccount($movement, $request);
+            $this->checkCashAvailability($movement);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($movement);
