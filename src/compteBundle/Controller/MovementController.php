@@ -52,29 +52,6 @@ class MovementController extends Controller
 
 
     /**
-    * Check the possibility to execute the movement (line has enough cash) 
-    *
-    **/
-
-    public function checkCashAvailability(Movement $movement){
-
-        $lineAmount= $movement->getLine()->getAmount();
-        $lineConsumedAmount= $movement->getLine()->getConsumedAmount();
-        $movementAmount= $movement->getAmountMv();
-
-        $remainingCash = $lineAmount - $lineConsumedAmount;
-        $postRemainingCash= $remainingCash - $movementAmount;
-
-        if ($postRemainingCash <0) {
-            
-        }
-
-
-    }
-
-
-
-    /**
      * Creates a new movement entity.
      *
      */
@@ -124,6 +101,14 @@ class MovementController extends Controller
     {
         $deleteForm = $this->createDeleteForm($movement);
         $editForm = $this->createForm('compteBundle\Form\MovementType', $movement);
+
+        $editForm->remove('creditAccount');
+        $editForm->remove('debitAccount');
+        $editForm->remove('creditEAccount');
+        $editForm->remove('debitEAccount');
+        $editForm->remove('selectCreditAccount');
+        $editForm->remove('selectDebitAccount');
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

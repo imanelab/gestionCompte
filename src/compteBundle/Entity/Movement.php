@@ -400,15 +400,24 @@ class Movement
         $postRemainingCash= $remainingCash - $movementAmount;
 
         if ($postRemainingCash <0) {
-
             $context
+            ->buildViolation('Somme non dotée')
+            ->atPath('line')
+            ->addViolation();
+        }
 
-            ->buildViolation('Somme non dotée') // message
+        if ($this->months >12) {
+            $context
+            ->buildViolation('mois + que 12')
+            ->atPath('months')
+            ->addViolation();
+        }
 
-            ->atPath('line')                                                   // attribut de l'objet qui est violé
-
-            ->addViolation() ;// ceci déclenche l'erreur, ne l'oubliez pas
-            
+        if ($this->realDateMv < $this->dateMv) {
+            $context
+            ->buildViolation('dates fchkeeel')
+            ->atPath('dateMv')
+            ->addViolation();
         }
 
 

@@ -26,6 +26,40 @@
                 </div>
                 <div class="x_content">
                   <div class="dashboard-widget-content">
+
+                {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+
+                  {% if form is defined%}
+                  {% if not form.vars.valid %}
+                          <div class="alert alert-error">
+                  <ul>
+                      {# Loop through every form item #}
+                      {% for child in form.children %}
+                          {# Display the errors of the form item #}
+                          {%for error in child.vars.errors%}
+                              <li>{{error.message}}</li>
+                          {%endfor%}
+                      {%endfor%}
+                  </ul>
+                          </div>
+                  {%endif%}
+                  {%endif%}
+
+                   {% if edit_form is defined%}
+                  {% if not edit_form.vars.valid %}
+                          <div class="alert alert-error">
+                  <ul>
+                      {# Loop through every form item #}
+                      {% for child in edit_form.children %}
+                          {# Display the errors of the form item #}
+                          {%for error in child.vars.errors%}
+                              <li>{{error.message}}</li>
+                          {%endfor%}
+                      {%endfor%}
+                  </ul>
+                          </div>
+                  {%endif%}
+                  {%endif%}
                   {% block content %}
 
                     <ul class="list-unstyled timeline widget">
