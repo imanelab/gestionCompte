@@ -21,13 +21,13 @@ class Account
 
    */
 
-  private $delagation;
+  private $delegation;
 
     /**
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -144,26 +144,26 @@ class Account
     }
 
     /**
-     * Set delagation
+     * Set delegation
      *
-     * @param \compteBundle\Entity\Delagation $delagation
+     * @param \compteBundle\Entity\Delegation $delegation
      * @return Account
      */
-    public function setDelagation(\compteBundle\Entity\Delagation $delagation)
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation)
     {
-        $this->delagation = $delagation;
+        $this->delegation = $delegation;
 
         return $this;
     }
 
     /**
-     * Get delagation
+     * Get delegation
      *
-     * @return \compteBundle\Entity\Delagation 
+     * @return \compteBundle\Entity\Delegation 
      */
-    public function getDelagation()
+    public function getDelegation()
     {
-        return $this->delagation;
+        return $this->delegation;
     }
 
     /**
@@ -187,5 +187,11 @@ class Account
     public function getAccount()
     {
         return $this->account;
+    }
+
+
+    public function removeParent()
+    {
+        unset($this->account);
     }
 }

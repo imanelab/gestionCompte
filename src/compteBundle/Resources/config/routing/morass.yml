@@ -22,3 +22,8 @@ morass_delete:
     path:     /{id}/delete
     defaults: { _controller: "compteBundle:Morass:delete" }
     methods:  DELETE
+
+morass_morass:
+    path:      /{id}/morass
+    defaults: { _controller: "compteBundle:Morass:morass" }
+    methods:  GET

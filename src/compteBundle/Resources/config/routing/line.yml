@@ -1,0 +1,24 @@
+line_index:
+    path:     /
+    defaults: { _controller: "compteBundle:Line:index" }
+    methods:  GET
+
+line_show:
+    path:     /{id}/show
+    defaults: { _controller: "compteBundle:Line:show" }
+    methods:  GET
+
+line_new:
+    path:     /new
+    defaults: { _controller: "compteBundle:Line:new" }
+    methods:  [GET, POST]
+
+line_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "compteBundle:Line:edit" }
+    methods:  [GET, POST]
+
+line_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:Line:delete" }
+    methods:  DELETE

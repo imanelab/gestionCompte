@@ -1,0 +1,65 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> الأسطر </h2>
+{% endblock %}
+{% block content %}
+
+ <table id="datatable" class="table table-striped table-bordered"  dir="rtl" >
+                      <thead>
+                        <tr>
+                            
+							<th>رقم السطر</th>
+							<th>إسم السطر</th>
+							 <th>الرصيد</th>
+							   <th>رقم التعديل</th>
+							<th>العمليات</th>
+                         
+						
+						
+                        </tr>
+                     </thead>
+
+
+                      <tbody>
+                        <tr>
+                         
+                          
+                         
+						  <td>{{ line.idl }}</td>
+					   <td>{{ line.title }}</td>
+					   <td>{{ line.amount }}</td>
+					   <td>{{ line.version }}</td>
+                       <td>
+
+                          
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                           
+							 
+							 
+							 {{ form_start(delete_form) }}
+                           <input type="submit" value="حذف" class="btn btn-danger">
+						    <a class="btn btn-info" href="{{ path('line_edit', { 'id': line.id }) }}">تعديل
+							
+							</a>
+                             {{ form_end(delete_form) }}
+							 
+							
+							 
+							</div> </div> 
+                       </td>
+					   
+					  
+					
+					   
+                        </tr>
+            
+						</tbody>
+                    </table>
+
+    
+            <a class="btn btn-primary pull-right" href="{{ path('line_index') }}">العودة إلى اللائحة</a>
+       
+{% endblock %}

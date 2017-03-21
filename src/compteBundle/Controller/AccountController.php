@@ -39,6 +39,23 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $parent=$account->getAccount();
+            if( is_null($parent))
+            $account->setDepth(1);
+        else{
+                $parentId= $account->getAccount()->getId();
+                $id=$account->getId();
+                if($parentId==$id){
+                $account->removeParent();
+                $account->setDepth(1);
+            } 
+                else{
+                    $parentDepth=$parent->getDepth()+1;
+                    $account->setDepth($parentDepth);
+                }
+            }
+
             $em->persist($account);
             $em->flush($account);
 
@@ -76,6 +93,12 @@ class AccountController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if($account->getAccount()){
+           $parent= $account->getAccount()->getId();
+           $id=$account->getId();
+           if($parent==$id)
+           $account->removeParent();
+             }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('account_edit', array('id' => $account->getId()));

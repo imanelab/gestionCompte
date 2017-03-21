@@ -15,8 +15,9 @@ class AccountType extends AbstractType
     {
         $builder->add('rib')
 		//->add('depth')
-		->add('balance')
-		->add('delagation')->add('account')        ;
+		 ->add('balance')//,'money',["currency"=>"MAD"])
+		->add('delegation','entity',["class"=>"compteBundle:Delegation","property"=>"name","required"=>false])
+        ->add('account','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false]);
     }
     
     /**

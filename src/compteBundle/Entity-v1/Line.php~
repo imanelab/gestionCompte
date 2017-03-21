@@ -1,0 +1,135 @@
+<?php
+
+namespace compteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Line
+ *
+ * @ORM\Table(name="line")
+ * @ORM\Entity(repositoryClass="compteBundle\Repository\LineRepository")
+ */
+class Line
+{
+    /**
+
+   * @ORM\ManyToMany(targetEntity="compteBundle\Entity\MasterEntity", cascade={"persist"})
+
+   */
+
+    private $masterEntities;
+
+    /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Paragraph")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $paragraph;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="float", nullable=true)
+     */
+    private $amount;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="version", type="smallint")
+     */
+    private $version;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     * @return Line
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float 
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set version
+     *
+     * @param integer $version
+     * @return Line
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * Get version
+     *
+     * @return integer 
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Set paragraph
+     *
+     * @param \compteBundle\Entity\Paragraph $paragraph
+     * @return Line
+     */
+    public function setParagraph(\compteBundle\Entity\Paragraph $paragraph)
+    {
+        $this->paragraph = $paragraph;
+
+        return $this;
+    }
+
+    /**
+     * Get paragraph
+     *
+     * @return \compteBundle\Entity\Paragraph 
+     */
+    public function getParagraph()
+    {
+        return $this->paragraph;
+    }
+}

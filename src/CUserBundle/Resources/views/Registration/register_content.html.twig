@@ -1,14 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 {% block xTitle %}
     <h2> تسجيل مستخدم </h2>
 {% endblock %}
-{% block content %}
+{% block fos_user_content %}
      	{{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
 
      		<div class="form-group">
-		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.firstName) }}<span class="required"></span>
+		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.firstName,"الإسم") }}<span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
 		        {{ form_widget(form.firstName) }}
@@ -16,7 +17,7 @@
 		    </div>
 
 		    <div class="form-group">
-		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.lastName) }} <span class="required"></span>
+		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.lastName,"النسب") }} <span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
 		        {{ form_widget(form.lastName) }}
@@ -40,12 +41,27 @@
 		    </div>
 
 		    <div class="form-group">
-		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.plainPassword) }}<span class="required"></span>
-		         </label>
+		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.plainPassword,"الرقم السري") }}<span class="required"></span>
+		         </label>	
 		      <div class="col-md-6 col-sm-6 col-xs-12">
-		        {{ form_widget(form.plainPassword) }}
+			  
+		        {{ form_widget(form.plainPassword.first) }}
+			
 		        </div>
+				
 		    </div>
+			<div class="form-group">				
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" > إعادة الرقم السري<span class="required"></span>
+		         </label>
+				 <div class="col-md-6 col-sm-6 col-xs-12">
+				{{ form_widget(form.plainPassword.second) }}
+		        </div>
+		      
+		    </div>
+			
+			
+			<br><br><br>
+
                 <button class="btn btn-primary pull-right">
                     {{ 'registration.submit'|trans }}
                 </button>
@@ -54,5 +70,4 @@
                 </a>
         {{ form_rest(form) }}
         {{ form_end(form) }}
-    </form>
-{% endblock %}
+{% endblock fos_user_content %}

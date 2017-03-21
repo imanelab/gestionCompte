@@ -1,0 +1,65 @@
+{% extends 'compteBundle::layout.html.twig' %}
+
+{% block xTitle %}
+    <h2> تعديل سطر </h2>
+	
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(edit_form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	
+	<div class="form-group">
+	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.title, "إسم السطر")}}<span class="required"></span>
+         </label>
+	<div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(edit_form.title,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+		</div>	
+		</div>
+		<div class="form-group">
+		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.idl, "رقم السطر")}}<span class="required"></span>
+         </label>
+         </label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+		{{ form_widget(edit_form.idl,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+			</div> </div>
+			
+			<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.amount, "الرصيد")}}<span class="required"></span>
+         </label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+		{{ form_widget(edit_form.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+			</div> </div>
+			
+			<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.masterEntities, "القسم")}}<span class="required"></span>
+         </label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+		{{ form_widget(edit_form.masterEntities,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+			</div> </div>
+			
+			<div class="form-group">
+			 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.paragraph, "الفقرة")}}<span class="required"></span>
+         </label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+		{{ form_widget(edit_form.paragraph,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+			</div> </div>
+			
+	<div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+				 <input type="submit" class="btn btn-info" value="تعديل" />
+				
+						   <a class="btn btn-primary" href="{{ path('line_index') }}">العودة إلى اللائحة</a>
+                            
+				{{ form_end(edit_form) }}
+				 
+                
+                
+
+            </div>
+           </div>
+	
+	    
+   
+{% endblock %}

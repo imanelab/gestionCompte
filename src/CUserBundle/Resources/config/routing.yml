@@ -1,3 +1,7 @@
 c_user_homepage:
     path:     /
     defaults: { _controller: CUserBundle:Default:index }
+
+c_users:
+    resource: "@CUserBundle/Resources/config/routing/account.yml"
+    prefix: /users

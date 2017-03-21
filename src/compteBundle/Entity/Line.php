@@ -53,6 +53,21 @@ class Line
      */
     private $version;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idl", type="smallint")
+     */
+    private $idl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string",length=255)
+     */
+    private $title;
+
+
 
     /**
      * Get id
@@ -171,5 +186,51 @@ class Line
     public function getMasterEntities()
     {
         return $this->masterEntities;
+    }
+
+    /**
+     * Set idl
+     *
+     * @param integer $idl
+     * @return Line
+     */
+    public function setIdl($idl)
+    {
+        $this->idl = $idl;
+
+        return $this;
+    }
+
+    /**
+     * Get idl
+     *
+     * @return integer 
+     */
+    public function getIdl()
+    {
+        return $this->idl;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Line
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

@@ -12,6 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Morass
 {
+
+
+    /** 
+    @ORM\OneToOne(targetEntity="compteBundle\Entity\Delegation")
+   * @ORM\JoinColumn(nullable=true)
+   */
+
+  private $delegation;
+
+      /** 
+    @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+   * @ORM\JoinColumn(nullable=true)
+   */
+
+  private $user;
     /**
      * @var int
      *
@@ -90,5 +105,51 @@ class Morass
     public function getYear()
     {
         return $this->year;
+    }
+
+    /**
+     * Set delegation
+     *
+     * @param \compteBundle\Entity\Delegation $delegation
+     * @return Morass
+     */
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation = null)
+    {
+        $this->delegation = $delegation;
+
+        return $this;
+    }
+
+    /**
+     * Get delegation
+     *
+     * @return \compteBundle\Entity\Delegation 
+     */
+    public function getDelegation()
+    {
+        return $this->delegation;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Morass
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

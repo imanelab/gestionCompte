@@ -1,6 +1,6 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
-{%block title%}
-    {{parent()}} - Connexion
+{%block xTitle%}
+   <h2 class="pull-right">Connexion</h2>
 {%endblock%}
 {% trans_default_domain 'FOSUserBundle' %}
 
@@ -12,22 +12,50 @@
     <div class="alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     </div>
 	{% endif %}
-	<form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-		<div class="nav">
-		<img class="img-responsive" src="{{asset('assets/public/images/logo.png')}}">
-		</div>
-	    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+	<div>   
+      <div class="login_wrapper">
+	     
+        <div class="animate form">
+          <section class="login_content">
+          		<div class="nav">
+				<img src="{{asset('assets/images/logo-habous.png')}}">
+		      </div>
 
-	    <label for="username">{{ 'security.login.username'|trans }}</label>
-	    <input class="input-block-level" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+		        <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+		        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+	            <div>
+	            <label for="username">{{ 'security.login.username'|trans }}</label>
+	              <input class="input-block-level" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+	            <div>
+	            <label for="password">{{ 'security.login.password'|trans }}</label>
+	              <input class="input-block-level" type="password" id="password" name="_password" required="required" />
+	            </div>
+	            <div>
+	              <input class="btn btn-large btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+	              <input  type="checkbox" id="remember_me" name="_remember_me" value="on" />
+		   		<label class="checkbox" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+	              <a class="reset_pass" href="#">نسيت كلمة المرور؟</a>
+	            </div>
 
-	    <label for="password">{{ 'security.login.password'|trans }}</label>
-	    <input class="input-block-level" type="password" id="password" name="_password" required="required" />
-	     <label class="checkbox" for="remember_me">
-	    <input  type="checkbox" id="remember_me" name="_remember_me" value="on" />
-	   {{ 'security.login.remember_me'|trans }}</label>
+	            <div class="clearfix"></div>
 
-	    <input class="btn btn-large btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-	</form>
+	            <div class="separator">
+	              
+
+	              <div class="clearfix"></div>
+	              <br />
+
+	              <div>
+	                
+	                <p>©2017 جميع الحقوق محفوظة.</p>
+	              </div>
+	            </div>
+	          </form>
+	        </section>
+        </div>
+      </div>
+    </div>
+
 </div>
+
 {% endblock fos_user_content %}
