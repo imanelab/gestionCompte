@@ -1,5 +1,6 @@
 <?php
 
+
 namespace compteBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -38,4 +39,6 @@ class ParagraphType extends AbstractType
     }
 
 
+
 }
+

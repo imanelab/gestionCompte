@@ -53,6 +53,21 @@ class Line
      */
     private $version;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="idl", type="smallint")
+     */
+    private $idl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string",length=255)
+     */
+    private $title;
+
+
 
     /**
      * @var float
@@ -242,6 +257,7 @@ class Line
         return $this->title;
     }
 
+
     /**
      * Set consumedAmount
      *
@@ -264,4 +280,5 @@ class Line
     {
         return $this->consumedAmount;
     }
+
 }

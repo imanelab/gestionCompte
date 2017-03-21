@@ -38,3 +38,4 @@ compte:
 c_user:
     resource: "@CUserBundle/Resources/config/routing.yml"
     prefix:   /
+

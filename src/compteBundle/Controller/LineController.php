@@ -32,6 +32,7 @@ class LineController extends Controller
      *
      */
     public function newAction(Request $request)
+
     {
         $line = new Line();
         $form = $this->createForm('compteBundle\Form\LineType', $line);

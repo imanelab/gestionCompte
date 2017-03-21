@@ -2,18 +2,60 @@
 
 
 {% block xTitle %}
-    <h2> قائمة المندوبيات </h2>
+    <h2> إضافة سطر جديد </h2>
 {% endblock %}
 {% block content %}
+      {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.title, "إسم السطر")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.title,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.idl, "رقم السطر")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.idl,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.amount, "الرصيد")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.masterEntities, "القسم")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.masterEntities,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.paragraph, "الفقرة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.paragraph,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+        <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ path('line_index') }}">العودة إلى اللائحة</a>
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+
+
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('line_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

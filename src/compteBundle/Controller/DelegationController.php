@@ -34,9 +34,10 @@ class DelegationController extends Controller
     public function newAction(Request $request)
     {
         $delegation = new Delegation();
+		$delegation->setDepth(1);
         $form = $this->createForm('compteBundle\Form\DelegationType', $delegation);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($delegation);
@@ -108,7 +109,6 @@ class DelegationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
 
                 if(!$delegation->getDelegation()){
            // $parent= $delegation->getDelegation()->getId();

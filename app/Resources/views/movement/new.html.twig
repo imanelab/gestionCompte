@@ -49,7 +49,7 @@
          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.realDateMv, "التاريخ الحقيقي")}}<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form_widget(form.realDateMv,{'attr': {'class': 'datepicker form-control col-md-7 col-xs-12'}}) }}
+        {{ form_widget(form.realDateMv,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
         </div>
         </div>
 		
@@ -70,8 +70,6 @@
         </div>
 
 
-
-
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">
             {{form_label(form.selectCreditAccount,"type de compte Crediteur")}}
@@ -83,6 +81,7 @@
         <div id="creditAccount" class="col-md-4 col-sm-4 col-xs-8">
         {{ form_widget(form.creditAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
         </div>
+
 
       <div id="creditEAccount" class="col-md-4 col-sm-4 col-xs-8">
         {{ form_widget(form.creditEAccount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
@@ -115,6 +114,7 @@
 
 
        
+
 		
         <div class="ln_solid"></div>
             <div class="form-group">
@@ -128,24 +128,23 @@
 
     {{ form_end(form) }}
 
-    {% endblock %}
-	
   {% block js %}
   {{ parent() }}
+
 	 <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 	 <!-- jQuery -->
     <script src="{{asset('assets/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
     <script src="{{asset('assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
 
     <!-- bootstrap-daterangepicker -->
-    <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
-    <script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-
     <script>
       $(document).ready(function(){
         $(".datepicker").daterangepicker({
@@ -160,7 +159,10 @@
 
         $("#comptebundle_movement_selectCreditAccount").change(changeCreditAccount);
         $("#comptebundle_movement_selectDebitAccount").change(changeDebitAccount);
+
       });
+    </script>
+    <!-- /jQuery Tags Input -->
 
       function changeCreditAccount(){
        if($("#comptebundle_movement_selectCreditAccount").val()=="1"){
@@ -186,7 +188,9 @@
           $("#debitEAccount").show();
         }
       }
-    </script>
+
+    </script>	
 {% endblock %}
+
 
         

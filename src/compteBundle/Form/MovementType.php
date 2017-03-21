@@ -14,6 +14,7 @@ class MovementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('amountMv')
+
 	   ->add('dateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
 		->add('months','number')
 		->add('realDateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
@@ -25,6 +26,7 @@ class MovementType extends AbstractType
 		->add('debitAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
 		->add('creditEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])
 		->add('debitEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])        ;
+
     }
     
     /**

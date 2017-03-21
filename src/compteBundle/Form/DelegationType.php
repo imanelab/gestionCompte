@@ -5,6 +5,7 @@ namespace compteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use compteBundle\Entity\Delegation;
 
 class DelegationType extends AbstractType
 {
@@ -13,9 +14,10 @@ class DelegationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$emptyDelegation= new Delegation();
         $builder->add('name')
 		//->add('depth')
-		->add('delegation','entity',['class'=>'compteBundle:Delegation','property'=>'name','required'=>false])        ;
+		->add('delegation','entity',array('class'=>'compteBundle:Delegation','property'=>'name','required'=> false))     ;
     }
     
     /**

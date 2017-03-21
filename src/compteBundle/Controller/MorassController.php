@@ -121,4 +121,47 @@ class MorassController extends Controller
             ->getForm()
         ;
     }
+	
+	
+	
+	
+	 public function morassAction(Morass $morass)
+    {
+		$repository = $this
+
+  ->getDoctrine()
+
+  ->getManager()
+
+  ->getRepository('compteBundle:Paragraph')
+
+;
+		$paragraphs=$repository->findByMorass($morass);
+		
+		foreach( $paragraphs as $paragraph)
+		{
+			$repository = $this
+			  ->getDoctrine()
+			  ->getManager()
+			  ->getRepository('compteBundle:Line');
+			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph);
+			
+		}
+		
+		$colspan = count($lines,COUNT_RECURSIVE)+1;
+		
+		
+		
+		
+		
+		
+		
+		
+        return $this->render('morass/morass.html.twig', array(
+            'morass' => $morass,
+			'paragraphs' => $paragraphs,
+			'lines' => $lines,
+			'colspan'=>$colspan,
+        ));
+    }
 }

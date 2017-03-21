@@ -129,6 +129,7 @@ class Morass
     {
         return $this->delegation;
     }
+<<<<<<< HEAD
 
     /**
      * Set user
@@ -152,4 +153,6 @@ class Morass
     {
         return $this->user;
     }
+=======
+>>>>>>> 5353dd158937174f35d6fa6663430a0aa9e3462c
 }
