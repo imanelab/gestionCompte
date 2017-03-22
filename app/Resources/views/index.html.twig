@@ -2,7 +2,7 @@
 
 
 {% block xTitle %}
-    <h2> إضافة مندوبية </h2>
+    <h2> الرئيسية </h2>
 {% endblock %}
 {% block content %}
 
@@ -10,12 +10,12 @@
 <div class="col-md-4 col-sm-6 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
-      <h2>الرئيسية</h2>
+      <h2>المستخدمين</h2>
 
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-    <a href="{{path('compte_homepage')}}"><img class="img-responsive" src="{{asset('assets/images/home_blue.png')}}"></a>
+    <a href="{{path('compte_homepage')}}"><img class="img-responsive" src="{{asset('assets/images/users1.png')}}"></a>
     </div>
   </div>
 </div>
@@ -84,5 +84,19 @@
     </div>
   </div>
 </div>
+
+<div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="x_panel fixed_height_320">
+    <div class="x_title">
+      <h2>الحسابات الخارجية</h2>
+
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <a href="{{path('externalaccount_index')}}"><img class="img-responsive" src="{{asset('assets/images/account.png')}}"></a>
+    </div>
+  </div>
+</div>
+
         <!-- /page content -->
 {% endblock %}

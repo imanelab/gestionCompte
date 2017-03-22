@@ -1,36 +1,63 @@
 {% extends "compteBundle::layout.html.twig" %}
 
-{% block pageContent %}
-    <h1>Externalaccount</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ externalAccount.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ externalAccount.name }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ externalAccount.type }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('externalaccount_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('externalaccount_edit', { 'id': externalAccount.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+{% block xTitle %}
+    <h2> قائمة المندوبيات </h2>
 {% endblock %}
+{% block content %}
+
+ <table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+
+							
+							<th>العمليات</th>
+							 <th>نوع الحساب</th>
+                          <th>إسم الحساب</th>
+						 
+						
+                        </tr>
+                     </thead>
+
+
+                      <tbody>
+                        <tr>
+                         
+                          
+                         
+                       <td>
+
+                          
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                           
+
+							 
+							 
+							 {{ form_start(delete_form) }}
+                           <input type="submit" value="حذف" class="btn btn-danger">
+						    <a class="btn btn-info" href="{{ path('externalaccount_edit', { 'id': externalAccount.id }) }}">تعديل
+							
+							</a>
+                             {{ form_end(delete_form) }}
+							 
+							
+							 
+							</div> </div> 
+                       </td>
+					   
+					   <td>{{ externalAccount.type }}</td>
+					  <td>{{ externalAccount.name }}</td>
+            
+                      
+					   
+                       
+            
+						</tbody>
+                    </table>
+
+    
+            <a class="btn btn-primary pull-right" href="{{ path('externalaccount_index') }}">العودة إلى اللائحة</a>
+       
+{% endblock %}
+

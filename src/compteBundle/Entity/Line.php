@@ -76,19 +76,7 @@ class Line
      */
     private $consumedAmount;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idl", type="smallint")
-     */
-    private $idl;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string",length=255)
-     */
-    private $title;
+    
 
 
 
