@@ -70,7 +70,6 @@ class Line
      */
     private $consumedAmount;
 
-
     /**
      * @var string
      *

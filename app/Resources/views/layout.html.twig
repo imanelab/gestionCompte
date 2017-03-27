@@ -52,18 +52,21 @@
                   
                    
            
-           <li><a href="general_elements.html"><i class="fa fa-home"></i> الرئيسية </a></li>
-                  <li><a><i class="fa fa-desktop"></i> العمليات البنكية <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Virement "Entrée"</a></li>
-                      <li><a href="media_gallery.html">Virement "sortie"</a></li>
-                     
-                    </ul>
-                  </li>
+           <li><a href="{{path('compte_homepage')}}"><i class="fa fa-home"></i> الرئيسية </a></li>
+		   
+		   <li><a href="{{path('masterentity_index')}}"><i class="fa fa-user"></i> المستخدمين </a> </li>
+		   
+           <li><a href="{{path('masterentity_index')}}"><i class="fa fa-desktop"></i> الوحدات الإدارية </a> </li>
           
-          <li><a href="analyser.html"><i class="fa fa-table"></i> Analyser le budget </a></li>
+          <li><a href="{{path('delegation_index')}}"><i class="fa fa-table"></i> المندوبيات </a></li>
             
-          <li><a href="historique.html"><i class="fa fa-bar-chart-o"></i> Historique </a>   </li>
+          <li><a href="{{path('morass_index')}}"><i class="fa fa-bar-chart-o"></i> مصنفة الميزانية </a> </li>
+		  
+		  <li><a href="{{path('account_index')}}"><i class="fa fa-table"></i> الحسابات البنكية </a></li>
+		  
+		  <li><a href="{{path('externalaccount_index')}}"><i class="fa fa-table"></i> الحسابات الخارجية </a></li>
+            
+          <li><a href="{{path('codificationabb_index')}}"><i class="fa fa-outdent"></i> ترميز البريد بنك </a> </li>
                 
                   
                  
