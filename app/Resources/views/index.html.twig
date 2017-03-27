@@ -1,13 +1,35 @@
-{% extends "compteBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
+  {% block title %}
+     {{parent()}} - Gestion de tresorerie
+      {% endblock %}
+{% block pageContent %}
 
 
-{% block xTitle %}
-    <h2> الرئيسية </h2>
-{% endblock %}
-{% block content %}
+                          <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          
+          <!-- /top tiles -->
 
-        <!-- page content -->
-<div class="col-md-4 col-sm-6 col-xs-12">
+          <br />
+
+         
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel" style="left:0px;width:100%">
+                <div class="x_title">
+                {% block xTitle %}
+                 <h2> الرئيسية </h2>
+				 {% endblock %}
+                  <div class="clearfix"></div>
+                </div>
+				
+				<div class="x_content">
+				 <div class="dashboard-widget-content">
+				{% block content %}
+
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>المستخدمين</h2>
@@ -20,7 +42,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>الوحدات الإدارية</h2>
@@ -33,7 +55,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>المندوبيات</h2>
@@ -46,7 +68,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>مصنفة الميزانية</h2>
@@ -59,7 +81,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>الحسابات البنكية</h2>
@@ -72,7 +94,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>ترميز البريد بنك</h2>
@@ -85,7 +107,7 @@
   </div>
 </div>
 
-<div class="col-md-4 col-sm-6 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
       <h2>الحسابات الخارجية</h2>
@@ -98,5 +120,18 @@
   </div>
 </div>
 
-        <!-- /page content -->
+
+
+{% endblock %}
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-8 col-sm-8 col-xs-12"> </div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+{{parent()}}
 {% endblock %}
