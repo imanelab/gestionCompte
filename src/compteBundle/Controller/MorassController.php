@@ -58,10 +58,14 @@ class MorassController extends Controller
     public function showAction(Morass $morass)
     {
         $deleteForm = $this->createDeleteForm($morass);
-
+        $morassArray= $this->getMorass($morass);
         return $this->render('morass/show.html.twig', array(
             'morass' => $morass,
             'delete_form' => $deleteForm->createView(),
+            'paragraphs'=>$morassArray['paragraphs'],
+            'lines'=>$morassArray['lines'],
+            'colspan'=>$morassArray['colspan'],
+            'morassAmount'=>$morassArray['morassAmount'],
         ));
     }
 
@@ -125,43 +129,34 @@ class MorassController extends Controller
 	
 	
 	
-	 public function morassAction(Morass $morass)
+	 public function getMorass(Morass $morass)
     {
-		$repository = $this
-
-  ->getDoctrine()
-
-  ->getManager()
-
-  ->getRepository('compteBundle:Paragraph')
-
-;
+		$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Paragraph');
 		$paragraphs=$repository->findByMorass($morass);
+        $morassAmount=0;
 		
 		foreach( $paragraphs as $paragraph)
 		{
-			$repository = $this
-			  ->getDoctrine()
-			  ->getManager()
-			  ->getRepository('compteBundle:Line');
+			$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
 			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph);
+            
 			
 		}
+        foreach ($lines as $line) {
+            foreach ($line as $amount) {
+                $morassAmount += $amount->getAmount();
+            }
+        }
 		
 		$colspan = count($lines,COUNT_RECURSIVE)+1;
 		
-		
-		
-		
-		
-		
-		
-		
-        return $this->render('morass/morass.html.twig', array(
+				
+        return array(
             'morass' => $morass,
 			'paragraphs' => $paragraphs,
 			'lines' => $lines,
 			'colspan'=>$colspan,
-        ));
+            'morassAmount'=>$morassAmount,
+        );
     }
 }

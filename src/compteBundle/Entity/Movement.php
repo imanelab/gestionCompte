@@ -109,6 +109,13 @@ class Movement
     private $months;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="months", type="string", length=255, nullable=true)
+     */
+    private $months;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="real_date_mv", type="datetime")
