@@ -109,11 +109,11 @@ class Movement
     private $months;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="months", type="string", length=255, nullable=true)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
-    private $months;
+    private $comment;
 
     /**
      * @var \DateTime
@@ -430,4 +430,27 @@ class Movement
 
     }
 
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Movement
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }
