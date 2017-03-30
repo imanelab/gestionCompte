@@ -70,9 +70,15 @@ class MovementController extends Controller
             $em->persist($movement);
             $em->flush($movement);
 
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('movement_show', array('id' => $movement->getId()));
-        }
 
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
         return $this->render('movement/new.html.twig', array(
             'movement' => $movement,
             'form' => $form->createView(),
@@ -114,7 +120,14 @@ class MovementController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('movement_edit', array('id' => $movement->getId()));
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('movement_show', array('id' => $movement->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('movement/edit.html.twig', array(
@@ -137,6 +150,12 @@ class MovementController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($movement);
             $em->flush($movement);
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('movement_index');

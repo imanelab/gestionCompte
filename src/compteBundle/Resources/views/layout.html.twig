@@ -27,21 +27,42 @@
                 <div class="x_content">
                   <div class="dashboard-widget-content">
 
+                  {% if app.session.flashBag.has('notice') %}
+                  {% for msg in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-success fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        
+                            {{ msg }}
+                        
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+
+                {% if app.session.flashBag.has('error') %}
+                  {% for msg in app.session.flashBag.get('error') %}
+                    <div class="alert alert-error fade in" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ msg }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
                 {# On affiche les messages flash que définissent les contrôleurs du bundle #}
 
                   {% if form is defined%}
                   {% if not form.vars.valid %}
-                          <div class="alert alert-error">
-                  <ul>
-                      {# Loop through every form item #}
-                      {% for child in form.children %}
-                          {# Display the errors of the form item #}
-                          {%for error in child.vars.errors%}
-                              <li>{{error.message}}</li>
-                          {%endfor%}
-                      {%endfor%}
-                  </ul>
-                          </div>
+                    <div class="alert alert-error">
+                        <ul>
+                            {# Loop through every form item #}
+                            {% for child in form.children %}
+                                {# Display the errors of the form item #}
+                                {%for error in child.vars.errors%}
+                                    <li>{{error.message}}</li>
+                                {%endfor%}
+                            {%endfor%}
+                        </ul>
+                    </div>
                   {%endif%}
                   {%endif%}
 

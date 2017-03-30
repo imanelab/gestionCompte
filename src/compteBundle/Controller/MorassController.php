@@ -41,8 +41,14 @@ class MorassController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($morass);
             $em->flush($morass);
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        return $this->redirectToRoute('morass_show', array('id' => $morass->getId()));
 
-            return $this->redirectToRoute('morass_show', array('id' => $morass->getId()));
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('morass/new.html.twig', array(
@@ -81,8 +87,14 @@ class MorassController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        return $this->redirectToRoute('morass_show', array('id' => $morass->getId()));
 
-            return $this->redirectToRoute('morass_edit', array('id' => $morass->getId()));
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('morass/edit.html.twig', array(
@@ -105,6 +117,12 @@ class MorassController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($morass);
             $em->flush($morass);
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('morass_index');
