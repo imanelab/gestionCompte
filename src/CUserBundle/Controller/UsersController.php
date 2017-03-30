@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use CUserBundle\Entity\User;
 use CUserBundle\Form\UserType;
+use CUserBundle\Form\RegistrationType;
 
 /**
  * Users controller.
@@ -51,7 +52,7 @@ class UsersController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('users_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('users_show', array('username' => $entity->getUsername())));
         }
 
         return $this->render('CUserBundle:Account:new.html.twig', array(
@@ -69,12 +70,10 @@ class UsersController extends Controller
      */
     private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(new RegistrationType(), $entity, array(
             'action' => $this->generateUrl('users_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }

@@ -96,8 +96,6 @@ class LineController extends Controller
 
         }
 
-        }
-
         return $this->render('line/edit.html.twig', array(
             'line' => $line,
             'edit_form' => $editForm->createView(),
