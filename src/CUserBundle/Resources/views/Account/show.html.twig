@@ -13,15 +13,16 @@
   {% endfor %}
 {% block xcontent %}
  
-					<table id="datatable" class="table table-striped table-bordered">
+					<table id="datatable" class="table table-striped table-bordered" dir="rtl">
                      <thead>
                         <tr>
                             			 
                             
-							<th>الرقم السري</th>
+							
 							<th>الإسم</th>
 							<th>النسب</th>
 							 <th>{{ 'profile.show.username'|trans }}</th>
+							 <th>كلمة المرور</th>
 							 <th>{{ 'profile.show.email'|trans }}</th>
 							 <th>العمليات</th>
 							 
@@ -30,14 +31,14 @@
                              <tbody>
 							 
 						 <tr>
-						 <td><a class="href" href="{{ path('fos_user_change_password') }}">
-                                <i class="icon-edit"></i>
-                                Changer
-                            </a></td>
+						
                             <td>{{ user.lastName }}</td>
                             <td> {{ user.firstname }}</td>
                             <td> {{ user.username }}</td>
-                        
+                         <td><a class="href" href="{{ path('fos_user_change_password') }}">
+                                <i class="icon-edit"></i>
+                                Changer
+                            </a></td>
                             <td>{{ user.email }}</td>
                        
                             
