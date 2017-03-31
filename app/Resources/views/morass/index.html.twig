@@ -38,7 +38,7 @@
         {% for morass in morasses %}
             <tr>
                 
-                <td>{{ morass.name }}</td>
+                <td><a href="{{ path('morass_show', { 'id': morass.id }) }}">{{ morass.name }}</a></td>
                 <td>{{ morass.year }}</td>
                 <td>{% if morass.delegation %} {{ morass.delegation.name }} {%else%} الحساب المركزي{% endif %}</td>
 				

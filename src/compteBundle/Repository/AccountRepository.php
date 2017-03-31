@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class AccountRepository extends EntityRepository
 {
+	public function getAccountProperty(){
+
+		$qb = $this->createQueryBuilder('a');
+
+
+			  $qb->where('a.account IS NULL')
+
+			  ;
+			  return $qb;
+	}
 }

@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use compteBundle\Repository\AccountRepository;
+
 class AccountType extends AbstractType
 {
     /**
@@ -17,7 +19,10 @@ class AccountType extends AbstractType
 		//->add('depth')
 		 ->add('balance')//,'money',["currency"=>"MAD"])
 		->add('delegation','entity',["class"=>"compteBundle:Delegation","property"=>"name","required"=>false])
-        ->add('account','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false]);
+        ->add('account','entity',['class'=>'compteBundle:Account', 'property'=>'rib','query_builder' => 
+                                                                function (AccountRepository $a) {
+                                                            return $a->getAccountProperty(); },
+        'required'=>false]);
     }
     
     /**

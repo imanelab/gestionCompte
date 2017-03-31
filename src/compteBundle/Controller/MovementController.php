@@ -64,7 +64,6 @@ class MovementController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->selectedAccount($movement, $request);
-            $this->checkCashAvailability($movement);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($movement);

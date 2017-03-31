@@ -33,7 +33,7 @@
                 <td>{{ movement.amountMv }} -</td>
                 <td>{{ movement.amountMv }}</td>
 
-                <td>{% if movement.debitAccount.delegation is defined %}{{ movement.debitAccount.delegation.name }}{% endif %} {% if movement.debitEAccount %}{{ movement.debitEAccount.name }}{% endif %}</td>  
+                <td>{% if movement.debitAccount.delegation.name is defined %}{{ movement.debitAccount.delegation.name }}{% endif %} {% if movement.debitEAccount %}{{ movement.debitEAccount.name }}{% endif %}</td>  
                 <td>{{ movement.comment }}</td> 
                 <td>
 
@@ -70,11 +70,22 @@
     <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
+
+    <script src="{{asset('assets/vendors/jszip/dist/jszip.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
     <!-- Datatables -->
     <script>
       $(document).ready(function() {
 
+        var handleDataTableButtons = function() {
+        if ($("#datatable").length) {
         $('#datatable').dataTable({
         language:{
                  "sProcessing":   "جارٍ التحميل...",
@@ -91,13 +102,50 @@
                 "sPrevious": "السابق",
                 "sNext":     "التالي",
                 "sLast":     "الأخير"
-    }
+            }
         
-        }
+        },
+
+        dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
         });
 
+          }
+        };
 
-      });
+      TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
+        TableManageButtons.init();
+
+    });
     </script>
     <!-- /Datatables -->
 
