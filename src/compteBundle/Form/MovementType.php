@@ -17,7 +17,7 @@ class MovementType extends AbstractType
 
 	   ->add('dateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
 		->add('months','number')
-        ->add('comment','textarea')
+        ->add('comment','textarea',["required"=>false])
 		->add('realDateMv','date',["widget"=>"single_text",'format'=>'dd/MM/yyyy'])
 		->add('line','entity',['class'=>'compteBundle:Line','property'=>'title'])
         ->add('selectDebitAccount','choice',['choices'=>['1'=>"داخلي",'2'=>'خارجي'],'mapped'=>false])

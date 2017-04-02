@@ -4,6 +4,9 @@ namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * MasterEntity
  *
@@ -128,5 +131,24 @@ class MasterEntity
         public function removeParent()
     {
         unset($this->masterEntity);
+    }
+
+     /**
+    * An entity shouldn't have itself as parent
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+       
+
+        if ($this->getMasterEntity()!==null && $this->getId() == $this->getMasterEntity()->getId()) {
+            $context
+            ->buildViolation('An entity shouldn\'t have itself as parent')
+            ->atPath('masterEntity')
+            ->addViolation();
+        }
+
     }
 }
