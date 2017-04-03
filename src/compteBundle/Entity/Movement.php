@@ -109,6 +109,13 @@ class Movement
     private $months;
 
     /**
+     * @var text
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="real_date_mv", type="datetime")
@@ -423,4 +430,27 @@ class Movement
 
     }
 
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Movement
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }

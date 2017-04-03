@@ -35,7 +35,7 @@ class MasterEntityController extends Controller
     public function newAction(Request $request)
     {
         $masterEntity = new Masterentity();
-		$masterEntity->setDepth(1);
+	//	$masterEntity->setDepth(1);
         $form = $this->createForm('compteBundle\Form\MasterEntityType', $masterEntity);
         $form->handleRequest($request);
 

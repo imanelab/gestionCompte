@@ -4,6 +4,9 @@ namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Delegation
  *
@@ -109,7 +112,7 @@ class Delegation
      * @param \compteBundle\Entity\Delegation $delegation
      * @return Delegation
      */
-    public function setDelegation(\compteBundle\Entity\Delegation $delegation)
+    public function setDelegation(\compteBundle\Entity\Delegation $delegation=null)
     {
         $this->delegation = $delegation;
 
@@ -129,5 +132,25 @@ class Delegation
     public function removeParent()
     {
         unset($this->delegation);
+    }
+
+
+     /**
+    * An entity shouldn't have itself as parent
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+       
+
+        if ($this->getDelegation()!==null && $this->getId() == $this->getDelegation()->getId()) {
+            $context
+            ->buildViolation('An entity shouldn\'t have itself as parent')
+            ->atPath('delegation')
+            ->addViolation();
+        }
+
     }
 }

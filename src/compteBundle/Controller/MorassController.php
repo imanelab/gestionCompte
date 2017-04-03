@@ -150,13 +150,17 @@ class MorassController extends Controller
 	 public function getMorass(Morass $morass)
     {
 		$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Paragraph');
-		$paragraphs=$repository->findByMorass($morass);
+
+		$paragraphs=$repository->findByMorass($morass,array('idp' => 'ASC'));
+
         $morassAmount=0;
 		
 		foreach( $paragraphs as $paragraph)
 		{
 			$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
-			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph);
+
+			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph,array('idl' => 'ASC'));
+
             
 			
 		}

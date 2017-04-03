@@ -34,7 +34,7 @@ class DelegationController extends Controller
     public function newAction(Request $request)
     {
         $delegation = new Delegation();
-		$delegation->setDepth(1);
+		//$delegation->setDepth(1);
         $form = $this->createForm('compteBundle\Form\DelegationType', $delegation);
         $form->handleRequest($request);
 
@@ -91,6 +91,14 @@ class DelegationController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $depth=$delegation->getDepth();
+            $parent=$delegation->getDelegation();
+            if( is_null($parent))
+            $delegation->setDepth(1);
+        else{
+            $parentDepth=$parent->getDepth()+1;
+            $delegation->setDepth($parentDepth);
+        }
             $this->getDoctrine()->getManager()->flush();
 
           $this->addFlash('notice', 'لقد تمت العملية بنجاح');

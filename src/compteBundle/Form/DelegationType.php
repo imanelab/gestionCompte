@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use compteBundle\Entity\Delegation;
 
+use compteBundle\Repository\DelegationRepository;
+
 class DelegationType extends AbstractType
 {
     /**
@@ -17,7 +19,9 @@ class DelegationType extends AbstractType
 		$emptyDelegation= new Delegation();
         $builder->add('name')
 		//->add('depth')
-		->add('delegation','entity',array('class'=>'compteBundle:Delegation','property'=>'name','required'=> false))     ;
+		->add('delegation','entity',array('class'=>'compteBundle:Delegation','property'=>'name',
+            'query_builder'=>function (DelegationRepository $dr){return $dr->createQueryBuilder('d')
+                ->where('d.depth=1');},'required'=> false))     ;
     }
     
     /**

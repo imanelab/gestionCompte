@@ -4,6 +4,10 @@ namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+// Ajoutez ce use pour le contexte
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Movement
  *
@@ -37,7 +41,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -47,7 +51,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -57,7 +61,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\ExternalAccount")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -67,7 +71,7 @@ class Movement
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\ExternalAccount")
 
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
 
    */
 
@@ -103,6 +107,13 @@ class Movement
      * @ORM\Column(name="months", type="integer", nullable=true)
      */
     private $months;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
 
     /**
      * @var \DateTime
@@ -351,4 +362,72 @@ class Movement
     {
         return $this->debitEAccount;
     }
+
+
+    /**
+     * unset Account
+     *
+     */
+    public function unsetAccount($par)
+    {
+        switch ($par) {
+            case 'CA':
+                $this->creditAccount=null;
+                break;
+
+            case 'CEA':
+                 $this->creditEAccount=null;
+                break;
+
+            case 'DA':
+                 $this->debitAccount=null;
+                break;
+
+            case 'DEA':
+                 $this->debitEAccount=null;
+                break;
+            
+        }
+    }
+
+
+     /**
+    * Check the possibility to execute the movement (line has enough cash) 
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+        $lineAmount= $this->getLine()->getAmount();
+        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
+        $movementAmount= $this->getAmountMv();
+
+        $remainingCash = $lineAmount - $lineConsumedAmount;
+        $postRemainingCash= $remainingCash - $movementAmount;
+
+        if ($postRemainingCash <0) {
+            $context
+            ->buildViolation('Somme non dotée')
+            ->atPath('line')
+            ->addViolation();
+        }
+
+        if ($this->months >12) {
+            $context
+            ->buildViolation('mois + que 12')
+            ->atPath('months')
+            ->addViolation();
+        }
+
+        if ($this->realDateMv < $this->dateMv) {
+            $context
+            ->buildViolation('dates fchkeeel')
+            ->atPath('dateMv')
+            ->addViolation();
+        }
+
+
+    }
+
 }
