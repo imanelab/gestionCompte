@@ -41,8 +41,14 @@ class ExternalAccountController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($externalAccount);
             $em->flush($externalAccount);
-
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('externalaccount_show', array('id' => $externalAccount->getId()));
+
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('externalaccount/new.html.twig', array(
@@ -78,7 +84,14 @@ class ExternalAccountController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('externalaccount_edit', array('id' => $externalAccount->getId()));
+           $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('externalaccount_show', array('id' => $externalAccount->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('externalaccount/edit.html.twig', array(
@@ -101,6 +114,12 @@ class ExternalAccountController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($externalAccount);
             $em->flush($externalAccount);
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('externalaccount_index');

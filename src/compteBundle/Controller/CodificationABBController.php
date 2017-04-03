@@ -41,8 +41,14 @@ class CodificationABBController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($codificationABB);
             $em->flush($codificationABB);
-
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('codificationabb_show', array('id' => $codificationABB->getId()));
+
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('codificationabb/new.html.twig', array(
@@ -78,7 +84,14 @@ class CodificationABBController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('codificationabb_edit', array('id' => $codificationABB->getId()));
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('codificationabb_show', array('id' => $codificationABB->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('codificationabb/edit.html.twig', array(
@@ -101,6 +114,12 @@ class CodificationABBController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($codificationABB);
             $em->flush($codificationABB);
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('codificationabb_index');

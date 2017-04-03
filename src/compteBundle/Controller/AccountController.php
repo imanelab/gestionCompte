@@ -59,7 +59,13 @@ class AccountController extends Controller
             $em->persist($account);
             $em->flush($account);
 
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('account_show', array('id' => $account->getId()));
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('account/new.html.twig', array(
@@ -101,7 +107,13 @@ class AccountController extends Controller
              }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('account_edit', array('id' => $account->getId()));
+             $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('account_show', array('id' => $account->getId()));
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('account/edit.html.twig', array(
@@ -124,6 +136,12 @@ class AccountController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($account);
             $em->flush($account);
+         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('account_index');

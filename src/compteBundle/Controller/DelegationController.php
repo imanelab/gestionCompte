@@ -51,10 +51,15 @@ class DelegationController extends Controller
         }
             $em->persist($delegation);
             $em->flush($delegation);
-
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('delegation_show', array('id' => $delegation->getId()));
-        }
 
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
         return $this->render('delegation/new.html.twig', array(
             'delegation' => $delegation,
             'form' => $form->createView(),
@@ -88,7 +93,14 @@ class DelegationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('delegation_edit', array('id' => $delegation->getId()));
+          $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('delegation_show', array('id' => $delegation->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('delegation/edit.html.twig', array(
@@ -128,6 +140,12 @@ class DelegationController extends Controller
 
             $em->remove($delegation);
             $em->flush($delegation);
+         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('delegation_index');

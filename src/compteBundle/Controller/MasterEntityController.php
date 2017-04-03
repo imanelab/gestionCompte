@@ -52,8 +52,14 @@ class MasterEntityController extends Controller
         }
             $em->persist($masterEntity);
             $em->flush($masterEntity);
-
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('masterentity_show', array('id' => $masterEntity->getId()));
+
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('masterentity/new.html.twig', array(
@@ -99,7 +105,14 @@ class MasterEntityController extends Controller
                 }
 
          $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('masterentity_edit', array('id' => $masterEntity->getId()));
+         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('masterentity_show', array('id' => $masterEntity->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('masterentity/edit.html.twig', array(
@@ -122,6 +135,13 @@ class MasterEntityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($masterEntity);
             $em->flush($masterEntity);
+       $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('masterentity_index');

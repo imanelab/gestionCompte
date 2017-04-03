@@ -40,9 +40,15 @@ class ParagraphController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($paragraph);
-            $em->flush($paragraph);
+            $em->flush($paragraph); 
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        return $this->redirectToRoute('paragraph_show', array('id' => $paragraph->getId()));
 
-            return $this->redirectToRoute('paragraph_show', array('id' => $paragraph->getId()));
+        }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('paragraph/new.html.twig', array(
@@ -78,7 +84,14 @@ class ParagraphController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('paragraph_edit', array('id' => $paragraph->getId()));
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        return $this->redirectToRoute('paragraph_show', array('id' => $paragraph->getId()));
+
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->render('paragraph/edit.html.twig', array(
@@ -101,6 +114,12 @@ class ParagraphController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($paragraph);
             $em->flush($paragraph);
+        $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        }
+        else {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
         }
 
         return $this->redirectToRoute('paragraph_index');

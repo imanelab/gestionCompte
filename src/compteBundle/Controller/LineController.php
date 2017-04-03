@@ -44,8 +44,16 @@ class LineController extends Controller
             $em->persist($line);
             $em->flush($line);
 
+            
+          $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('line_show', array('id' => $line->getId()));
         }
+        elseif ($form->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
+
 
         return $this->render('line/new.html.twig', array(
             'line' => $line,
@@ -79,8 +87,15 @@ class LineController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('line_show', array('id' => $line->getId()));
+        }
+        elseif ($editForm->isSubmitted()) {
 
-            return $this->redirectToRoute('line_edit', array('id' => $line->getId()));
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
+
         }
 
         return $this->render('line/edit.html.twig', array(
