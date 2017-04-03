@@ -26,15 +26,13 @@
                 </div>
                 <div class="x_content">
 
-		                {% for key, message in app.session.flashbag.all() %}
-
-						    <div class="alert alert-{{ key }}">
-
-						      {{ message|trans({}, 'FOSUserBundle') }}
-
-						    </div>
-
-  						{% endfor %}
+		                {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <div class="alert alert-{{ key }}">
+          {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+    {% endfor %}
+{% endfor %}
 
                   <div class="dashboard-widget-content">
                   {% block fos_user_content %}

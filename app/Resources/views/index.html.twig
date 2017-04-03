@@ -29,6 +29,7 @@
 				 <div class="dashboard-widget-content">
 				{% block content %}
 
+ {% if is_granted("ROLE_SUPER_ADMIN") %}
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
@@ -37,11 +38,13 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-    <a href="{{path('compte_homepage')}}"><img class="img-responsive" src="{{asset('assets/images/users1.png')}}"></a>
+    <a href="{{path('users')}}"><img class="img-responsive" src="{{asset('assets/images/users1.png')}}"></a>
     </div>
   </div>
 </div>
+{%endif%}
 
+{% if is_granted("ROLE_SUPER_ADMIN") %}
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
@@ -54,7 +57,9 @@
     </div>
   </div>
 </div>
+{%endif%}
 
+{% if is_granted("ROLE_SUPER_ADMIN") %}
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
@@ -67,6 +72,8 @@
     </div>
   </div>
 </div>
+{%endif%}
+
 
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
@@ -94,6 +101,7 @@
   </div>
 </div>
 
+{% if is_granted("ROLE_SUPER_ADMIN") %}
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
     <div class="x_title">
@@ -106,6 +114,7 @@
     </div>
   </div>
 </div>
+{%endif%}
 
 <div class="col-md-3 col-sm-4 col-xs-12">
   <div class="x_panel fixed_height_320">
@@ -120,6 +129,20 @@
   </div>
 </div>
 
+{% if not is_granted("ROLE_SUPER_ADMIN") %}
+<div class="col-md-3 col-sm-4 col-xs-12">
+  <div class="x_panel fixed_height_320">
+    <div class="x_title">
+      <h2>التحويلات</h2>
+
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <a href="{{path('movement_index')}}"><img class="img-responsive" src="{{asset('assets/images/transaction.png')}}"></a>
+    </div>
+  </div>
+</div>
+{%endif%}
 
 
 {% endblock %}
