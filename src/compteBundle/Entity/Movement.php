@@ -17,6 +17,16 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Movement
 {
 
+    /**
+
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $user;
+
       /**
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Line")
@@ -93,6 +103,13 @@ class Movement
      * @ORM\Column(name="amount_mv", type="float")
      */
     private $amountMv;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validation", type="boolean")
+     */
+    private $validation;
 
     /**
      * @var \DateTime
@@ -452,5 +469,28 @@ class Movement
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set validation
+     *
+     * @param boolean $validation
+     * @return Movement
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get validation
+     *
+     * @return boolean 
+     */
+    public function getValidation()
+    {
+        return $this->validation;
     }
 }

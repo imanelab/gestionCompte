@@ -25,6 +25,16 @@ class Account
 
     /**
 
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $user;
+
+    /**
+
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
    * @ORM\JoinColumn(nullable=true)
