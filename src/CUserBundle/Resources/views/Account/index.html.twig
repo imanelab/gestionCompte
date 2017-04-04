@@ -26,9 +26,10 @@
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Identifiant</th>
+						<th>Entité</th>
                         <th>Roles</th>
                         <th>Statut</th>
-                        <th>Affectation des rôles</th>
+                        <th>Affectation des rôles</th>						
 						<th>Actions</th>
                     </tr>
                 </thead>
@@ -38,6 +39,10 @@
                                     <td>{{ entity.firstName }}</td>
                                     <td>{{ entity.lastName }}</td>
                                     <td>{{ entity.username }}</td>
+									<td> {% if entity.masterEntity %}
+									{{ entity.masterEntity.name }}
+									{% endif %}
+									</td>
                                     <td>{% for role in entity.roles %} 
                                             {{ role[5:]|capitalize }} <br>
                                         {% endfor %}										
@@ -63,11 +68,13 @@
                                         {{ form_widget(forms[entity.id].status)}}
                                         {{ form_end(forms[entity.id])}}
 									</td>
+																		
+									
 								    <td>
                                           <a class="btn btn-success" href="{{ path('users_show', {'username': entity.username }) }}">
                                             <i class="icon-eye-open"></i> Afficher 
                                         </a>
-                                        <a class="btn btn-primary" href="{{ path('users_edit', { 'id':entity.id,'username': entity.username }) }}">
+                                        <a class="btn btn-info" href="{{ path('users_edit', { 'id':entity.id,'username': entity.username }) }}">
                                             <i class="icon-pencil icon-white"></i> Editer
                                         </a>
                                             
