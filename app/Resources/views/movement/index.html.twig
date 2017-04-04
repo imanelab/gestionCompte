@@ -14,9 +14,9 @@
                 <th>نوع العملية</th>
                 <th>عدد الشهور المغطاة</th>
                 <th>السطر المعني بالعملية</th>
-                <th>حركة دائنة</th>
-                <th>حركة مدينة</th>
-                <th>الحساب المحول منه/إليه</th>
+                <th>الحساب الدائن</th>
+                <th>الحساب المدين</th>
+                <th>المبلغ المحول</th>
                 <th>الملاحظات</th>
                 <th>Actions</th>
             </tr>
@@ -24,16 +24,16 @@
         <tbody>
         {% for movement in movements %}
             <tr>
+            
 
                 <td>{% if movement.dateMv %}{{ movement.dateMv|date('d-m-Y') }}{% endif %}</td>
                 <td>{% if movement.realDateMv %}{{ movement.dateMv|date('d-m-Y') }}{% endif %}</td>
-                <td></td>
+                <td>{{ movement.codificationABB.label }}</td>
                 <td>{{ movement.months }}</td>
                 <td>{{ movement.line.title }}</td>
-                <td>{{ movement.amountMv }} -</td>
-                <td>{{ movement.amountMv }}</td>
-
+                <td>{% if movement.creditAccount.delegation.name is defined %}{{ movement.creditAccount.delegation.name }}{% endif %} {% if movement.creditEAccount %}{{ movement.creditEAccount.name }}{% endif %}</td>  
                 <td>{% if movement.debitAccount.delegation.name is defined %}{{ movement.debitAccount.delegation.name }}{% endif %} {% if movement.debitEAccount %}{{ movement.debitEAccount.name }}{% endif %}</td>  
+                <td>{{ movement.amountMv }}</td>
                 <td>{{ movement.comment }}</td> 
                 <td>
 

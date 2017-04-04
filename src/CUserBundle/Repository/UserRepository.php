@@ -17,9 +17,8 @@ class UserRepository extends EntityRepository
 
 		$qb = $this->createQueryBuilder('u')
 				  	->where('u.roles like :role')
-					->setParameter('role', '%ROLE_SUPERVISOR%')
-					->where('u.masterEntity= :masterEntity')
-					->setParameter('masterEntity', $masterEntity)
+					->andWhere('u.masterEntity= :masterEntity')
+					->setParameters(array('masterEntity'=> $masterEntity,'role'=>'%ROLE_SUPERVISOR%'))
 					->setMaxResults(1);
 			  return $qb;
 	}

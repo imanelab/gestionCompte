@@ -18,9 +18,18 @@ class MovementController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+        $masterEntity= $user->getMasterEntity();
+
         $em = $this->getDoctrine()->getManager();
 
-        $movements = $em->getRepository('compteBundle:Movement')->findAll();
+        $lines= $em->getRepository('compteBundle:Line')->getMasterEntities($masterEntity->getId())->getQuery()->getResult();
+
+
+
+        
+
+        $movements = $em->getRepository('compteBundle:Movement')->findByLine($lines);
 
         return $this->render('movement/index.html.twig', array(
             'movements' => $movements,
@@ -66,6 +75,8 @@ class MovementController extends Controller
             //$userEntity= $currentUser->getMasterEntity();
            // $userEntityDepth = $userEntity->getDepth();
             $user = $this->getUser();
+
+            // if the current user is not a supervisor so it requires an approver
             if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPERVISOR')) {
                 $em = $this->getDoctrine()->getManager();
                 $movement->setValidation(true);
@@ -74,17 +85,23 @@ class MovementController extends Controller
                 if($validator)
                 $movement->setValidator($validator);
                 else
-                throw $this->createNotFoundException('The product does not exist'.$validator.getFirstName());
+                throw $this->createNotFoundException('This user doesn\'t have a validator please specify one before');
             }
-            else
+            else{
                 $movement->setValidator(null);
+                $movement->setValidation(false);
+            }
                  
             $movement->setUser($user);
+            $oldConsumedAmount = $movement->getLine()->getConsumedAmount();
+            $currentConsumedAmount= $oldConsumedAmount +$movement->getAmountMv();
+            $movement->getLine()->setConsumedAmount($currentConsumedAmount);
+
             $this->selectedAccount($movement, $request);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($movement);
-            $em->flush($movement);
+            $em->flush();
 
             $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             return $this->redirectToRoute('movement_show', array('id' => $movement->getId()));

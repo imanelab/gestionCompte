@@ -418,46 +418,6 @@ class Movement
     }
 
 
-     /**
-    * Check the possibility to execute the movement (line has enough cash) 
-    *
-    * @Assert\Callback
-    **/
-
-    public function checkCashAvailability(ExecutionContextInterface $context){
-
-        $lineAmount= $this->getLine()->getAmount();
-        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
-        $movementAmount= $this->getAmountMv();
-
-        $remainingCash = $lineAmount - $lineConsumedAmount;
-        $postRemainingCash= $remainingCash - $movementAmount;
-
-        if ($postRemainingCash <0) {
-            $context
-            ->buildViolation('Somme non dotée')
-            ->atPath('line')
-            ->addViolation();
-        }
-
-        if ($this->months >12) {
-            $context
-            ->buildViolation('mois + que 12')
-            ->atPath('months')
-            ->addViolation();
-        }
-
-        if ($this->realDateMv < $this->dateMv) {
-            $context
-            ->buildViolation('dates fchkeeel')
-            ->atPath('dateMv')
-            ->addViolation();
-        }
-
-
-    }
-
-
     /**
      * Set comment
      *
@@ -548,5 +508,63 @@ class Movement
     public function getValidator()
     {
         return $this->validator;
+    }
+
+
+      /**
+    * Check the possibility to execute the movement (line has enough cash) 
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+        $lineAmount= $this->getLine()->getAmount();
+        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
+        $movementAmount= $this->getAmountMv();
+
+        $remainingCash = $lineAmount - $lineConsumedAmount;
+        $postRemainingCash= $remainingCash - $movementAmount;
+
+
+        // check cash availability on morass's line
+        if ($postRemainingCash <0) {
+            $context
+            ->buildViolation('Somme non dotée')
+            ->atPath('line')
+            ->addViolation();
+        }
+
+        //check covered duration
+        if ($this->months >12) {
+            $context
+            ->buildViolation('mois + que 12')
+            ->atPath('months')
+            ->addViolation();
+        }
+        //check dates
+        if ($this->realDateMv < $this->dateMv) {
+            $context
+            ->buildViolation('dates fchkeeel')
+            ->atPath('dateMv')
+            ->addViolation();
+        }
+
+        //check accounts
+         if ($this->creditAccount != null && ($this->creditAccount == $this->debitAccount)) {
+            $context
+            ->buildViolation('credit and debit accounts shouldn\'t be the same')
+            ->atPath('creditAccount')
+            ->addViolation();
+        }
+
+        if ($this->creditEAccount!= null && ($this->creditEAccount == $this->debitEAccount)) {
+            $context
+            ->buildViolation('credit and debit accounts shouldn\'t be the same')
+            ->atPath('creditEAccount')
+            ->addViolation();
+        }
+
+
     }
 }
