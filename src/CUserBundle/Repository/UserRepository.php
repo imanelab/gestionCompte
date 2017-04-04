@@ -15,12 +15,12 @@ class UserRepository extends EntityRepository
 
 	public function getMasterEntitySupervisor($masterEntity){
 
-		$qb = $this->createQueryBuilder('u');
-			  $qb->where('u.roles like :role')
-			  	->setParameter('role', 'ROLE_SUPERVISOR')
-			  	->andWhere('u.masterEntity= :masterEntity')
-			  	->setParameter('masterEntity', $masterEntity)
-			  	->setMaxResults(1);
+		$qb = $this->createQueryBuilder('u')
+				  	->where('u.roles like :role')
+					->setParameter('role', '%ROLE_SUPERVISOR%')
+					->where('u.masterEntity= :masterEntity')
+					->setParameter('masterEntity', $masterEntity)
+					->setMaxResults(1);
 			  return $qb;
 	}
 }

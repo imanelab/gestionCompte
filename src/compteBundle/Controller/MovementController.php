@@ -70,14 +70,14 @@ class MovementController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $movement->setValidation(true);
                 $masterEntity= $user->getMasterEntity();
-                $validator= $em->getRepository('CUserBundle:User')->getMasterEntitySupervisor($masterEntity)->getSingleResult();
+                $validator= $em->getRepository('CUserBundle:User')->getMasterEntitySupervisor($masterEntity)->getQuery()->getSingleResult();
                 if($validator)
                 $movement->setValidator($validator);
                 else
-                throw $this->createNotFoundException('The product does not exist');
+                throw $this->createNotFoundException('The product does not exist'.$validator.getFirstName());
             }
             else
-                $movement->setValidation(false);
+                $movement->setValidator(null);
                  
             $movement->setUser($user);
             $this->selectedAccount($movement, $request);

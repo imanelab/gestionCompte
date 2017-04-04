@@ -17,6 +17,16 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Movement
 {
 
+    /**
+
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $user;
+
       /**
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Line")
@@ -26,6 +36,16 @@ class Movement
    */
 
   private $line;
+
+    /**
+
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $validator;
 
     /**
 
@@ -95,11 +115,11 @@ class Movement
     private $amountMv;
 
     /**
-     * @var float
+     * @var boolean
      *
      * @ORM\Column(name="validation", type="boolean")
      */
-    private $validation;
+    private $validation=false;
 
     /**
      * @var \DateTime
@@ -459,5 +479,74 @@ class Movement
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set validation
+     *
+     * @param boolean $validation
+     * @return Movement
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get validation
+     *
+     * @return boolean 
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Movement
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set validator
+     *
+     * @param \CUserBundle\Entity\User $validator
+     * @return Movement
+     */
+    public function setValidator(\CUserBundle\Entity\User $validator = null)
+    {
+        $this->validator = $validator;
+
+        return $this;
+    }
+
+    /**
+     * Get validator
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 }

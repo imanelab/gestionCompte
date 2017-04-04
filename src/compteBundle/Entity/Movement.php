@@ -45,7 +45,7 @@ class Movement
 
    */
 
-  private $valdiator;
+  private $validator;
 
     /**
 
@@ -502,5 +502,51 @@ class Movement
     public function getValidation()
     {
         return $this->validation;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Movement
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set validator
+     *
+     * @param \CUserBundle\Entity\User $validator
+     * @return Movement
+     */
+    public function setValidator(\CUserBundle\Entity\User $validator=null)
+    {
+        $this->validator = $validator;
+
+        return $this;
+    }
+
+    /**
+     * Get validator
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 }
