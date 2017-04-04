@@ -1,26 +1,29 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "compteBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 {% block xTitle %}
     <h2> تسجيل مستخدم </h2>
 {% endblock %}
-{% block fos_user_content %}
+{% block content %}
      	{{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
 
      		<div class="form-group">
 		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.firstName,"الإسم") }}<span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
-		        {{ form_widget(form.firstName) }}
+		        {{ form_widget(form.firstName,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 		        </div>
 		    </div>
 
+	
+			
+			
 		    <div class="form-group">
 		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.lastName,"النسب") }} <span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
-		        {{ form_widget(form.lastName) }}
+		        {{ form_widget(form.lastName,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 		        </div>
 		    </div>
 
@@ -28,7 +31,7 @@
 		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.username) }} <span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
-		        {{ form_widget(form.username) }}
+		        {{ form_widget(form.username,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 		        </div>
 		    </div>
 
@@ -36,25 +39,35 @@
 		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.email) }} <span class="required"></span>
 		         </label>
 		      <div class="col-md-6 col-sm-6 col-xs-12">
-		        {{ form_widget(form.email) }}
+		        {{ form_widget(form.email,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 		        </div>
 		    </div>
 
 		    <div class="form-group">
-		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.plainPassword,"الرقم السري") }}<span class="required"></span>
+		         <label class="control-label col-md-3 col-sm-3 col-xs-12" > {{ form_label(form.plainPassword,"كلمة المرور") }}<span class="required"></span>
 		         </label>	
 		      <div class="col-md-6 col-sm-6 col-xs-12">
 			  
-		        {{ form_widget(form.plainPassword.first) }}
+		        {{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 			
 		        </div>
 				
 		    </div>
 			<div class="form-group">				
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" > إعادة الرقم السري<span class="required"></span>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" > إعادة كلمة المرور<span class="required"></span>
 		         </label>
 				 <div class="col-md-6 col-sm-6 col-xs-12">
-				{{ form_widget(form.plainPassword.second) }}
+				{{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+		        </div>
+		      
+		    </div>
+			
+			
+			<div class="form-group">				
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" > الوحدة الإدارية<span class="required"></span>
+		         </label>
+				 <div class="col-md-6 col-sm-6 col-xs-12">
+				{{ form_widget(form.masterEntity,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
 		        </div>
 		      
 		    </div>
@@ -65,9 +78,9 @@
                 <button class="btn btn-primary pull-right">
                     {{ 'registration.submit'|trans }}
                 </button>
-                <a class="btn btn-danger pull-right" href="{{ path('c_user_homepage')}}">
+                <a class="btn btn-danger pull-right" href="{{ path('users')}}">
                     العودة إلى القائمة
                 </a>
         {{ form_rest(form) }}
         {{ form_end(form) }}
-{% endblock fos_user_content %}
+{% endblock %}

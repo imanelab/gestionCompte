@@ -20,6 +20,7 @@ class UserType extends AbstractType
             ->add('roles','choice',['choices'=>['ROLE_OPERATOR'=>'OPERATOR','ROLE_APPROVER'=>'APPROVER','ROLE_SUPERVISOR'=>'SUPERVISOR','ROLE_SUPER_ADMIN'=>'SUPER ADMIN',],'expanded'=>true,'multiple'=>true])
             ->add('adminRole','submit',array('label'=>'Droits admin'))
             ->add('status','submit',array('label'=>'Statut'))
+			
         ;
     }
 

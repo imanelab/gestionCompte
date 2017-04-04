@@ -15,6 +15,7 @@ class RegistrationType extends AbstractType
         $builder
             ->add('firstName','text')
             ->add('lastName','text')
+			->add('masterEntity','entity',['class'=>'compteBundle:masterEntity','property'=>'name','required'=>false]);
         ;
     }
 
