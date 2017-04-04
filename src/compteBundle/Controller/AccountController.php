@@ -39,18 +39,6 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$userEntity= $currentUser->getMasterEntity();
-           // $userEntityDepth = $userEntity->getDepth();
-            if (!$this->get('security.context')->isGranted('ROLE_SUPERVISOR')) {
-                $user = $this->getUser();
-                $masterEntity= $user->getMasterEntity();
-                
-
-            }
-
-
-
-
             $em = $this->getDoctrine()->getManager();
 
             $parent=$account->getAccount();

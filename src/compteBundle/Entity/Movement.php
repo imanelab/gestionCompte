@@ -39,6 +39,16 @@ class Movement
 
     /**
 
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $valdiator;
+
+    /**
+
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\CodificationABB")
 
    * @ORM\JoinColumn(nullable=false)
@@ -109,7 +119,7 @@ class Movement
      *
      * @ORM\Column(name="validation", type="boolean")
      */
-    private $validation;
+    private $validation=false;
 
     /**
      * @var \DateTime

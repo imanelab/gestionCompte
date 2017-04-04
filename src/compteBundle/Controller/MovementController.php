@@ -63,6 +63,23 @@ class MovementController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //$userEntity= $currentUser->getMasterEntity();
+           // $userEntityDepth = $userEntity->getDepth();
+            $user = $this->getUser();
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPERVISOR')) {
+                $em = $this->getDoctrine()->getManager();
+                $movement->setValidation(true);
+                $masterEntity= $user->getMasterEntity();
+                $validator= $em->getRepository('CUserBundle:User')->getMasterEntitySupervisor($masterEntity)->getSingleResult();
+                if($validator)
+                $movement->setValidator($validator);
+                else
+                throw $this->createNotFoundException('The product does not exist');
+            }
+            else
+                $movement->setValidation(false);
+                 
+            $movement->setUser($user);
             $this->selectedAccount($movement, $request);
             
             $em = $this->getDoctrine()->getManager();
