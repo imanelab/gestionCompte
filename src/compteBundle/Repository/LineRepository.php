@@ -20,4 +20,15 @@ class LineRepository extends EntityRepository
        ->where($qb->expr()->eq('f.id', $id));
     return $qb;
   }
+
+
+  	public function getLinesByMasterEntitiesId($user)
+  {
+  	$masterEntity= $user->getMasterEntity();
+
+    $qb = $this->createQueryBuilder('l');
+    $qb->join('l.masterEntities', 'f')
+       ->where($qb->expr()->eq('f.id', $masterEntity->getId()));
+    return $qb;
+  }
 }

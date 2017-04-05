@@ -141,6 +141,8 @@ class MovementController extends Controller
         $deleteForm = $this->createDeleteForm($movement);
         $editForm = $this->createForm('compteBundle\Form\MovementType', $movement);
 
+
+// do not have to change the accounts when editing
         $editForm->remove('creditAccount');
         $editForm->remove('debitAccount');
         $editForm->remove('creditEAccount');

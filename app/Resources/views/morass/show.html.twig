@@ -100,7 +100,7 @@
 				<td><a href="{{ path('line_edit', { 'id': line.id }) }}"> {{ line.idl }} </a></td>
 				<td> {{ line.title }}</td>
 				<td> {{line.amount|number_format}}</td>
-				<td> {{line.consumedAmount|number_format}}</td>
+				<td>{% if line in userLines%} {{line.consumedAmount|number_format}} {% endif %}</td>
 				</tr>
 				{%endfor%}
 				{%endfor%}

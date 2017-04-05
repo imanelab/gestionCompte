@@ -6,6 +6,8 @@ use compteBundle\Entity\Morass;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use CUserBundle\Entity\User;
+
 /**
  * Morass controller.
  *
@@ -63,8 +65,9 @@ class MorassController extends Controller
      */
     public function showAction(Morass $morass)
     {
+        $user=$this->getUser();
         $deleteForm = $this->createDeleteForm($morass);
-        $morassArray= $this->getMorass($morass);
+        $morassArray= $this->getMorass($morass,$user);
         return $this->render('morass/show.html.twig', array(
             'morass' => $morass,
             'delete_form' => $deleteForm->createView(),
@@ -72,6 +75,7 @@ class MorassController extends Controller
             'lines'=>$morassArray['lines'],
             'colspan'=>$morassArray['colspan'],
             'morassAmount'=>$morassArray['morassAmount'],
+            'userLines'=>$morassArray['userLines'],
         ));
     }
 
@@ -147,13 +151,16 @@ class MorassController extends Controller
 	
 	
 	
-	 public function getMorass(Morass $morass)
+	 public function getMorass(Morass $morass, User $user)
     {
 		$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Paragraph');
 
 		$paragraphs=$repository->findByMorass($morass,array('idp' => 'ASC'));
 
         $morassAmount=0;
+
+        $repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
+        $userLines= $repository->getLinesByMasterEntitiesId($user)->getQuery()->getResult();
 		
 		foreach( $paragraphs as $paragraph)
 		{
@@ -179,6 +186,7 @@ class MorassController extends Controller
 			'lines' => $lines,
 			'colspan'=>$colspan,
             'morassAmount'=>$morassAmount,
+            'userLines'=>$userLines,
         );
     }
 }

@@ -21,7 +21,7 @@ class DelegationType extends AbstractType
 		//->add('depth')
 		->add('delegation','entity',array('class'=>'compteBundle:Delegation','property'=>'name',
             'query_builder'=>function (DelegationRepository $dr){return $dr->createQueryBuilder('d')
-                ->where('d.depth=1');},'required'=> false))     ;
+                ->where('d.depth=1');},'required'=> false));
     }
     
     /**
