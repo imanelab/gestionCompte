@@ -33,3 +33,4 @@ users_delete:
     path:     /{username}/delete
     defaults: { _controller: "CUserBundle:Users:delete" }
     methods:  [POST, DELETE]
+    
