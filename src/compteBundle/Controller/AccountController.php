@@ -100,12 +100,20 @@ class AccountController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            if($account->getAccount()){
-           $parent= $account->getAccount()->getId();
-           $id=$account->getId();
-           if($parent==$id)
-           $account->removeParent();
-             }
+
+            $em = $this->getDoctrine()->getManager();
+
+            $parent=$account->getAccount();
+             if( is_null($parent))
+            $account->setDepth(1);
+        else{
+                $parentId= $account->getAccount()->getId();
+                $id=$account->getId();
+                if($parentId==$id){
+                $account->removeParent();
+                $account->setDepth(1);
+            } 
+        }
             $this->getDoctrine()->getManager()->flush();
 
              $this->addFlash('notice', 'لقد تمت العملية بنجاح');
