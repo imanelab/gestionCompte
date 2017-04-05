@@ -159,8 +159,10 @@ class MorassController extends Controller
 
         $morassAmount=0;
 
+        if($user->getMasterEntity()->getId()){
         $repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
         $userLines= $repository->getLinesByMasterEntitiesId($user)->getQuery()->getResult();
+    }
 		
 		foreach( $paragraphs as $paragraph)
 		{
