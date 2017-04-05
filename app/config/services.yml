@@ -17,3 +17,10 @@ services:
         class: CUserBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: cuser_user_profile}
+
+    movement.type.form:
+            class: compteBundle\Form\MovementType
+            arguments:
+                - '@security.token_storage'
+            tags:
+                - { name: form.type }

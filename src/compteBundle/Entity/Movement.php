@@ -17,6 +17,16 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Movement
 {
 
+    /**
+
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $user;
+
       /**
 
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Line")
@@ -26,6 +36,16 @@ class Movement
    */
 
   private $line;
+
+    /**
+
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $validator;
 
     /**
 
@@ -93,6 +113,13 @@ class Movement
      * @ORM\Column(name="amount_mv", type="float")
      */
     private $amountMv;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validation", type="boolean")
+     */
+    private $validation=false;
 
     /**
      * @var \DateTime
@@ -391,46 +418,6 @@ class Movement
     }
 
 
-     /**
-    * Check the possibility to execute the movement (line has enough cash) 
-    *
-    * @Assert\Callback
-    **/
-
-    public function checkCashAvailability(ExecutionContextInterface $context){
-
-        $lineAmount= $this->getLine()->getAmount();
-        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
-        $movementAmount= $this->getAmountMv();
-
-        $remainingCash = $lineAmount - $lineConsumedAmount;
-        $postRemainingCash= $remainingCash - $movementAmount;
-
-        if ($postRemainingCash <0) {
-            $context
-            ->buildViolation('Somme non dotée')
-            ->atPath('line')
-            ->addViolation();
-        }
-
-        if ($this->months >12) {
-            $context
-            ->buildViolation('mois + que 12')
-            ->atPath('months')
-            ->addViolation();
-        }
-
-        if ($this->realDateMv < $this->dateMv) {
-            $context
-            ->buildViolation('dates fchkeeel')
-            ->atPath('dateMv')
-            ->addViolation();
-        }
-
-
-    }
-
-
     /**
      * Set comment
      *
@@ -452,5 +439,132 @@ class Movement
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set validation
+     *
+     * @param boolean $validation
+     * @return Movement
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get validation
+     *
+     * @return boolean 
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Movement
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set validator
+     *
+     * @param \CUserBundle\Entity\User $validator
+     * @return Movement
+     */
+    public function setValidator(\CUserBundle\Entity\User $validator=null)
+    {
+        $this->validator = $validator;
+
+        return $this;
+    }
+
+    /**
+     * Get validator
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getValidator()
+    {
+        return $this->validator;
+    }
+
+
+      /**
+    * Check the possibility to execute the movement (line has enough cash) 
+    *
+    * @Assert\Callback
+    **/
+
+    public function checkCashAvailability(ExecutionContextInterface $context){
+
+        $lineAmount= $this->getLine()->getAmount();
+        $lineConsumedAmount= $this->getLine()->getConsumedAmount();
+        $movementAmount= $this->getAmountMv();
+
+        $remainingCash = $lineAmount - $lineConsumedAmount;
+        $postRemainingCash= $remainingCash - $movementAmount;
+
+
+        // check cash availability on morass's line
+        if ($postRemainingCash <0) {
+            $context
+            ->buildViolation('Somme non dotée')
+            ->atPath('line')
+            ->addViolation();
+        }
+
+        //check covered duration
+        if ($this->months >12) {
+            $context
+            ->buildViolation('mois + que 12')
+            ->atPath('months')
+            ->addViolation();
+        }
+        //check dates
+        if ($this->realDateMv < $this->dateMv) {
+            $context
+            ->buildViolation('dates fchkeeel')
+            ->atPath('dateMv')
+            ->addViolation();
+        }
+
+        //check accounts
+         if ($this->creditAccount != null && ($this->creditAccount == $this->debitAccount)) {
+            $context
+            ->buildViolation('credit and debit accounts shouldn\'t be the same')
+            ->atPath('creditAccount')
+            ->addViolation();
+        }
+
+        if ($this->creditEAccount!= null && ($this->creditEAccount == $this->debitEAccount)) {
+            $context
+            ->buildViolation('credit and debit accounts shouldn\'t be the same')
+            ->atPath('creditEAccount')
+            ->addViolation();
+        }
+
+
     }
 }

@@ -4,10 +4,8 @@
 {% block xTitle %}
     <h2> قائمة الوحدات </h2>
 {% endblock %}
-{% block content %}
-                  
-   
-   
+
+{% block content %}  
  <table id="datatable" class="table table-striped table-bordered" dir="rtl">
         <thead>
             <tr>
@@ -53,13 +51,11 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-   
-            <a class="btn btn-primary pull-right" href="{{ path('masterentity_new') }}">إضافة وحدة جديدة</a>
-       
-
+   <a class="btn btn-primary pull-right" href="{{ path('masterentity_new') }}">إضافة وحدة جديدة</a>
 {% endblock %}
 
 {% block js %}

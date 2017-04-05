@@ -77,7 +77,8 @@
                  
                  <th>السطر</th> 
                  <th>نوع العمليات</th>
-                <th>توقعات النفقت لسنة 2017</th>
+                <th>توقعات النفقات لسنة 2017</th>
+                <th>المبلغ المصروف</th>
 				 
                 
             </tr>
@@ -99,6 +100,7 @@
 				<td><a href="{{ path('line_edit', { 'id': line.id }) }}"> {{ line.idl }} </a></td>
 				<td> {{ line.title }}</td>
 				<td> {{line.amount|number_format}}</td>
+				<td>{% if line in userLines%} {{line.consumedAmount|number_format}} {% endif %}</td>
 				</tr>
 				{%endfor%}
 				{%endfor%}

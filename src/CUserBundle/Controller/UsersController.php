@@ -135,7 +135,7 @@ class UsersController extends Controller
      * Displays a form to edit an existing Account entity.
      *
      */
-    public function editAction($username)
+    public function editAction(Request $request,$username)
     {
 
         $userManager = $this->get('fos_user.user_manager');
@@ -150,7 +150,21 @@ class UsersController extends Controller
                  ->remove('current_password')
                  /*->setAction($this->generateUrl('users_delete'))*/;
 
-        //$editForm->handleRequest($request);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $this->getDoctrine()->getManager()->flush();
+
+             $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+            return $this->redirectToRoute('users_show', array('username' => $username));
+        }
+        elseif ($editForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
+
         
         return $this->render('CUserBundle:Account:edit.html.twig', array(
             'user'      => $entity,
@@ -197,6 +211,7 @@ class UsersController extends Controller
                 //$roles=$manageForm['roles']->getData();
                 //$this->manageRole($username);
                 $manager->updateUser($entity);
+                $this->addFlash('notice', 'لقد تمت العملية بنجاح');
             }
             elseif ($manageForm->get('status')->isClicked()) {
                $this->manageStatus($username);
@@ -228,9 +243,7 @@ class UsersController extends Controller
 
         $em=$this->getDoctrine()->getManager();
         $manager->updateUser($entity);
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'Vos changements ont été sauvegardés!');
+         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
         return $this->redirect($this->generateUrl('users'));
     }
 
@@ -250,9 +263,7 @@ class UsersController extends Controller
 
         $em=$this->getDoctrine()->getManager();
         $manager->updateUser($entity);
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'Vos changements ont été sauvegardés!');
+         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
         return $this->redirect($this->generateUrl('users'));
     }
 

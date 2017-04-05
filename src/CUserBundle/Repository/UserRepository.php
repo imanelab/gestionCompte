@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+
+	public function getMasterEntitySupervisor($masterEntity){
+
+		$qb = $this->createQueryBuilder('u')
+				  	->where('u.roles like :role')
+					->andWhere('u.masterEntity= :masterEntity')
+					->setParameters(array('masterEntity'=> $masterEntity,'role'=>'%ROLE_SUPERVISOR%'))
+					->setMaxResults(1);
+			  return $qb;
+	}
 }
