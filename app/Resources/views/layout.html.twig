@@ -53,32 +53,32 @@
                    
            
            <li><a href="{{path('compte_homepage')}}"><i class="fa fa-home"></i> الرئيسية </a></li>
-		   
-		   {% if is_granted("ROLE_SUPER_ADMIN") %}
-		   <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمين </a> </li>
-		   {%endif%}
-		   
-		   {% if is_granted("ROLE_SUPER_ADMIN") %}
+       
+       {% if is_granted("ROLE_SUPER_ADMIN") %}
+       <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمين </a> </li>
+       {%endif%}
+       
+       {% if is_granted("ROLE_SUPER_ADMIN") %}
            <li><a href="{{path('masterentity_index')}}"><i class="fa fa-desktop"></i> الوحدات الإدارية </a> </li>
-		   {%endif%}
-		   
+       {%endif%}
+       
           {% if is_granted("ROLE_SUPER_ADMIN") %}
           <li><a href="{{path('delegation_index')}}"><i class="fa fa-table"></i> المندوبيات </a></li>
-		  {%endif%}
-		  
+      {%endif%}
+      
             
           <li><a href="{{path('morass_index')}}"><i class="fa fa-bar-chart-o"></i> مصنفة الميزانية </a> </li>
-		  
-		  <li><a href="{{path('account_index')}}"><i class="fa fa-table"></i> الحسابات البنكية </a></li>
-		  
-		  <li><a href="{{path('externalaccount_index')}}"><i class="fa fa-table"></i> الحسابات الخارجية </a></li>
+      
+      <li><a href="{{path('account_index')}}"><i class="fa fa-table"></i> الحسابات البنكية </a></li>
+      
+      <li><a href="{{path('externalaccount_index')}}"><i class="fa fa-table"></i> الحسابات الخارجية </a></li>
            
-		   {% if is_granted("ROLE_SUPER_ADMIN") %}
+       {% if is_granted("ROLE_SUPER_ADMIN") %}
           <li><a href="{{path('codificationabb_index')}}"><i class="fa fa-outdent"></i> ترميز البريد بنك </a> </li>
-		  {%endif%}
-		  
-		  {% if not is_granted("ROLE_SUPER_ADMIN") %}
-		   <li><a href="{{path('movement_index')}}"><i class="fa fa-retweet"></i> التحويلات </a> </li>
+      {%endif%}
+      
+      {% if not is_granted("ROLE_SUPER_ADMIN") %}
+       <li><a href="{{path('movement_index')}}"><i class="fa fa-retweet"></i> التحويلات </a> </li>
           {%endif%}      
                   
                  
@@ -97,28 +97,31 @@
         <div class="top_nav" >
           <div class="nav_menu" >
             <nav class="navbar navbar-default" >
-			<div class="container-fluid">
+      <div class="container-fluid">
    
     <ul class="nav navbar-nav">
 	  <li><a> </a> </li>
       <li>
+
 	  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dir="rtl">
-                    الحساب
+  الحساب
   
 
                     <span class=" fa fa-angle-down"></span>
                   </a>
+
                   <ul class="dropdown-menu dropdown-usermenu pull-right" style="margin-right: -85px">
                     <li><a href="{{path('fos_user_profile_show')}}" style="position:relative;left:80px"> Profil</a></li>                
                     <li><a href="{{path('fos_user_security_logout')}}" style="position:relative;left:80px"> خروج </a></li>	   
 				  </ul>
 	  
 	  </li>
+
        
       <li><a> {{ app.user.firstName}} {{ app.user.lastName}}</a> </li>
     
-	  
-	  <li role="presentation" class="dropdown">
+    
+    <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">3</span>

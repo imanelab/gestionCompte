@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class MovementRepository extends EntityRepository
 {
+
+
+//get all account transactions debit+credit and sort by date
+
+	public function getAccountTransactions($account){
+
+		$qb = $this->createQueryBuilder('m');
+			  $qb->where('m.debitAccount= :debitAccount')
+			  ->orWhere('m.creditAccount= :creditAccount')
+			  ->setParameters(['debitAccount'=>$account->getId(),'creditAccount'=>$account->getId()])
+			  ->orderBy('m.realDateMv, m.id');
+			  return $qb;
+	}
 }

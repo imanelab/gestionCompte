@@ -6,6 +6,8 @@ use compteBundle\Entity\Account;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 /**
  * Account controller.
  *
@@ -26,6 +28,28 @@ class AccountController extends Controller
             'accounts' => $accounts,
         ));
     }
+
+
+
+
+
+    /**
+     * Lists all account transactions.
+     *
+     * @ParamConverter("account", options={"mapping": {"id": "id"}})
+     */
+    public function releveAction(Account $account)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $movements = $em->getRepository('compteBundle:Movement')->getAccountTransactions($account)->getQuery()->getResult();
+
+        return $this->render('account/releve.html.twig', array(
+            'movements' => $movements,
+        ));
+    }
+
+
 
     /**
      * Creates a new account entity.
@@ -100,12 +124,20 @@ class AccountController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            if($account->getAccount()){
-           $parent= $account->getAccount()->getId();
-           $id=$account->getId();
-           if($parent==$id)
-           $account->removeParent();
-             }
+
+            $em = $this->getDoctrine()->getManager();
+
+            $parent=$account->getAccount();
+             if( is_null($parent))
+            $account->setDepth(1);
+        else{
+                $parentId= $account->getAccount()->getId();
+                $id=$account->getId();
+                if($parentId==$id){
+                $account->removeParent();
+                $account->setDepth(1);
+            } 
+        }
             $this->getDoctrine()->getManager()->flush();
 
              $this->addFlash('notice', 'لقد تمت العملية بنجاح');

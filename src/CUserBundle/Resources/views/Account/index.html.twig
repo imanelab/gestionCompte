@@ -8,8 +8,8 @@
         {% endblock %}
      
             {% block content %}
-			
-			 <div class="span12">
+            
+             <div class="span12">
         
             {% for key, messages in app.session.flashbag.all() %}
     {% for message in messages %}
@@ -23,72 +23,70 @@
             <table id="datatable" class="table table-striped table-bordered" dir="rtl" >
                 <thead>
                     <tr>
-					    <th>الإسم الشخصي</th>
-                        <th>الإسم العائلي</th>                      
+
+                        <th>الإسم الشخصي</th>
+                        <th>الإسم العائلي</th>
                         <th>المستخدم</th>
-						<th>الوحدة الإدارية</th>
+                        <th>الوحدة الإدارية</th>
                         <th>الصفة</th>
                         <th>حالة الحساب</th>
-                        <th>تعديل الصفات</th>						
-						<th>العمليات</th>
+                        <th>تعديل الصفات</th>                       
+                        <th>العمليات</th>
                     </tr>
                 </thead>
-                            <tbody>
-                            {% for entity in entities %}
-                                <tr>
-                                    <td>{{ entity.firstName }}</td>
-                                    <td>{{ entity.lastName }}</td>
-                                    <td>{{ entity.username }}</td>
-									<td> {% if entity.masterEntity %}
-									{{ entity.masterEntity.name }}
-									{% endif %}
-									</td>
-                                    <td>{% for role in entity.roles %} 
-                                            {{ role[5:]|capitalize }} <br>
-                                        {% endfor %}										
-										
-                                    </td>
-                                    <td>{% if entity.enabled %}
-                                        مفعل
-                                        {% else %}
-                                        غير مفعل
-                                    {% endif %}
-									{{ form_start(forms[entity.id])}}
-									                                    
-                                        {{ form_label(forms[entity.id].status)}}
-                                        {{ form_widget(forms[entity.id].status)}}
-                                        
-                                    </td>
-                                    <td>
-                                        
-                                        {{ form_widget(forms[entity.id].roles)}}
-                                        {{ form_label(forms[entity.id].adminRole)}}
-                                        {{ form_widget(forms[entity.id].adminRole)}}
-                                        {{ form_label(forms[entity.id].status)}}
-                                        {{ form_widget(forms[entity.id].status)}}
-                                        {{ form_end(forms[entity.id])}}
-									</td>
-																		
-									
-								    <td>
-                                          <a class="btn btn-success" href="{{ path('users_show', {'username': entity.username }) }}">
-                                            <i class="icon-eye-open"></i> Afficher 
-                                        </a>
-                                        <a class="btn btn-info" href="{{ path('users_edit', { 'id':entity.id,'username': entity.username }) }}">
-                                            <i class="icon-pencil icon-white"></i> Editer
-                                        </a>
-                                            
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.firstName }}</td>
+                        <td>{{ entity.lastName }}</td>
+                        <td>{{ entity.username }}</td>
+                        <td> {% if entity.masterEntity %}
+                        {{ entity.masterEntity.name }}
+                        {% endif %}
+                        </td>
+                        <td>{% for role in entity.roles %} 
+                                {{ role[5:]|capitalize }} <br>
+                            {% endfor %}                                        
+                            
+                        </td>
+                        <td>{% if entity.enabled %}
+                            مفعل
+                            {% else %}
+                            غير مفعل
+                        {% endif %}
+                        {{ form_start(forms[entity.id])}}
+                                                            
+                            {{ form_label(forms[entity.id].status)}}
+                            {{ form_widget(forms[entity.id].status)}}
+                            
+                        </td>
+                        <td>
+                            {{ form_widget(forms[entity.id].roles)}}
+                            {{ form_label(forms[entity.id].adminRole)}}
+                            {{ form_widget(forms[entity.id].adminRole)}}
+                            {{ form_end(forms[entity.id])}}
+                        </td>
+                                                            
+                        
+                        <td>
+                              <a class="btn btn-success" href="{{ path('users_show', {'username': entity.username }) }}">
+                                <i class="icon-eye-open"></i> Afficher 
+                            </a>
+                            <a class="btn btn-info" href="{{ path('users_edit', { 'id':entity.id,'username': entity.username }) }}">
+                                <i class="icon-pencil icon-white"></i> Editer
+                            </a>
+                                
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
                     
                 </div>
-				  
+                  
         </div>
-		
-		<a class="btn btn-primary pull-right" href="{{ path('users_new') }}">إضافة مستخدم جديد</a>
+        
+        <a class="btn btn-primary pull-right" href="{{ path('users_new') }}">إضافة مستخدم جديد</a>
             {% endblock %}
           
            {% block script %}
@@ -105,25 +103,25 @@
       $(document).ready(function() {
 
         $('#datatable').dataTable({
-		language:{
-				 "sProcessing":   "جارٍ التحميل...",
-			"sLengthMenu":   "أظهر _MENU_ مدخلات",
-			"sZeroRecords":  "لم يعثر على أية سجلات",
-			"sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
-			"sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
-			"sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-			"sInfoPostFix":  "",
-			"sSearch":       "ابحث:",
-			"sUrl":          "",
-			"oPaginate": {
-				"sFirst":    "الأول",
-				"sPrevious": "السابق",
-				"sNext":     "التالي",
-				"sLast":     "الأخير"
+        language:{
+                 "sProcessing":   "جارٍ التحميل...",
+            "sLengthMenu":   "أظهر _MENU_ مدخلات",
+            "sZeroRecords":  "لم يعثر على أية سجلات",
+            "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+            "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+            "sInfoPostFix":  "",
+            "sSearch":       "ابحث:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "الأول",
+                "sPrevious": "السابق",
+                "sNext":     "التالي",
+                "sLast":     "الأخير"
     }
-		
-		}
-		});
+        
+        }
+        });
 
 
       });

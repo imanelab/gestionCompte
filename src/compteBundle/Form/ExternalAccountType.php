@@ -13,7 +13,8 @@ class ExternalAccountType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('type')        ;
+        $builder->add('name')
+        ->add('type','choice',["choices"=>["قيم ديني"=>"قيم ديني","شركة خاصة"=>"شركة خاصة","آخر"=>"آخر"]])        ;
     }
     
     /**

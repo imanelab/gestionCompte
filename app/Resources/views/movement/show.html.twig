@@ -10,13 +10,13 @@
                       <thead>
                         <tr>
 
-							
-							<th>العمليات</th>
+                            
+                            <th>العمليات</th>
                           <th>التاريخ الحقيقي</th>
-						  <th>عدد الأشهر</th>
-						  <th>تاريخ التحويل</th>
-						  <th>الرصيد</th>
-						
+                          <th>عدد الأشهر</th>
+                          <th>تاريخ التحويل</th>
+                          <th>الرصيد</th>
+                        
                         </tr>
                      </thead>
 
@@ -33,32 +33,32 @@
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                            
 
-							 
-							 
-							 {{ form_start(delete_form) }}
+                             
+                             
+                             {{ form_start(delete_form) }}
                            <input type="submit" value="حذف" class="btn btn-danger">
-						    <a class="btn btn-info" href="{{ path('movement_edit', { 'id': movement.id }) }}">تعديل
-							
-							</a>
+                            <a class="btn btn-info" href="{{ path('movement_edit', { 'id': movement.id }) }}">تعديل
+                            
+                            </a>
                              {{ form_end(delete_form) }}
-							 
-							
-							 
-							</div> </div> 
+                             
+                            
+                             
+                            </div> </div> 
                        </td>
-					   
-					   <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
-					   <td>{{ movement.months }}</td>
-					   <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
-					   <td>{{ movement.amountMv }}</td>
-					
-					   
+                       
+                       <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
+                       <td>{{ movement.months }}</td>
+                       <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
+                       <td>{{ movement.amountMv }}</td>
+                    
+                       
                         </tr>
             
-						</tbody>
+                        </tbody>
                     </table>
 
     
-            <a class="btn btn-primary pull-right" href="{{ path('delegation_index') }}">العودة إلى اللائحة</a>
+            <a class="btn btn-primary pull-right" href="{{ path('movement_index') }}">العودة إلى اللائحة</a>
        
 {% endblock %}
