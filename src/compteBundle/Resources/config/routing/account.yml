@@ -8,6 +8,11 @@ account_show:
     defaults: { _controller: "compteBundle:Account:show" }
     methods:  GET
 
+account_releve:
+    path:     /{id}/releve
+    defaults: { _controller: "compteBundle:Account:releve" }
+    methods:  GET
+
 account_new:
     path:     /new
     defaults: { _controller: "compteBundle:Account:new" }

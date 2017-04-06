@@ -22,4 +22,5 @@ class AccountRepository extends EntityRepository
 			  ;
 			  return $qb;
 	}
+
 }
