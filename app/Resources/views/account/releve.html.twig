@@ -7,12 +7,11 @@
                   
    
    
-    <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Date Debut:
+    <div class="form-group" dir="rtl">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">كشف الحساب للفترة:
          </label>
           <input type="text" class="form-control col-md-3 col-sm-3 col-xs-12 datepicker" name="startDate" id="startDate" \>
     </div>
-          <input type="text" name="endDate" id="endDate">
 
 
     <table id="datatable" class="table table-striped table-bordered" dir="rtl">
@@ -83,15 +82,25 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+
+
+    <script src="{{asset('assets/vendors/jszip/dist/jszip.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
    <script>
 
            $.fn.dataTable.ext.search.push(
             function( settings, data, dataIndex ) {
 
-                var startDate = parseDateValue( $('#startDate').val());
-                var endDate = parseDateValue( $('#endDate').val());
-                var evalDate = parseDateValue(data[1]);
-         
+              var dateRange = parseDateValue( $('#startDate').val());
+                var startDate = dateRange[0];
+                var endDate = dateRange[1];
+                var evalDate = parseTableDateValue(data[1]);
                if (evalDate >= startDate && evalDate <= endDate) {
                     return true;
                 }
@@ -99,9 +108,20 @@
             }
         );
 
-
            function parseDateValue(rawDate) {
-              var dateArray= rawDate.split("/");
+              var datesArray= rawDate.split("-");
+              var startDate = datesArray[0].trim();
+              var endDate = datesArray[1].trim();
+              var dateArray = startDate.split("/");
+              var startParsedDate= dateArray[2] + dateArray[1] + dateArray[0];
+              var dateArray = endDate.split("/");
+              var endParsedDate= dateArray[2] + dateArray[1] + dateArray[0];
+              return [startParsedDate,endParsedDate];
+            }
+
+
+            function parseTableDateValue(rawDate) {
+              var dateArray= rawDate.split("-");
               var parsedDate= dateArray[2] + dateArray[1] + dateArray[0];
               return parsedDate;
             }
@@ -127,10 +147,35 @@
         "sLast":     "الأخير"
     }
     
-    }
+    },
+
+    dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
     });
 
-
+       $("#startDate").change ( function() { table.fnDraw(); } );
    /* $('#startDate, #endDate').keyup( function() {
             table.fnDraw(this.value);
         } );*/
@@ -138,12 +183,44 @@
 
       $(".datepicker").daterangepicker({
           locale: {
-                format: 'DD/MM/YYYY'
-          },
+                format: 'DD/MM/YYYY',
+                "applyLabel": "Apply",
+                "cancelLabel": "Cancel",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "Su",
+                    "Mo",
+                    "Tu",
+                    "We",
+                    "Th",
+                    "Fr",
+                    "Sa"
+                ],
+                "monthNames": [
+                    "Janvier",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+                ],
+                "firstDay": 1
+            },
+          "opens": "left",
+        "showDropdowns": true,
+        "autoApply": true,
           calender_style: "picker_4",
 
         });
-
 
       });
     </script>
