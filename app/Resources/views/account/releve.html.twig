@@ -76,7 +76,7 @@
     <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
     <!-- Datatables -->
 
     <!-- bootstrap-daterangepicker -->
@@ -126,8 +126,28 @@
               return parsedDate;
             }
 
+            function getDateRange(){
+              var d = new Date();
+               var thisYear= d.getFullYear();
+              var thisMonth=("0" + (d.getMonth()+1)).slice(-2);
+              var today= d.getDate();
+              var firstDayOfMonth = new Date(thisYear, thisMonth-1, 1);
+              var lastDayOfMonth = new Date(thisYear, thisMonth, 0);
+              var dateArray={
+              
+              thisYear:thisYear,
+              thisMonth:thisMonth,
+              today:today,
+              firstDayOfMonth:firstDayOfMonth,
+              lastDayOfMonth:lastDayOfMonth,
+            };
+
+            return dateArray;
+            }
+
 
       $(document).ready(function() {
+        console.log(getDateRange().thisMonth);
 
        var table= $('#datatable').dataTable({
     language:{
@@ -215,9 +235,46 @@
                 ],
                 "firstDay": 1
             },
+            "ranges": {
+        "Today": [
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
+        ],
+        "This Month": [
+            getDateRange().firstDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+            getDateRange().lastDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
+        ],
+        "Last 7 Days": [
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
+        ],
+        "Quarter 1": [
+            "01/01/"+getDateRange().thisYear,
+            "31/03/"+getDateRange().thisYear
+        ],
+        "Quarter 2": [
+            "01/04/"+getDateRange().thisYear,
+            "30/06/"+getDateRange().thisYear
+        ],
+        "Quarter 3": [
+            "01/07/"+getDateRange().thisYear,
+            "31/08/"+getDateRange().thisYear
+        ],
+        "Quarter 4": [
+            "01/09/"+getDateRange().thisYear,
+            "31/12/"+getDateRange().thisYear
+        ],
+        "Last Year": [
+            "01/01/"+(getDateRange().thisYear-1),
+            "31/12/"+(getDateRange().thisYear-1)
+        ]
+    },
           "opens": "left",
         "showDropdowns": true,
+        "alwaysShowCalendars": true,
         "autoApply": true,
+        "startDate": "04/01/2017",
+    "endDate": "04/07/2017",
           calender_style: "picker_4",
 
         });
