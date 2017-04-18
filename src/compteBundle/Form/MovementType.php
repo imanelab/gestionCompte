@@ -43,8 +43,8 @@ class MovementType extends AbstractType
         ->add('selectDebitAccount','choice',['choices'=>['1'=>"داخلي",'2'=>'خارجي'],'mapped'=>false])
         ->add('selectCreditAccount','choice',['choices'=>['1'=>"داخلي",'2'=>'خارجي'],'mapped'=>false])
 		->add('codificationABB','entity',['class'=>'compteBundle:CodificationABB','property'=>'label','required'=>false])
-		->add('creditAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
-		->add('debitAccount','entity',['class'=>'compteBundle:Account','property'=>'rib','required'=>false])
+		->add('creditAccount','entity',['class'=>'compteBundle:Account','property'=>'accountName','required'=>false])
+		->add('debitAccount','entity',['class'=>'compteBundle:Account','property'=>'accountName','required'=>false])
 		->add('creditEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])
 		->add('debitEAccount','entity',['class'=>'compteBundle:ExternalAccount','property'=>'name','required'=>false])        ;
 
