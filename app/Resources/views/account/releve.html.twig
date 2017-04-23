@@ -32,8 +32,7 @@
         <tbody>
         {% for movement in movements %}
             <tr>
-               
-               
+
                 <td>{% if movement.dateMv %}{{ movement.dateMv|date('d-m-Y') }}{% endif %}</td>
                 <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ movement.codificationABB.label }}</td>
