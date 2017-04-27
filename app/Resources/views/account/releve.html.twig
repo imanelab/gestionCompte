@@ -7,11 +7,13 @@
                   
    
    
-    <div class="form-group" dir="rtl">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">كشف الحساب للفترة:
+    <div class="form-group" dir="rtl" style="margin-right: 299px;">
+          <label class="control-label col-md-2 col-sm-2 col-xs-9" for="first-name">كشف الحساب للفترة: 
          </label>
-          <input type="text" class="form-control col-md-3 col-sm-3 col-xs-12 datepicker" name="startDate" id="startDate" \>
+		
+          <input type="text" class="col-md-3 col-sm-3 col-xs-12 datepicker" name="startDate" id="startDate" \>
     </div>
+	
 
 
     <table id="datatable" class="table table-striped table-bordered" dir="rtl">
@@ -93,6 +95,81 @@
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
    <script>
+   
+   $(".datepicker").daterangepicker({
+          locale: {
+                format: 'DD/MM/YYYY',
+                "applyLabel": "Apply",
+                "cancelLabel": "Cancel",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "ح",
+                    "ن",
+                    "ث",
+                    "ر",
+                    "خ",
+                    "ج",
+                    "س"
+                ],
+                "monthNames": [
+                    "يناير",
+                    "فبراير",
+                    "مارس",
+                    "أبريل",
+                    "ماي",
+                    "يونيو",
+                    "يوليوز",
+                    "غشت",
+                    "شتنبر",
+                    "أكتوبر",
+                    "نونبر",
+                    "دجنبر"
+                ],
+                "firstDay": 1
+            },
+            "ranges": {
+        "اليوم": [
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
+        ],
+        "الشهر الحالي": [
+            getDateRange().firstDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+            getDateRange().lastDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
+        ],
+        
+        "الربع 1": [
+            "01/01/"+getDateRange().thisYear,
+            "31/03/"+getDateRange().thisYear
+        ],
+        "الربع 2": [
+            "01/04/"+getDateRange().thisYear,
+            "30/06/"+getDateRange().thisYear
+        ],
+        "الريع 3": [
+            "01/07/"+getDateRange().thisYear,
+            "31/08/"+getDateRange().thisYear
+        ],
+        "الربع 4": [
+            "01/09/"+getDateRange().thisYear,
+            "31/12/"+getDateRange().thisYear
+        ],
+        "السنة الماضية": [
+            "01/01/"+(getDateRange().thisYear-1),
+            "31/12/"+(getDateRange().thisYear-1)
+        ]
+    },
+          "opens": "left",
+        "showDropdowns": true,
+        "alwaysShowCalendars": true,
+        "autoApply": true,
+        "startDate": getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+		"endDate": getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
+          calender_style: "picker_4",
+
+        });
 
            $.fn.dataTable.ext.search.push(
             function( settings, data, dataIndex ) {
@@ -147,7 +224,6 @@
 
 
       $(document).ready(function() {
-        console.log(getDateRange().thisMonth);
 
        var table= $('#datatable').dataTable({
     language:{
@@ -201,83 +277,7 @@
         } );*/
 
 
-      $(".datepicker").daterangepicker({
-          locale: {
-                format: 'DD/MM/YYYY',
-                "applyLabel": "Apply",
-                "cancelLabel": "Cancel",
-                "fromLabel": "From",
-                "toLabel": "To",
-                "customRangeLabel": "Custom",
-                "weekLabel": "W",
-                "daysOfWeek": [
-                    "Su",
-                    "Mo",
-                    "Tu",
-                    "We",
-                    "Th",
-                    "Fr",
-                    "Sa"
-                ],
-                "monthNames": [
-                    "Janvier",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "November",
-                    "December"
-                ],
-                "firstDay": 1
-            },
-            "ranges": {
-        "Today": [
-            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
-            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
-        ],
-        "This Month": [
-            getDateRange().firstDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
-            getDateRange().lastDayOfMonth+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
-        ],
-        "Last 7 Days": [
-            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
-            getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear
-        ],
-        "Quarter 1": [
-            "01/01/"+getDateRange().thisYear,
-            "31/03/"+getDateRange().thisYear
-        ],
-        "Quarter 2": [
-            "01/04/"+getDateRange().thisYear,
-            "30/06/"+getDateRange().thisYear
-        ],
-        "Quarter 3": [
-            "01/07/"+getDateRange().thisYear,
-            "31/08/"+getDateRange().thisYear
-        ],
-        "Quarter 4": [
-            "01/09/"+getDateRange().thisYear,
-            "31/12/"+getDateRange().thisYear
-        ],
-        "Last Year": [
-            "01/01/"+(getDateRange().thisYear-1),
-            "31/12/"+(getDateRange().thisYear-1)
-        ]
-    },
-          "opens": "left",
-        "showDropdowns": true,
-        "alwaysShowCalendars": true,
-        "autoApply": true,
-        "startDate": getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
-    "endDate": getDateRange().today+"/"+getDateRange().thisMonth+"/"+getDateRange().thisYear,
-          calender_style: "picker_4",
-
-        });
+      
 
       });
     </script>
