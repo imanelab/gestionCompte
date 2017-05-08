@@ -60,6 +60,13 @@ class Account
     private $rib;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="account_name", type="string", nullable=true,length=255)
+     */
+    private $accountName;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="depth", type="integer")
@@ -203,5 +210,58 @@ class Account
     public function removeParent()
     {
         unset($this->account);
+    }
+
+    /**
+     * Set accountName
+     *
+     * @return Account
+     */
+    public function setAccountName()
+    {
+        if( $this->delegation)
+        $this->creditAccountName = $this->delegation->getName();
+        else
+        $this->creditAccountName = "الحساب المركزي:".$this->rib;
+
+        return $this;
+    }
+
+    /**
+     * Get accountName
+     *
+     * @return string 
+     */
+    public function getAccountName()
+    {
+        if($this->accountName)
+        return $this->accountName;
+    elseif( $this->delegation)
+        return $this->delegation->getName();
+    else
+        return "الحساب المركزي:".$this->rib;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CUserBundle\Entity\User $user
+     * @return Account
+     */
+    public function setUser(\CUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

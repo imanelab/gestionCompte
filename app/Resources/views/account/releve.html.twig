@@ -34,8 +34,7 @@
         <tbody>
         {% for movement in movements %}
             <tr>
-               
-               
+
                 <td>{% if movement.dateMv %}{{ movement.dateMv|date('d-m-Y') }}{% endif %}</td>
                 <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ movement.codificationABB.label }}</td>
@@ -225,6 +224,62 @@
 
       $(document).ready(function() {
 
+       var table= $('#datatable').dataTable({
+    language:{
+         "sProcessing":   "جارٍ التحميل...",
+      "sLengthMenu":   " _MENU_ أظهر",
+      "sZeroRecords":  "لم يعثر على أية سجلات",
+      "sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+      "sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+      "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+      "sInfoPostFix":  "",
+      "sSearch":       "ابحث:",
+      "sUrl":          "",
+      "oPaginate": {
+        "sFirst":    "الأول",
+        "sPrevious": "السابق",
+        "sNext":     "التالي",
+        "sLast":     "الأخير"
+    }
+    
+    },
+
+    dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
+    });
+
+       $("#startDate").change ( function() { table.fnDraw(); } );
+   /* $('#startDate, #endDate').keyup( function() {
+            table.fnDraw(this.value);
+        } );*/
+
+
+      
+
+
+      $(document).ready(function() {
        var table= $('#datatable').dataTable({
     language:{
          "sProcessing":   "جارٍ التحميل...",
