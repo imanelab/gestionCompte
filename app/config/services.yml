@@ -27,3 +27,9 @@ services:
 
     gestionCompte.notifications.html:
         class: gestionCompteBundle\Notifications\NotificationsHTML
+
+    gestionCompte.notifications.listener:
+        class: gestionCompteBundle\Notifications\NotificationsListener
+        arguments: [@gestionCompte.notifications.html, "2013-10-20"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: processNotif }
