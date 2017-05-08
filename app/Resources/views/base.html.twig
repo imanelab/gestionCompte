@@ -27,28 +27,65 @@
 	 
         <div class="top_nav">
           <div class="nav_menu">
-            <nav>
-              
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
 
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    الحساب
+              <ul class="nav navbar-nav navbar-right" style="position: relative;left: -1002px;">
+                <li>
+
+	  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dir="rtl">
+  الحساب
   
 
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="{{path('fos_user_profile_show')}}"> Profil</a></li>                
-                    <li><a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out pull-right"></i> Se déconnecter </a></li>
-                  </ul>
+
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="margin-right: -85px">
+                    <li><a href="{{path('fos_user_profile_show')}}" style="position:relative;left:80px"> Profil</a></li>                
+                    <li><a href="{{path('fos_user_security_logout')}}" style="position:relative;left:80px"> خروج </a></li>	   
+				  </ul>
+	  
+	  </li>
+				
+				<li><a> {{ app.user.firstName}} {{ app.user.lastName}}</a> </li>
+				
+				<li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">3</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                      
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
                 </li>
 
             
               </ul>
+			  </div>
             </nav>
           </div>
         </div>
+		 </div>
+       
         <!-- /top navigation -->
 
         <!-- page content -->
