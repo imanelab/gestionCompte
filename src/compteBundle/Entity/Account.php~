@@ -25,6 +25,16 @@ class Account
 
     /**
 
+   * @ORM\ManyToOne(targetEntity="CUserBundle\Entity\User")
+
+   * @ORM\JoinColumn(nullable=true)
+
+   */
+
+  private $user;
+
+    /**
+
    * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Account")
 
    * @ORM\JoinColumn(nullable=true)
@@ -48,6 +58,13 @@ class Account
      * @ORM\Column(name="rib", type="bigint", unique=true)
      */
     private $rib;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="account_name", type="string", nullable=true,length=255)
+     */
+    private $accountName;
 
     /**
      * @var int

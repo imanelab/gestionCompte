@@ -24,3 +24,6 @@ services:
                 - '@security.token_storage'
             tags:
                 - { name: form.type }
+
+    gestionCompte.notifications.html:
+        class: gestionCompteBundle\Notifications\NotificationsHTML
