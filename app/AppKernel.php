@@ -19,7 +19,9 @@ class AppKernel extends Kernel
             new compteBundle\compteBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new CUserBundle\CUserBundle(),
-        );
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+                    
+                    );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

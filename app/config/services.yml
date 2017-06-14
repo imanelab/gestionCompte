@@ -26,10 +26,10 @@ services:
                 - { name: form.type }
 
     gestionCompte.notifications.html:
-        class: gestionCompteBundle\Notifications\NotificationsHTML
+        class: compteBundle\Notifications\NotificationsHTML
 
     gestionCompte.notifications.listener:
-        class: gestionCompteBundle\Notifications\NotificationsListener
-        arguments: [@gestionCompte.notifications.html, "2013-10-20"]
+        class: compteBundle\Notifications\NotificationsListener
+        arguments: ["@gestionCompte.notifications.html", "@doctrine.orm.entity_manager","@security.token_storage"]
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: processNotif }

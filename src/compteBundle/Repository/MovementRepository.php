@@ -25,4 +25,15 @@ class MovementRepository extends EntityRepository
 			  ->orderBy('m.realDateMv, m.id');
 			  return $qb;
 	}
+
+//get all movements of a masterEntity that require validation
+
+	public function getToApproveByMasterEntity($masterEntity){
+
+		$qb = $this->createQueryBuilder('m');
+			  $qb->where('m.user.id= :masterEntity')
+			  ->setParameters(['masterEntity'=>$masterEntity])
+			  ->orderBy('m.realDateMv, m.id');
+			  return $qb;
+	}
 }
