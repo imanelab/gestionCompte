@@ -14,7 +14,7 @@
 
 	  
       <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.amountMv, "الرصيد")}}<span class="required"></span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.amountMv, "مبلغ التحويل")}}<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         {{ form_widget(form.amountMv,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
@@ -46,7 +46,7 @@
         </div>
 		
 		<div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.realDateMv, "التاريخ الحقيقي")}}<span class="required"></span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.realDateMv, "تاريخ إنهاء عملية التحويل")}}<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         {{ form_widget(form.realDateMv,{'attr': {'class': 'datepicker form-control col-md-7 col-xs-12'}}) }}

@@ -52,6 +52,8 @@ class Line
      * @ORM\Column(name="version", type="smallint")
      */
     private $version;
+	
+	private $codeTitle;
 
     /**
      * @var int
@@ -266,6 +268,14 @@ class Line
     public function getConsumedAmount()
     {
         return $this->consumedAmount;
+    }
+	
+	
+	
+	public function getcodeTitle()
+    {
+		$codeTitle= $this->idl   .":".   $this->title;
+        return $codeTitle;
     }
 
 }
