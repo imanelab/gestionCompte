@@ -3,12 +3,14 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Morass
  *
  * @ORM\Table(name="morass")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\MorassRepository")
+ * @Gedmo\Loggable
  */
 class Morass
 {
@@ -39,6 +41,7 @@ class Morass
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -46,6 +49,7 @@ class Morass
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="year", type="smallint", unique=true)
      */
     private $year;

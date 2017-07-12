@@ -3,10 +3,13 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * CodificationABB
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="codification_a_b_b")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\CodificationABBRepository")
  */
@@ -24,6 +27,7 @@ class CodificationABB
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="code", type="smallint", unique=true)
      */
     private $code;
@@ -31,6 +35,7 @@ class CodificationABB
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="label", type="string", length=255)
      */
     private $label;

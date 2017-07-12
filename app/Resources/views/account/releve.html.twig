@@ -41,7 +41,7 @@
                 <td>{{ movement.line.title }}</td>
                 <td>{% if movement.creditAccount.delegation.name is defined %}{{ movement.creditAccount.delegation.name }}{% endif %} {% if movement.creditEAccount %}{{ movement.creditEAccount.name }}{% endif %}</td>  
                 <td>{% if movement.debitAccount.delegation.name is defined %}{{ movement.debitAccount.delegation.name }}{% endif %} {% if movement.debitEAccount %}{{ movement.debitEAccount.name }}{% endif %}</td>  
-                <td>{{ movement.amountMv }}</td>
+                <td>{{ movement.amountMv |number_format}}</td>
                 <td>{{ movement.comment }}</td> 
             </tr>
         {% endfor %}

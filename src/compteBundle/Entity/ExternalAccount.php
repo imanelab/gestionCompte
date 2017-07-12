@@ -3,10 +3,13 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * ExternalAccount
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="external_account")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\ExternalAccountRepository")
  */
@@ -24,6 +27,7 @@ class ExternalAccount
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -31,6 +35,7 @@ class ExternalAccount
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;

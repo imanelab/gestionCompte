@@ -7,12 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 // Ajoutez ce use pour le contexte
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Movement
  *
  * @ORM\Table(name="movement")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\MovementRepository")
+ * @Gedmo\Loggable
  */
 class Movement
 {
@@ -110,6 +113,7 @@ class Movement
     /**
      * @var float
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="amount_mv", type="float")
      */
     private $amountMv;
@@ -117,6 +121,7 @@ class Movement
     /**
      * @var boolean
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="validation", type="boolean")
      */
     private $validation=false;
@@ -124,6 +129,7 @@ class Movement
     /**
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="date_mv", type="datetime")
      */
     private $dateMv;
@@ -131,6 +137,7 @@ class Movement
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="months", type="integer", nullable=true)
      */
     private $months;
@@ -145,6 +152,7 @@ class Movement
     /**
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="real_date_mv", type="datetime")
      */
     private $realDateMv;

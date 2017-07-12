@@ -3,13 +3,17 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+
 /**
  * Delegation
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="delegation")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\DelegationRepository")
  */
@@ -38,6 +42,7 @@ class Delegation
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -45,6 +50,7 @@ class Delegation
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="depth", type="smallint")
      */
     private $depth;
