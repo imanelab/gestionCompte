@@ -28,6 +28,9 @@ services:
     gestionCompte.notifications.html:
         class: compteBundle\Notifications\NotificationsHTML
 
+    gestionCompte.n2l.html:
+        class: compteBundle\N2L\NumToAr
+
     gestionCompte.notifications.listener:
         class: compteBundle\Notifications\NotificationsListener
         arguments: ["@gestionCompte.notifications.html", "@doctrine.orm.entity_manager","@security.token_storage"]
