@@ -1,0 +1,4 @@
+n2l_index:
+    path:     /
+    defaults: { _controller: "compteBundle:N2L:index" }
+    methods:  GET

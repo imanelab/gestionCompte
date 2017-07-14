@@ -29,7 +29,7 @@ services:
         class: compteBundle\Notifications\NotificationsHTML
 
     gestionCompte.n2l.html:
-        class: compteBundle\N2L\NumToAr
+        class: compteBundle\N2L\NumToAr1
 
     gestionCompte.notifications.listener:
         class: compteBundle\Notifications\NotificationsListener

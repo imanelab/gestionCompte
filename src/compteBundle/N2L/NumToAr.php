@@ -1,10 +1,11 @@
 ﻿<?php
-//You need to read the lesson 'Number and numbered' in arabic, to understand this class
-// العدد والمعدود
-class NumToAr {
+namespace compteBundle\N2L;
+
+class NumToAr1
+{
 	//sex of the currency: 'female' | 'male'
-	private $number;
-	private $sex;
+	//private $number;
+	//private $sex;
 	//constructor
 	// function __construct($number, $sex)
 	// {
@@ -14,7 +15,6 @@ class NumToAr {
 	
 	public function convert_number($number, $sex)
 	{
-		$number=$this->number;
 		if (($number < 0) || ($number > 999999999999)) 
 		{ 
 			throw new Exception("العدد خارج النطاق");
@@ -29,15 +29,15 @@ class NumToAr {
 		//convert each number(hundred) to arabic
 		for($i=0; $i<count($array_number); $i++){
 			$place=count($array_number) - $i;
-			$return .= $this->convert($array_number[$i], $place);
+			$return .= $this->convert($array_number[$i], $place,$sex);
 			if(isset($array_number[($i + 1)]) && $array_number[($i + 1)]>0)  $return .= ' و';
 		}
 		return $return;
 	}
 	//private function
-	private function convert($number, $place){
+	private function convert($number, $place,$sex){
 		// take in charge the sex of NUMBERED
-		$sex=$this->sex;
+		//$sex=$this->sex;
 		//the number word in arabic for masculine and feminine
 		$words = array(
 			'male'=>array(
@@ -206,6 +206,8 @@ class NumToAr {
 			break;
 		}
 		return $return;
+	
 	}
 }
+
 ?>
