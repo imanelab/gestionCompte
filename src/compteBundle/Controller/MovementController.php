@@ -38,6 +38,24 @@ class MovementController extends Controller
 
 
     /**
+     * Approve/Refuse a movement.
+     *
+     */
+    public function processMovementAction($id)
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $Movement= $em->getRepository('compteBundle:Movement')->findById($id);
+
+
+        return $this->render('movement/index.html.twig', array(
+            'movements' => $movements,
+        ));
+    }
+
+    /**
     * Check the selected accounts
     *
     **/

@@ -1,0 +1,4 @@
+notifications_index:
+    path:     /
+    defaults: { _controller: "compteBundle:Notifications:index" }
+    methods:  GET

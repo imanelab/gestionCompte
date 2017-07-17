@@ -43,6 +43,7 @@
                        <td>{{ movement.months }}</td>
                        <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
                        <td>{{ movement.amountMv }}</td>
+                       <td>{{ movement.line.title }}</td>
                     
                        
                         </tr>
