@@ -23,43 +23,31 @@
 
 
                       <tbody>
+                        {% for movement in movements %}
                         <tr>
-                         
-                          
-                         
-                       <td>
-
-                          
-            <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                           
-                           <input type="submit" value="رفض التحويل" class="btn btn-danger">
-                            <input class="btn btn-success" type= "submit" value="تأكيد التحويل">
-
-                            </div> </div> 
-                       </td>
-                       
-                       <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
-                       <td>{{ movement.months }}</td>
-                       <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d H:i:s') }}{% endif %}</td>
-                       <td>{{ movement.amountMv }}</td>
-                       <td>{{ movement.line.title }}</td>
-                    
-                       
+	                       	<td>   
+					            <div class="form-group">
+					                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+					                    <input type="submit" id="refuse-"{{movement.id}} value="رفض التحويل" class="btn btn-danger">
+					                    <input class="btn btn-success" id="approve-"{{movement.id}} type= "submit" value="تأكيد التحويل">
+					                </div> 
+					            </div> 
+	                       </td>
+	                       
+	                       <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('Y-m-d') }}{% endif %}</td>
+	                       
+	                       <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d') }}{% endif %}</td>
+	                       <td>{{ movement.months }}</td>
+	                       <td>{{ movement.amountMv | number_format }}</td>
+	                       <td>{{ movement.line.title }}</td>
                         </tr>
+                        {% endfor %}
             
                         </tbody>
                     </table>
 
 	 </div>
               </div>
-	
-	
-    
-            <a class="btn btn-primary pull-right" href="{{ path('paragraph_new') }}">إضافة فقرة جديدة</a>
-       
-	
-
 {% endblock %}
 
 {% block js %}
@@ -73,6 +61,30 @@
     <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
     <!-- Datatables -->
     <script>
+
+     function approveButtonPressed(){
+     			var id =this.id.replace('approve-','');
+			    $.post('{{path('movement_approve', { 'id': $id })}}',               
+			                {id: this.id, choice:'approve'}, 
+			            function(response){
+			                    if(response.code == 100 && response.success){
+			                    	alert("salam approve");
+			                    }
+
+			    }, "json");    
+			}
+	function refuseButtonPressed(){
+				$id =this.id.replace('refuse-','');
+			    $.post('{{path('movement_approve', { 'id': $id })}}',              
+			                {id: $id, choice:'refuse'}, 
+			            function(response){
+			                    if(response.code == 100 && response.success){
+			                    	alert("salam refuse");
+			                    }
+
+			    }, "json");    
+			}
+			
       $(document).ready(function() {
 
         $('#datatable').dataTable({
@@ -96,8 +108,18 @@
 		}
 		});
 
-
+          $('button').on('click', function(){
+          	if(this.id.indexOf("approve-") !=-1){
+          	 approveButtonPressed();
+          	}
+          	if(this.id.indexOf("refuse-") !=-1){
+          	 refuseButtonPressed();
+          	}
+          });
       });
+
+
+    
     </script>
     <!-- /Datatables -->
 

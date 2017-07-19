@@ -127,6 +127,14 @@ class Movement
     private $validation=false;
 
     /**
+     * @var boolean
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="approved", type="boolean", nullable=true)
+     */
+    private $approved;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Versioned
@@ -574,5 +582,28 @@ class Movement
         }
 
 
+    }
+
+    /**
+     * Set approved
+     *
+     * @param boolean $approved
+     * @return Movement
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+
+        return $this;
+    }
+
+    /**
+     * Get approved
+     *
+     * @return boolean 
+     */
+    public function getApproved()
+    {
+        return $this->approved;
     }
 }

@@ -22,3 +22,8 @@ movement_delete:
     path:     /{id}/delete
     defaults: { _controller: "compteBundle:Movement:delete" }
     methods:  DELETE
+
+movement_approve:
+    path:     /{id}/process_movement
+    defaults: { _controller: "compteBundle:Movement:processMovement" }
+    methods:  POST

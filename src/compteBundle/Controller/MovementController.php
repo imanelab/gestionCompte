@@ -41,18 +41,27 @@ class MovementController extends Controller
      * Approve/Refuse a movement.
      *
      */
-    public function processMovementAction($id)
+    public function processMovementAction()
     {
+
+        $request = $this->container->get('request');        
+          $id = $request->query->get('id');
+          $choice = $request->query->get('choice');
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
 
-        $Movement= $em->getRepository('compteBundle:Movement')->findById($id);
-
-
-        return $this->render('movement/index.html.twig', array(
-            'movements' => $movements,
-        ));
+        $movement= $em->getRepository('compteBundle:Movement')->findById($id);
+        if ($choice == "Approve") {
+            $movement->setApproved(true);
+        }
+        elseif ($choice == "Refuse") {
+            $movement->setApproved(false);
+        }
+        $em->persist($movement);
+        $em->flush();
+        $response = array("code" => 100, "success" => true);
+        return new $Response(json_encode($response)); 
     }
 
     /**
