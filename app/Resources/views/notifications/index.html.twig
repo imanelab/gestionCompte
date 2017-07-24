@@ -62,29 +62,39 @@
     <!-- Datatables -->
     <script>
 
-     function approveButtonPressed(){
-     			var id =this.id.replace('approve-','');
-			    $.post('{{path('movement_approve', { 'id': $id })}}',               
-			                {id: this.id, choice:'approve'}, 
-			            function(response){
-			                    if(response.code == 100 && response.success){
-			                    	alert("salam approve");
-			                    }
+     jQuery(function($){ 
+     			$(".btn").click(function(event){
+     				event.preventDefault();
+     				if(this.id.indexOf("approve-") !=-1){
+		          	 id =this.id.replace('approve-','');
+					    $.post('{{path('movement_approve', { 'id': $id })}}',               
+					                {id: this.id, choice:'approve'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	alert("salam approve");
+					                    }
 
-			    }, "json");    
-			}
+					    }, "json");    
+					}
+					if(this.id.indexOf("refuse-") !=-1){
+						id =this.id.replace('refuse-','');
+					    $.post('{{path('movement_approve', { 'id': $id })}}',              
+					                {id: $id, choice:'refuse'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	alert("salam refuse");
+					                    }
+
+					    }, "json");    
+
+		          	}
+				}
+     				
+		});
 	function refuseButtonPressed(){
-				$id =this.id.replace('refuse-','');
-			    $.post('{{path('movement_approve', { 'id': $id })}}',              
-			                {id: $id, choice:'refuse'}, 
-			            function(response){
-			                    if(response.code == 100 && response.success){
-			                    	alert("salam refuse");
-			                    }
-
-			    }, "json");    
+				
 			}
-			
+
       $(document).ready(function() {
 
         $('#datatable').dataTable({
