@@ -28,8 +28,8 @@
 	                       	<td>   
 					            <div class="form-group">
 					                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-					                    <input type="submit" id="refuse-"{{movement.id}} value="رفض التحويل" class="btn btn-danger">
-					                    <input class="btn btn-success" id="approve-"{{movement.id}} type= "submit" value="تأكيد التحويل">
+					                    <input type="submit" id="refuse-{{movement.id}}" value="رفض التحويل" class="btn btn-danger">
+					                    <input class="btn btn-success" id="approve-{{movement.id}}" type= "submit" value="تأكيد التحويل">
 					                </div> 
 					            </div> 
 	                       </td>
@@ -58,43 +58,11 @@
     <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
     <!-- Datatables -->
     <script>
 
-     jQuery(function($){ 
-     			$(".btn").click(function(event){
-     				event.preventDefault();
-     				if(this.id.indexOf("approve-") !=-1){
-		          	 id =this.id.replace('approve-','');
-					    $.post('{{path('movement_approve', { 'id': $id })}}',               
-					                {id: this.id, choice:'approve'}, 
-					            function(response){
-					                    if(response.code == 100 && response.success){
-					                    	alert("salam approve");
-					                    }
-
-					    }, "json");    
-					}
-					if(this.id.indexOf("refuse-") !=-1){
-						id =this.id.replace('refuse-','');
-					    $.post('{{path('movement_approve', { 'id': $id })}}',              
-					                {id: $id, choice:'refuse'}, 
-					            function(response){
-					                    if(response.code == 100 && response.success){
-					                    	alert("salam refuse");
-					                    }
-
-					    }, "json");    
-
-		          	}
-				}
-     				
-		});
-	function refuseButtonPressed(){
-				
-			}
-
+    
       $(document).ready(function() {
 
         $('#datatable').dataTable({
@@ -117,16 +85,37 @@
 		
 		}
 		});
-
-          $('button').on('click', function(){
-          	if(this.id.indexOf("approve-") !=-1){
-          	 approveButtonPressed();
-          	}
-          	if(this.id.indexOf("refuse-") !=-1){
-          	 refuseButtonPressed();
-          	}
-          });
       });
+
+       jQuery(function($){
+     			$(".btn").click(function(event){
+     				event.preventDefault();
+     				if(this.id.indexOf("approve-") !=-1){
+		          	 id =this.id;
+		          	 $path="{{path('movement_approve', { 'id':"+id+" })}}";
+					    $.post(path,               
+					                {id: this.id, choice:'approve'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	alert("lalaland");
+					                    }
+					    }, "json");    
+					}
+					if(this.id.indexOf("refuse-") !=-1){
+						id =this.id.replace('refuse-','');
+					    var path="{{path('movement_approve', { 'id':"+ this.id +" })}}";
+					    $.post(path,              
+					                {id: this.id, choice:'refuse'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	alert("lalaland");
+					                    }
+					    }, "json");    
+
+		          	}
+				})		
+		});
+
 
 
     
