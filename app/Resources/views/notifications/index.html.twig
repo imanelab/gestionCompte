@@ -91,21 +91,24 @@
      			$(".btn").click(function(event){
      				event.preventDefault();
      				if(this.id.indexOf("approve-") !=-1){
-		          	 id =this.id;
-		          	 $path="{{path('movement_approve', { 'id':"+id+" })}}";
-					    $.post(path,               
-					                {id: this.id, choice:'approve'}, 
+		          	 id=this.id.replace('approve-','');
+		          	 path1="{{path('movement_approve', { 'id':'varvar'})}}";
+		          	 path =path1.replace('varvar',id);
+		          	  $.post(path,              
+					                {id: id, choice:'approve'}, 
 					            function(response){
 					                    if(response.code == 100 && response.success){
 					                    	alert("lalaland");
 					                    }
-					    }, "json");    
+					    }, "json");   
+    
 					}
 					if(this.id.indexOf("refuse-") !=-1){
 						id =this.id.replace('refuse-','');
-					    var path="{{path('movement_approve', { 'id':"+ this.id +" })}}";
+					    path1="{{path('movement_approve', { 'id':'varvar'})}}";
+		          		 path =path1.replace('varvar',id);
 					    $.post(path,              
-					                {id: this.id, choice:'refuse'}, 
+					                {id: id, choice:'refuse'}, 
 					            function(response){
 					                    if(response.code == 100 && response.success){
 					                    	alert("lalaland");

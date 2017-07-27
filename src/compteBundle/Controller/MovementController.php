@@ -6,6 +6,8 @@ use compteBundle\Entity\Movement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Movement controller.
  *
@@ -44,24 +46,24 @@ class MovementController extends Controller
     public function processMovementAction()
     {
 
-        $request = $this->container->get('request');        
-          $id = $request->query->get('id');
-          $choice = $request->query->get('choice');
+        $request = $this->get('request');        
+          $id = $request->get('id');
+          $choice = $request->get('choice');
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
 
-        $movement= $em->getRepository('compteBundle:Movement')->findById($id);
-        if ($choice == "Approve") {
+        $movement= $em->getRepository('compteBundle:Movement')->findOneById($id);
+        if ($choice == "approve") {
             $movement->setApproved(true);
         }
-        elseif ($choice == "Refuse") {
+        elseif ($choice == "refuse") {
             $movement->setApproved(false);
         }
         $em->persist($movement);
         $em->flush();
-        $response = array("code" => 100, "success" => true);
-        return new $Response(json_encode($response)); 
+        $response = array("code" => 100, "success" => true, "approved"=>$movement->getApproved());
+        return new Response(json_encode($response)); 
     }
 
     /**
