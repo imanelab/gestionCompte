@@ -27,6 +27,8 @@
                         <tr>
 	                       	<td>   
 					            <div class="form-group">
+					            	<h2 id="approved-{{movement.id}}" class="bg-success" style="display:none;">تحويل مقبول</h2>
+					            	<h2 id="refused-{{movement.id}}" class="bg-danger" style="display:none;">تحويل مرفوض</h2>
 					                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
 					                    <input type="submit" id="refuse-{{movement.id}}" value="رفض التحويل" class="btn btn-danger">
 					                    <input class="btn btn-success" id="approve-{{movement.id}}" type= "submit" value="تأكيد التحويل">
@@ -90,15 +92,18 @@
        jQuery(function($){
      			$(".btn").click(function(event){
      				event.preventDefault();
+     				id=this.id.replace('approve-','');
+		          	 fullId=this.id;
      				if(this.id.indexOf("approve-") !=-1){
-		          	 id=this.id.replace('approve-','');
+		          	 
 		          	 path1="{{path('movement_approve', { 'id':'varvar'})}}";
 		          	 path =path1.replace('varvar',id);
 		          	  $.post(path,              
 					                {id: id, choice:'approve'}, 
 					            function(response){
 					                    if(response.code == 100 && response.success){
-					                    	alert("lalaland");
+					                    	$('#'+fullId).parent().hide();
+					                    	$('#approved-'+id).show();
 					                    }
 					    }, "json");   
     
@@ -111,7 +116,8 @@
 					                {id: id, choice:'refuse'}, 
 					            function(response){
 					                    if(response.code == 100 && response.success){
-					                    	alert("lalaland");
+					                    	$('#'+fullId).parent().hide();
+					                    	$('#refused-'+id).show();
 					                    }
 					    }, "json");    
 
