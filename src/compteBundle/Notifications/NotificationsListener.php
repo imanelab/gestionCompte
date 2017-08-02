@@ -70,7 +70,7 @@ class NotificationsListener
       return;
     }
     //$this->notificationsList = $this->em->getRepository('compteBundle:Movement')->findAll();
-    $this->notificationsList = $this->em->getRepository('compteBundle:Movement')->findByUser($this->currentUser);
+    $this->notificationsList = $this->em->getRepository('compteBundle:Movement')->findByValidator($this->currentUser);
 
      if (!$this->notificationsList) {
       return;
