@@ -1,0 +1,41 @@
+
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> إضافة مصنفة الميزانية </h2>
+{% endblock %}
+{% block content %}
+      {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.name, "إسم المصنفة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.name,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.year, "التاريخ")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.year,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+        <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a class="btn btn-primary" href="{{ path('morass_index') }}">العودة إلى اللائحة</a>
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+
+
+    {{ form_end(form) }}
+{% endblock %}
+
+
+      
