@@ -108,7 +108,7 @@
         </tbody>
     </table>
      <a class="btn btn-primary pull-right" href="{{ path('morass_index') }}">العودة إلى اللائحة </a>
-     <a class="btn btn-primary pull-right" href="{{ path('morass_line_transfer') }}">ترحيل النفقات بين السطور</a>
+     <a class="btn btn-primary pull-right" href="{{ path('morass_line_transfer' , { 'id': morass.id }) }}">ترحيل النفقات بين السطور</a>
 {% endblock %}
 
 {% block js %}

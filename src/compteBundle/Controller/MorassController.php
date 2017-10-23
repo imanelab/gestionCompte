@@ -14,6 +14,66 @@ use CUserBundle\Entity\User;
  */
 class MorassController extends Controller
 {
+
+
+
+    /**
+     * Migration between lines.
+     *
+     */
+    public function lineTransferAction(Morass $morass)
+    {
+        //$em = $this->getDoctrine()->getManager();
+
+        //$morass = $em->getRepository('compteBundle:Morass')->findOneById($id);
+        $user=$this->getUser();
+        $transferForm = $this->createTransferForm($morass);
+        $morassArray= $this->getMorass($morass,$user);
+        return $this->render('morass/lineTransfer.html.twig', array(
+            'morass' => $morass,
+          //  'delete_form' => $deleteForm->createView(),
+            'paragraphs'=>$morassArray['paragraphs'],
+            'lines'=>$morassArray['lines'],
+            'colspan'=>$morassArray['colspan'],
+            'morassAmount'=>$morassArray['morassAmount'],
+            'userLines'=>$morassArray['userLines'],
+        ));
+
+      //  return $this->render('morass/lineTransfer.html.twig', array(
+          //  'morass' => $morass,
+      //  ));
+    }
+
+    /**
+     * Creates a form to delete a morass entity.
+     *
+     * @param Morass $morass The morass entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Morass $morass)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('line_transfer', array('id' => $morass->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+
+
+
+    /************************************** ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ **********************************************/
+
+
+
+
+
+
+
+
+
+
     /**
      * Lists all morass entities.
      *
