@@ -5,6 +5,61 @@
     <h2> مصنفة الميزانية </h2>
 {% endblock %}
 {% block content %}
+{{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.fromParagraph, "from paragraph")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.fromParagraph,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+
+         <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.fromLine, "from line")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.fromLine,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+
+
+         <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.toParagraph, "to paragraph")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.toParagraph,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+
+
+         <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.toLine, "from paragraph")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.toLine,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.amount, "Amount")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(form.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+        </div>
+        </div>
+		
+        <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+
+
+    {{ form_end(form) }}
+
 
 	
 	<table id="datatable" class="table table-striped table-bordered" dir="rtl">

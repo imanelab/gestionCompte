@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use CUserBundle\Entity\User;
+use compteBundle\Entity\ExpenseTransfer;
 
 /**
  * Morass controller.
@@ -27,7 +28,9 @@ class MorassController extends Controller
 
         //$morass = $em->getRepository('compteBundle:Morass')->findOneById($id);
         $user=$this->getUser();
-        $transferForm = $this->createTransferForm($morass);
+        $expenseTransfer= new ExpenseTransfer();
+        $expenseTransfer->setMorass($morass);
+        $transferForm = $this->createForm('compteBundle\Form\ExpenseTransferType', $expenseTransfer);
         $morassArray= $this->getMorass($morass,$user);
         return $this->render('morass/lineTransfer.html.twig', array(
             'morass' => $morass,
@@ -37,29 +40,13 @@ class MorassController extends Controller
             'colspan'=>$morassArray['colspan'],
             'morassAmount'=>$morassArray['morassAmount'],
             'userLines'=>$morassArray['userLines'],
+            'form'=>$transferForm->createView(),
         ));
 
       //  return $this->render('morass/lineTransfer.html.twig', array(
           //  'morass' => $morass,
       //  ));
     }
-
-    /**
-     * Creates a form to delete a morass entity.
-     *
-     * @param Morass $morass The morass entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Morass $morass)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('line_transfer', array('id' => $morass->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
-
 
 
 

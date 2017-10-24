@@ -1,0 +1,121 @@
+<?php
+
+namespace compteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ExpenseTransfer
+ *
+ * @ORM\Table(name="expense_transfer")
+ * @ORM\Entity(repositoryClass="compteBundle\Repository\ExpenseTransferRepository")
+ */
+class ExpenseTransfer
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="float")
+     */
+    private $amount;
+
+
+        /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Paragraph")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $fromParagraph;
+
+
+
+      /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Paragraph")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $toParagraph;
+
+
+
+      /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Line")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $fromLine;
+
+
+      /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Line")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $toLine;
+
+
+        /**
+
+   * @ORM\ManyToOne(targetEntity="compteBundle\Entity\Morass")
+
+   * @ORM\JoinColumn(nullable=false)
+
+   */
+
+  private $morass;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     * @return ExpenseTransfer
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float 
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+}
