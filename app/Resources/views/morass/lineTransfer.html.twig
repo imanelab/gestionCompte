@@ -104,3 +104,24 @@
 	 
 	 </a>
 {% endblock %}
+
+
+{% block js %}
+{{parent()}}
+ 
+	<script>
+	jQuery(document).ready(function(){
+		var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
+		var values = [];
+		$('#comptebundle_morass_fromLine option').each(function() { 
+		    values[ $(this).attr('value')]= $(this).text(); //: $(this).text() );
+		});
+		console.log(values);
+	});
+		
+	</script>
+    <!-- /Datatables -->
+	
+	
+
+{% endblock %}
