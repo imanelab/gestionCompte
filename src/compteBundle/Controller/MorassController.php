@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use CUserBundle\Entity\User;
 use compteBundle\Entity\ExpenseTransfer;
+use compteBundle\Form\ExpenseTransferType;
 
 /**
  * Morass controller.
@@ -30,7 +31,8 @@ class MorassController extends Controller
         $user=$this->getUser();
         $expenseTransfer= new ExpenseTransfer();
         $expenseTransfer->setMorass($morass);
-        $transferForm = $this->createForm('compteBundle\Form\ExpenseTransferType', $expenseTransfer);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $transferForm = $this->createForm(new ExpenseTransferType($em), $expenseTransfer);
         $morassArray= $this->getMorass($morass,$user);
         return $this->render('morass/lineTransfer.html.twig', array(
             'morass' => $morass,

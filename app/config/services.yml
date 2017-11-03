@@ -36,3 +36,7 @@ services:
         arguments: ["@gestionCompte.notifications.html", "@doctrine.orm.entity_manager","@security.token_storage"]
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: processNotif }
+
+    gestionCompte.expenseTransfer:
+        class: compteBundle\Form\ExpenseTransferType
+        arguments: ["@doctrine.orm.entity_manager"]

@@ -34,7 +34,7 @@ class NotificationsListener
      protected $currentUser;
      protected $notificationsList;
      protected $tokenStorage;
-      protected $em;
+     protected $em;
 
 /**
  * @InjectParams
