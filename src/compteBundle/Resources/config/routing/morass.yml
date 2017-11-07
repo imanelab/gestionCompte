@@ -36,4 +36,9 @@ morass_morass:
 morass_line_transfer:
     path:      /{id}/transfer
     defaults: { _controller: "compteBundle:Morass:lineTransfer" }
-    methods:  GET
+    methods:  POST
+
+morass_line_manage_transfer:
+    path:      /{id}/managetransfer
+    defaults: { _controller: "compteBundle:Morass:manageTransfer" }
+    methods:  POST

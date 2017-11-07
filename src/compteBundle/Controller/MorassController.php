@@ -52,6 +52,37 @@ class MorassController extends Controller
 
 
 
+     /**
+     * Migration between lines.
+     *
+     */
+    public function manageTransferAction()
+    {
+        //$em = $this->getDoctrine()->getManager();
+
+        //$morass = $em->getRepository('compteBundle:Morass')->findOneById($id);
+        $expenseTransfer= new ExpenseTransfer();
+        $expenseTransfer->setMorass($morass);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $transferForm = $this->createForm(new ExpenseTransferType($em), $expenseTransfer);
+        $morassArray= $this->getMorass($morass,$user);
+        return $this->render('morass/lineTransfer.html.twig', array(
+            'morass' => $morass,
+          //  'delete_form' => $deleteForm->createView(),
+            'paragraphs'=>$morassArray['paragraphs'],
+            'lines'=>$morassArray['lines'],
+            'colspan'=>$morassArray['colspan'],
+            'morassAmount'=>$morassArray['morassAmount'],
+            'userLines'=>$morassArray['userLines'],
+            'form'=>$transferForm->createView(),
+        ));
+
+      //  return $this->render('morass/lineTransfer.html.twig', array(
+          //  'morass' => $morass,
+      //  ));
+    }
+
+
     /************************************** ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ **********************************************/
 
 

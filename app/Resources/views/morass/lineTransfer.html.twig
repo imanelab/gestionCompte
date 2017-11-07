@@ -111,6 +111,13 @@
  
 	<script>
 	jQuery(document).ready(function(){
+		$('#comptebundle_morass_fromParagraph').change(function({
+			var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
+			var data = {'option': fromParagraph};
+			$.post("{{ path('morass_line_transfer' , { 'id': morass.id }) }}", data, function(data){
+				alert(data[0].idl)
+			})
+		}))
 		var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
 		var values = [];
 		$('#comptebundle_morass_fromLine option').each(function() { 

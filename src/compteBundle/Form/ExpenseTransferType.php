@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvents;
 
 use compteBundle\Repository\LineRepository;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
 
 class ExpenseTransferType extends AbstractType
@@ -38,11 +39,13 @@ class ExpenseTransferType extends AbstractType
     {
         $builder->add('fromParagraph','entity', array(
                 'class'       => 'compteBundle:Paragraph','property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
+        ->add('fromLine','entity', array(
+                'class'=> 'compteBundle:Line','property'=>'idl','required'=>true,'multiple'=>false,'expanded'=>false ))
 
-        ->addEventListener(
+        /*->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
-            )
+            )*/
 
         ->add('toParagraph','entity', array(
                 'class'       => 'compteBundle:Paragraph','property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
@@ -73,7 +76,7 @@ class ExpenseTransferType extends AbstractType
         return 'comptebundle_morass';
     }
 
-    public function onPreSetData(FormEvent $event){
+   /* public function onPreSetData(FormEvent $event){
 
         $form = $event->getForm();
         $data = $event->getData();
@@ -83,15 +86,19 @@ class ExpenseTransferType extends AbstractType
                 $fromParagraph = $data->getFromParagraph();
                 //$em = new EntityManager();
               //  $em = $DC->container->get('doctrine.orm.entity_manager')->getManager();
-                $lines = $this->em->getRepository('compteBundle:Line')->findAll();
+                $lines = $this->em->getRepository('compteBundle:Line')->findByParagraph($fromParagraph);
+                foreach($lines as $value) {
+                    $id_set[]   = $value->getId();
+                    $name_set[] = $value->getIdl();
+                }
 
                 $form->add('fromLine','entity', array(
-                'class'       => 'compteBundle:Line','choices'=>$lines,'property'=>'idl','required'=>true,'multiple'=>false, 'expanded'=>false ));
+                'class'=> 'compteBundle:Line','choices'=>$lines,'property'=>'idl','required'=>true,'multiple'=>false,'expanded'=>false ));
             }
 
         
 
-    }
+    }*/
 
 
 }
