@@ -111,22 +111,37 @@
  
 	<script>
 	jQuery(document).ready(function(){
-		$('#comptebundle_morass_fromParagraph').change(function({
-			var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
-			var data = {'option': fromParagraph};
-			$.post("{{ path('morass_line_transfer' , { 'id': morass.id }) }}", data, function(data){
-				alert(data[0].idl)
-			})
-		}))
-		var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
-		var values = [];
+        $('#comptebundle_morass_fromParagraph').change();
+		$('#comptebundle_morass_fromParagraph').change(manageTransfer);
+        $('#comptebundle_morass_toParagraph').change(manageTransfer);
+       // $('#comptebundle_morass_toParagraph').change(manageTransfer());
+		/*var values = [];
 		$('#comptebundle_morass_fromLine option').each(function() { 
 		    values[ $(this).attr('value')]= $(this).text(); //: $(this).text() );
 		});
-		console.log(values);
+		console.log(values);*/
 	});
 		
 	</script>
+    <script type="text/javascript">
+        function manageTransfer(){
+            var fromParagraph= $('#comptebundle_morass_fromParagraph option:selected').text();
+            var toParagraph= $('#comptebundle_morass_toParagraph option:selected').text();
+            var url = "{{ path('morass_line_manage_transfer' , { 'id': morass.id }) }}";
+            $.post(url, {'fromParagraph':fromParagraph, 'toParagraph': toParagraph}, function(data){
+                console.log(data);
+                $('#comptebundle_morass_fromLine option').remove();
+                $('#comptebundle_morass_toLine option').remove();
+                $.each(data[0], function(val, text) {
+                $('#comptebundle_morass_fromLine').append( new Option(text,val) );
+            });
+
+            $.each(data[1], function(val, text) {
+                $('#comptebundle_morass_toLine').append( new Option(text,val) );
+            });
+        });
+        }
+    </script>
     <!-- /Datatables -->
 	
 	

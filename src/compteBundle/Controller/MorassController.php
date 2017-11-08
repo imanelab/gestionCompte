@@ -5,10 +5,12 @@ namespace compteBundle\Controller;
 use compteBundle\Entity\Morass;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use CUserBundle\Entity\User;
 use compteBundle\Entity\ExpenseTransfer;
 use compteBundle\Form\ExpenseTransferType;
+
 
 /**
  * Morass controller.
@@ -61,25 +63,35 @@ class MorassController extends Controller
         //$em = $this->getDoctrine()->getManager();
 
         //$morass = $em->getRepository('compteBundle:Morass')->findOneById($id);
-        $expenseTransfer= new ExpenseTransfer();
-        $expenseTransfer->setMorass($morass);
-        $em = $this->get('doctrine.orm.entity_manager');
-        $transferForm = $this->createForm(new ExpenseTransferType($em), $expenseTransfer);
-        $morassArray= $this->getMorass($morass,$user);
-        return $this->render('morass/lineTransfer.html.twig', array(
-            'morass' => $morass,
-          //  'delete_form' => $deleteForm->createView(),
-            'paragraphs'=>$morassArray['paragraphs'],
-            'lines'=>$morassArray['lines'],
-            'colspan'=>$morassArray['colspan'],
-            'morassAmount'=>$morassArray['morassAmount'],
-            'userLines'=>$morassArray['userLines'],
-            'form'=>$transferForm->createView(),
-        ));
+        $request = $this->getRequest();
+        $fromParagraphIdl= $request->get('fromParagraph');
+        $toParagraphIdl= $request->get('toParagraph');
 
-      //  return $this->render('morass/lineTransfer.html.twig', array(
-          //  'morass' => $morass,
-      //  ));
+        $em = $this->get('doctrine.orm.entity_manager');
+        $fromParagraph=$lines=$em->getRepository('compteBundle:Paragraph')->findOneByIdp($fromParagraphIdl);
+        $fromLines=$em->getRepository('compteBundle:Line')->findByParagraph($fromParagraph);
+        $toParagraph=$lines=$em->getRepository('compteBundle:Paragraph')->findOneByIdp($toParagraphIdl);
+        $toLines=$em->getRepository('compteBundle:Line')->findByParagraph($toParagraph);
+        $fromLine= array();
+        $toLine= array();
+        $i=0;
+        foreach ($fromLines as $line) {
+            $fromLine[$line->getId()]=$line->getIdl();
+            $i++;
+        }
+        $i=0;
+        foreach ($toLines as $line) {
+           /* $toLine[$i]['id'] = $line->getId();
+            $toLine[$i]['idl'] = $line->getIdl();
+            $i++;*/
+            $toLine[$line->getId()]=$line->getIdl();
+        }
+        $data = json_encode([$fromLine,$toLine]);
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($data);
+        return $response;
+
     }
 
 
