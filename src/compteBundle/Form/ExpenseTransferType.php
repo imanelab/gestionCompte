@@ -10,8 +10,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 use compteBundle\Repository\LineRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
+use compteBundle\Repository\ParagraphRepository;
+use compteBundle\Entity\Morass;
+
 
 
 class ExpenseTransferType extends AbstractType
@@ -20,25 +21,19 @@ class ExpenseTransferType extends AbstractType
      * {@inheritdoc}
      */
 
+    protected $morass;
 
+    public function __construct(Morass $morass){
 
-    protected $em;
-
-     /**
-     * ExpenseTransferType Constructor
-     *
-     * @param EntityManager $entityManager
-     */
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->em= $entityManager;
+        $this->morass= $morass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $morasse = $this->morass;
         $builder->add('fromParagraph','entity', array(
-                'class'       => 'compteBundle:Paragraph','property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
+                'class'=> 'compteBundle:Paragraph','query_builder'=>function(ParagraphRepository $pa) use($morasse) {
+            return $pa->getParagraphsByMorass($morasse);},'property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
         ->add('fromLine','entity', array(
                 'class'=> 'compteBundle:Line','property'=>'idl','required'=>true,'multiple'=>false,'expanded'=>false ))
 
@@ -48,7 +43,8 @@ class ExpenseTransferType extends AbstractType
             )*/
 
         ->add('toParagraph','entity', array(
-                'class'       => 'compteBundle:Paragraph','property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
+                'class'       => 'compteBundle:Paragraph','query_builder'=>function(ParagraphRepository $pa) use($morasse) {
+            return $pa->getParagraphsByMorass($morasse);},'property'=>'idp','required'=>true,'multiple'=>false, 'expanded'=>false ))
 
         ->add('toLine','entity', array(
                 'class'       => 'compteBundle:Line','property'=>'idl','required'=>true,'multiple'=>false, 'expanded'=>false ))

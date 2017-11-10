@@ -25,17 +25,64 @@ class MorassController extends Controller
      * Migration between lines.
      *
      */
-    public function lineTransferAction(Morass $morass)
+    public function lineTransferAction(Request $request, Morass $morass)
     {
-        //$em = $this->getDoctrine()->getManager();
 
-        //$morass = $em->getRepository('compteBundle:Morass')->findOneById($id);
         $user=$this->getUser();
         $expenseTransfer= new ExpenseTransfer();
         $expenseTransfer->setMorass($morass);
-        $em = $this->get('doctrine.orm.entity_manager');
-        $transferForm = $this->createForm(new ExpenseTransferType($em), $expenseTransfer);
+
+        $transferForm = $this->createForm(new ExpenseTransferType($morass), $expenseTransfer);
         $morassArray= $this->getMorass($morass,$user);
+
+
+
+        $transferForm->handleRequest($request);
+        if ($transferForm->isSubmitted() && $transferForm->isValid()) {
+
+            // make sure the migration is between 2 different lines.
+            $fromLine =$expenseTransfer->getFromLine();
+            $toLine =$expenseTransfer->gettoLine();
+            $amount= $expenseTransfer->getAmount();
+            $lineAvailableAmount= $fromLine->getAmount() - $fromLine->getConsumedAmount(); 
+                if($fromLine->getId() != $toLine->getId() && $lineAvailableAmount >= $amount ){
+
+                    $fromlineAmount = $fromLine->getAmount();
+                    $tolineAmount = $toLine->getAmount();
+
+                    $fromLine->setAmount($fromlineAmount - $amount);
+                    $toLine->setAmount($tolineAmount + $amount);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($expenseTransfer);
+                    $em->persist($toLine);
+                    $em->persist($fromLine);
+                    $em->flush($expenseTransfer);
+                    $em->flush($toLine);
+                    $em->flush($fromLine);
+                    $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+                    return $this->redirectToRoute('morass_line_transfer', array('id' => $morass->getId()));
+                }
+                elseif ($transferForm->isSubmitted() && $fromLine->getId() == $toLine->getId()) {
+
+                    $this->addFlash('error', 'هناك مشكل في إتمام العملية : المرجو اختيار سطرين مختلفين');
+
+                }
+
+                  elseif ($transferForm->isSubmitted() && $fromLine->getAmount() >= $amount) {
+
+                    $this->addFlash('error', 'هناك مشكل في إتمام العملية : السطر المحول منه لا يحتوي على المبلغ المطلوب');
+
+                }
+
+        }
+        elseif ($transferForm->isSubmitted()) {
+
+            $this->addFlash('error', 'هناك مشكل في إتمام العملية');
+
+        }
+
+
         return $this->render('morass/lineTransfer.html.twig', array(
             'morass' => $morass,
           //  'delete_form' => $deleteForm->createView(),
@@ -46,12 +93,7 @@ class MorassController extends Controller
             'userLines'=>$morassArray['userLines'],
             'form'=>$transferForm->createView(),
         ));
-
-      //  return $this->render('morass/lineTransfer.html.twig', array(
-          //  'morass' => $morass,
-      //  ));
     }
-
 
 
      /**
@@ -74,16 +116,10 @@ class MorassController extends Controller
         $toLines=$em->getRepository('compteBundle:Line')->findByParagraph($toParagraph);
         $fromLine= array();
         $toLine= array();
-        $i=0;
         foreach ($fromLines as $line) {
             $fromLine[$line->getId()]=$line->getIdl();
-            $i++;
         }
-        $i=0;
         foreach ($toLines as $line) {
-           /* $toLine[$i]['id'] = $line->getId();
-            $toLine[$i]['idl'] = $line->getIdl();
-            $i++;*/
             $toLine[$line->getId()]=$line->getIdl();
         }
         $data = json_encode([$fromLine,$toLine]);

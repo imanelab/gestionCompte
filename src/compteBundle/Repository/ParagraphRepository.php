@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ParagraphRepository extends EntityRepository
 {
+
+		public function getParagraphsByMorass($morass)
+  {
+
+    $qb = $this->createQueryBuilder('p');
+    $qb->join('p.morass', 'm')
+       ->where($qb->expr()->eq('m.id', $morass->getId()));
+    return $qb;
+  }
 }
