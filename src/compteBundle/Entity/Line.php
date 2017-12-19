@@ -3,12 +3,15 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Line
  *
  * @ORM\Table(name="line")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\LineRepository")
+ * @Gedmo\Loggable
  */
 class Line
 {
@@ -42,6 +45,7 @@ class Line
     /**
      * @var float
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="amount", type="float", nullable=true)
      */
     private $amount;
@@ -49,6 +53,7 @@ class Line
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="version", type="smallint")
      */
     private $version;

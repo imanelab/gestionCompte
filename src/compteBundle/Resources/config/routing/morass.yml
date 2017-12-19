@@ -23,7 +23,22 @@ morass_delete:
     defaults: { _controller: "compteBundle:Morass:delete" }
     methods:  DELETE
 
+morass_transfer:
+    path:     /{id}/delete
+    defaults: { _controller: "compteBundle:Morass:delete" }
+    methods:  DELETE
+
 morass_morass:
     path:      /{id}/morass
     defaults: { _controller: "compteBundle:Morass:morass" }
     methods:  GET
+
+morass_line_transfer:
+    path:      /{id}/transfer
+    defaults: { _controller: "compteBundle:Morass:lineTransfer" }
+    methods:  [GET, POST]
+
+morass_line_manage_transfer:
+    path:      /{id}/managetransfer
+    defaults: { _controller: "compteBundle:Morass:manageTransfer" }
+    methods:  POST

@@ -33,6 +33,14 @@ compte_movement:
 compte_externalaccount:
         resource: "@compteBundle/Resources/config/routing/externalaccount.yml"
         prefix:   /externalaccount
+
+compte_n2l:
+        resource: "@compteBundle/Resources/config/routing/n2l.yml"
+        prefix:   /n2l
+
+compte_notifications:
+        resource: "@compteBundle/Resources/config/routing/notifications.yml"
+        prefix:   /notifications
         
 compte_homepage:
     path:     /

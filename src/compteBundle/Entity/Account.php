@@ -3,10 +3,13 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Account
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="account")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\AccountRepository")
  */
@@ -55,6 +58,7 @@ class Account
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="rib", type="bigint", unique=true)
      */
     private $rib;
@@ -62,6 +66,7 @@ class Account
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="account_name", type="string", nullable=true,length=255)
      */
     private $accountName;
@@ -69,6 +74,7 @@ class Account
     /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="depth", type="integer")
      */
     private $depth;
@@ -76,6 +82,7 @@ class Account
     /**
      * @var float
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="balance", type="float", nullable=true)
      */
     private $balance;

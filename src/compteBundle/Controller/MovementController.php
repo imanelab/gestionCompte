@@ -6,6 +6,8 @@ use compteBundle\Entity\Movement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Movement controller.
  *
@@ -36,6 +38,33 @@ class MovementController extends Controller
         ));
     }
 
+
+    /**
+     * Approve/Refuse a movement.
+     *
+     */
+    public function processMovementAction()
+    {
+
+        $request = $this->get('request');        
+          $id = $request->get('id');
+          $choice = $request->get('choice');
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $movement= $em->getRepository('compteBundle:Movement')->findOneById($id);
+        if ($choice == "approve") {
+            $movement->setApproved(true);
+        }
+        elseif ($choice == "refuse") {
+            $movement->setApproved(false);
+        }
+        $em->persist($movement);
+        $em->flush();
+        $response = array("code" => 100, "success" => true, "approved"=>$movement->getApproved());
+        return new Response(json_encode($response)); 
+    }
 
     /**
     * Check the selected accounts

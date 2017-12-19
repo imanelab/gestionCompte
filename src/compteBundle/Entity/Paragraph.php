@@ -3,12 +3,15 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Paragraph
  *
  * @ORM\Table(name="paragraph")
  * @ORM\Entity(repositoryClass="compteBundle\Repository\ParagraphRepository")
+ * @Gedmo\Loggable
  */
 class Paragraph
 {
@@ -35,6 +38,7 @@ class Paragraph
         /**
      * @var int
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="idp", type="integer")
      */
     private $idp;
@@ -42,6 +46,7 @@ class Paragraph
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="title", type="string",length=255)
      */
     private $title;
