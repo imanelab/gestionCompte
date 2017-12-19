@@ -1,7 +1,7 @@
 {% extends 'compteBundle::layout.html.twig' %}
 
 {% block xTitle %}
-    <h2> تعديل حساب </h2>
+    <h2> تعديل شريك </h2>
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
     {{ form_start(edit_form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
 	
 	<div class="form-group">
-	 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.name, "إسم الحساب")}}<span class="required"></span>
+	 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.name, "إسم الشريك")}}<span class="required"></span>
          </label>
 	<div class="col-md-6 col-sm-6 col-xs-12">
 	
@@ -18,7 +18,7 @@
 		</div>	
 		</div>
 		<div class="form-group">
-		 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.type, "نوع الحساب")}}<span class="required"></span>
+		 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(edit_form.type, "نوع الشريك")}}<span class="required"></span>
          </label>
 		<div class="col-md-6 col-sm-6 col-xs-12">
 		{{ form_widget(edit_form.type,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}

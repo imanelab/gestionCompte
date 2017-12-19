@@ -55,7 +55,7 @@
            <li><a href="{{path('compte_homepage')}}"><i class="fa fa-home"></i> الرئيسية </a></li>
        
        {% if is_granted("ROLE_SUPER_ADMIN") %}
-       <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمين </a> </li>
+       <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمون </a> </li>
        {%endif%}
        
        {% if is_granted("ROLE_SUPER_ADMIN") %}
@@ -111,8 +111,8 @@
                   </a>
 
                   <ul class="dropdown-menu dropdown-usermenu pull-right" style="margin-right: -85px">
-                    <li><a href="{{path('fos_user_profile_show')}}" style="position:relative;left:80px"> Profil</a></li>                
-                    <li><a href="{{path('fos_user_security_logout')}}" style="position:relative;left:80px"> خروج </a></li>	   
+                    <li><a href="{{path('fos_user_profile_show')}}" > بيانات المستخدم</a></li>                
+                    <li><a href="{{path('fos_user_security_logout')}}" "> خروج </a></li>	   
 				  </ul>
 	  
 	  </li>
@@ -121,34 +121,20 @@
       <li><a> {{ app.user.firstName}} {{ app.user.lastName}}</a> </li>
     
     
-    <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">3</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                      
-                    <li id="test">
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                </li>
+      <li role="presentation" class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-envelope-o"></i>
+                      <span id="notificationsNumber" class="badge bg-green"></span>
+                    </a>
+                    <ul dir="rtl" id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        
+                      <li dir="rtl" id="notifications">
+                          <span dir="rtl" class="message">
+                           ليست لديكم أية تنبيهات
+                          </span>
+                      </li>
+                  </ul>
+      </li>
     </ul>
   </div>
             </nav>

@@ -1,0 +1,25 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+{% block xTitle %}
+    <h2> N2L</h2>
+{% endblock %}
+{% block content %}
+       
+   {{n2l}}
+   
+
+{% endblock %}
+
+{% block js %}
+{{parent()}}
+ 
+ <!-- Datatables -->
+    <script src="{{asset('assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{asset('assets/vendors/build/js/custom.min.js')}}"></script>
+
+{% endblock %}
+
+

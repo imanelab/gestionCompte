@@ -1,0 +1,134 @@
+{% extends "compteBundle::layout.html.twig" %}
+
+
+{% block xTitle %}
+    <h2> تأكيد التحويلات </h2>
+{% endblock %}
+{% block content %}
+                  
+   
+   
+<table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>                         
+                          <th>العمليات</th>
+                          <th>تاريخ التحويل</th>
+                          <th>تاريخ إنهاء عملية التحويل</th>
+                          <th>عدد الأشهر</th>
+                          <th>مبلغ التحويل</th>
+                          <th>السطر المحول منه</th>
+                        
+                        </tr>
+                     </thead>
+
+
+                      <tbody>
+                        {% for movement in movements %}
+                        <tr>
+	                       	<td>   
+					            <div class="form-group">
+					            	<h2 id="approved-{{movement.id}}" class="bg-success" style="display:none;">تحويل مقبول</h2>
+					            	<h2 id="refused-{{movement.id}}" class="bg-danger" style="display:none;">تحويل مرفوض</h2>
+					                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+					                    <input type="submit" id="refuse-{{movement.id}}" value="رفض التحويل" class="btn btn-danger">
+					                    <input class="btn btn-success" id="approve-{{movement.id}}" type= "submit" value="تأكيد التحويل">
+					                </div> 
+					            </div> 
+	                       </td>
+	                       
+	                       <td>{% if movement.realDateMv %}{{ movement.realDateMv|date('Y-m-d') }}{% endif %}</td>
+	                       
+	                       <td>{% if movement.dateMv %}{{ movement.dateMv|date('Y-m-d') }}{% endif %}</td>
+	                       <td>{{ movement.months }}</td>
+	                       <td>{{ movement.amountMv | number_format }}</td>
+	                       <td>{{ movement.line.title }}</td>
+                        </tr>
+                        {% endfor %}
+            
+                        </tbody>
+                    </table>
+
+	 </div>
+              </div>
+{% endblock %}
+
+{% block js %}
+{{parent()}}
+ 
+ <!-- Datatables -->
+    <script src="{{asset('assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{asset('assets/build/js/custom.min.js')}}"></script>
+    <!-- Datatables -->
+    <script>
+
+    
+      $(document).ready(function() {
+
+        $('#datatable').dataTable({
+		language:{
+				 "sProcessing":   "جارٍ التحميل...",
+			"sLengthMenu":   "أظهر _MENU_ مدخلات",
+			"sZeroRecords":  "لم يعثر على أية سجلات",
+			"sInfo":         "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+			"sInfoEmpty":    "يعرض 0 إلى 0 من أصل 0 سجل",
+			"sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+			"sInfoPostFix":  "",
+			"sSearch":       "ابحث:",
+			"sUrl":          "",
+			"oPaginate": {
+				"sFirst":    "الأول",
+				"sPrevious": "السابق",
+				"sNext":     "التالي",
+				"sLast":     "الأخير"
+    }
+		
+		}
+		});
+      });
+
+       jQuery(function($){
+     			$(".btn").click(function(event){
+     				event.preventDefault();
+     				id=this.id.replace('approve-','');
+		          	 fullId=this.id;
+     				if(this.id.indexOf("approve-") !=-1){
+		          	 
+		          	 path1="{{path('movement_approve', { 'id':'varvar'})}}";
+		          	 path =path1.replace('varvar',id);
+		          	  $.post(path,              
+					                {id: id, choice:'approve'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	$('#'+fullId).parent().hide();
+					                    	$('#approved-'+id).show();
+					                    }
+					    }, "json");   
+    
+					}
+					if(this.id.indexOf("refuse-") !=-1){
+						id =this.id.replace('refuse-','');
+					    path1="{{path('movement_approve', { 'id':'varvar'})}}";
+		          		 path =path1.replace('varvar',id);
+					    $.post(path,              
+					                {id: id, choice:'refuse'}, 
+					            function(response){
+					                    if(response.code == 100 && response.success){
+					                    	$('#'+fullId).parent().hide();
+					                    	$('#refused-'+id).show();
+					                    }
+					    }, "json");    
+
+		          	}
+				})		
+		});
+
+
+
+    
+    </script>
+    <!-- /Datatables -->
+
+{% endblock %}

@@ -2,7 +2,7 @@
 
 
 {% block xTitle %}
-    <h2> قائمة المندوبيات </h2>
+    <h2> قائمة الحسابات </h2>
 {% endblock %}
 {% block content %}
 
@@ -45,8 +45,8 @@
 							</div> </div> 
                        </td>
 					   
-				 <td>{{ account.balance }}</td>	 				
-                <td>{{ account.rib }}</td>
+				 <td>{{ account.balance |number_format}}</td>	 				
+                <td>{{ account.rib |number_format(0,',',' ')}}</td>
                 
                
 					
