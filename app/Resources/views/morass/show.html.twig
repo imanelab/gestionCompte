@@ -13,6 +13,7 @@
             <tr>
 			     <th>العمليات</th>
 				  <th>التاريخ</th>
+				  <th>الجهة الوصية</th>
                 <th>إسم المصنفة</th>
 				
                 
@@ -40,6 +41,7 @@
                        </td>
 				
 				 <td>{{ morass.year }}</td>
+				 <td>{%if mrass.delegation %} {{ morass.delegation }} {%else%} الحساب المركزي{%endif%}</td>
 				<td>{{ morass.name }}</td>
                
 				
@@ -85,6 +87,7 @@
 			</thead>
 			<tbody>
                  <tr><td rowspan="{{colspan}}">{{morassAmount|number_format}}</td>  </tr>
+                 {% if paragraphs%}
 				 {% for paragraph in paragraphs %}
                 <tr>
                 <td><a href="{{ path('paragraph_edit', { 'id': paragraph.id }) }}"> {{ paragraph.idp }} </a></td>
@@ -104,6 +107,7 @@
 				</tr>
 				{%endfor%}
 				{%endfor%}
+				{%endif%}
 
         </tbody>
     </table>

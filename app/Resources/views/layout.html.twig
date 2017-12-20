@@ -55,7 +55,7 @@
            <li><a href="{{path('compte_homepage')}}"><i class="fa fa-home"></i> الرئيسية </a></li>
        
        {% if is_granted("ROLE_SUPER_ADMIN") %}
-       <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمين </a> </li>
+       <li><a href="{{path('users')}}"><i class="fa fa-user"></i> المستخدمون </a> </li>
        {%endif%}
        
        {% if is_granted("ROLE_SUPER_ADMIN") %}
@@ -111,8 +111,8 @@
                   </a>
 
                   <ul class="dropdown-menu dropdown-usermenu pull-right" style="margin-right: -85px">
-                    <li><a href="{{path('fos_user_profile_show')}}" style="position:relative;left:80px"> Profil</a></li>                
-                    <li><a href="{{path('fos_user_security_logout')}}" style="position:relative;left:80px"> خروج </a></li>	   
+                    <li><a href="{{path('fos_user_profile_show')}}" > بيانات المستخدم</a></li>                
+                    <li><a href="{{path('fos_user_security_logout')}}" "> خروج </a></li>	   
 				  </ul>
 	  
 	  </li>

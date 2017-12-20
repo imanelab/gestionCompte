@@ -291,23 +291,25 @@ class MorassController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
         $userLines= $repository->getLinesByMasterEntitiesId($user)->getQuery()->getResult();
     }
-		
-		foreach( $paragraphs as $paragraph)
-		{
-			$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
+		if($paragraphs){
+    		foreach( $paragraphs as $paragraph)
+    		{
+    			$repository = $this->getDoctrine()->getManager()->getRepository('compteBundle:Line');
 
-			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph,array('idl' => 'ASC'));
+    			$lines[$paragraph->getId()]=$repository->findByParagraph($paragraph,array('idl' => 'ASC'));
 
-            
-			
-		}
-        foreach ($lines as $line) {
-            foreach ($line as $amount) {
-                $morassAmount += $amount->getAmount();
+                
+    			
+    		}
+            foreach ($lines as $line) {
+                foreach ($line as $amount) {
+                    $morassAmount += $amount->getAmount();
+                }
             }
-        }
-		
+		}
+        else $lines= array();
 		$colspan = count($lines,COUNT_RECURSIVE)+1;
+
 		
 				
         return array(

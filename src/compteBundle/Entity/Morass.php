@@ -50,7 +50,7 @@ class Morass
      * @var int
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="year", type="smallint", unique=true)
+     * @ORM\Column(name="year", type="smallint", unique=false)
      */
     private $year;
 
