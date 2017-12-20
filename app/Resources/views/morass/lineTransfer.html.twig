@@ -8,51 +8,65 @@
 {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
 	  
       <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.fromParagraph, "from paragraph")}}<span class="required"></span>
+
+         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="first-name"> {{form_label(form.fromParagraph, "الفقرة المحول منها")}}<span class="required"></span>
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-2 col-xs-6">
+
         {{ form_widget(form.fromParagraph,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
         </div>
         </div>
 
       <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.fromLine, "from line")}}<span class="required"></span>
+
+         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="first-name"> {{form_label(form.fromLine, "السطر المحول منه")}}<span class="required"></span>
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-2 col-xs-6">
+
         {{ form_widget(form.fromLine,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
         </div>
         </div>
 
 
-         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.toParagraph, "To paragraph")}}<span class="required"></span>
+
+         <div class="form-group" style="position: relative;right: 617px;top: -87px;">
+         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="first-name"> {{form_label(form.toParagraph, "الفقرة المحول إليها")}}<span class="required"></span>
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-2 col-xs-6">
+
         {{ form_widget(form.toParagraph,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
         </div>
         </div>
 
 
-         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.toLine, "To Line")}}<span class="required"></span>
+
+         <div class="form-group" style="position: relative;right: 617px;top: -87px;">
+         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="first-name"> {{form_label(form.toLine, "السطر المحول إليه")}}<span class="required"></span>
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-2 col-xs-6">
+
         {{ form_widget(form.toLine,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
         </div>
         </div>
 
         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(form.amount, "Amount")}}<span class="required"></span>
+
+         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="sec-name"> {{form_label(form.amount, " المبلغ المراد تحويله")}}<span class="required"></span>
          </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form_widget(form.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'first-name'}}) }}
+      <div class="col-md-2 col-sm-2 col-xs-6"> 
+        {{ form_widget(form.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12', 'id':'sec-name'}}) }}
         </div>
         </div>
 		
+	
+		
+		
+		
         <div class="ln_solid"></div>
-            <div class="form-group">
+            <div class="form-group"  style="position: relative;top: -76px;">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <input type="submit" class="btn btn-success" value="إحداث">
+                <input type="submit" class="btn btn-success" value="ترحيل">
+
 
             </div>
         </div>
@@ -112,6 +126,7 @@
 	<script>
 	jQuery(document).ready(function(){
         manageTransfer();
+
 		$('#comptebundle_morass_fromParagraph').change(manageTransfer);
         $('#comptebundle_morass_toParagraph').change(manageTransfer);
        // $('#comptebundle_morass_toParagraph').change(manageTransfer());

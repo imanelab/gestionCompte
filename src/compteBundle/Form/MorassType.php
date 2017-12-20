@@ -13,7 +13,9 @@ class MorassType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('year')        ;
+        $builder->add('name')
+        ->add('year')
+        ->add('delegation','entity',['class'=>'compteBundle:Delegation','property'=>'name','expanded'=>false,'required'=>false])        ;
     }
     
     /**
