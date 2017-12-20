@@ -3,6 +3,7 @@
 namespace compteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 
@@ -59,7 +60,8 @@ class Account
      * @var int
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="rib", type="bigint", unique=true)
+     * @ORM\Column(name="rib", type="string", unique=true,length=255)
+     * @Assert\Regex(pattern="/[0-9]+/", message="Le RIB ne doit contenir que des chiifres")
      */
     private $rib;
 

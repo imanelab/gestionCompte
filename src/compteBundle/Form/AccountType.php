@@ -19,7 +19,7 @@ class AccountType extends AbstractType
 		//->add('depth')
 		 ->add('balance')//,'money',["currency"=>"MAD"])
 		->add('delegation','entity',["class"=>"compteBundle:Delegation","property"=>"name","required"=>false])
-        ->add('account','entity',['class'=>'compteBundle:Account', 'property'=>'rib','query_builder' => 
+        ->add('account','entity',['class'=>'compteBundle:Account', 'property'=>'accountName','query_builder' => 
                                                                 function (AccountRepository $a) {
                                                             return $a->getAccountProperty(); },
         'required'=>false]);
