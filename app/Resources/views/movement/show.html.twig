@@ -42,11 +42,12 @@
                             </a>
 
 
-                            
-                             <a class="btn btn-info" href="{{ path('movement_edit', { 'id': movement.id }) }}">تعديل
+
+
+                             <a class="btn btn-info" href="{{ path('movement_request', { 'id': movement.id}) }}">طلب التحويل
                             
                             </a>
-                             <a class="btn btn-info" href="{{ path('movement_edit', { 'id': movement.id }) }}">تعديل
+                             <a class="btn btn-info" href="{{ path('movement_letter', { 'id': movement.id }) }}">رسالة التحويل
                             
                             </a>
                              {{ form_end(delete_form) }}

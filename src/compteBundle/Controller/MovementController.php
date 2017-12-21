@@ -66,6 +66,79 @@ class MovementController extends Controller
         return new Response(json_encode($response)); 
     }
 
+
+        /**
+     * Generate a movement request.
+     *
+     */
+    public function movementRequestAction(Movement $movement)
+    {    
+
+        $amount = $movement->getAmountMv();
+
+        $N2LService = $this->container->get('gestionCompte.n2l.html');
+        $amountLetters= $N2LService->convert_number($amount,'male');
+
+        $name="bb";
+        $object="cc";
+         return $this->render('TransferHTML/movement_request.html.twig', array(
+            'movement' => $movement,
+            'amountLetters'=> $amountLetters,
+            'name'=> $name,
+            'object'=> $object,
+        ));
+
+       
+    }
+
+
+
+        /**
+     * Generate a movement letter.
+     *
+     */
+    public function movementLetterAction(Movement $movement)
+    {
+
+        $amount = $movement->getAmountMv();
+
+        $N2LService = $this->container->get('gestionCompte.n2l.html');
+        $amountLetters= $N2LService->convert_number($amount,'male');
+
+        $name="bb";
+        $object="cc";
+
+
+        //regional or provincial
+        $debitAccount= $movement->getDebitAccount();
+        $delegation= $debitAccount ? $debitAccount->getDelegation(): null;
+        if($delegation){
+            if ($delegation->getDepth()==1) {
+                $regional= "الجهوي";
+                $region= $delegation->getName();
+                $ofRegion= "لجهة";
+            }
+            else {
+                $regional= "الإقليمي";
+                $region= $delegation->getName();
+                $ofRegion= "بإقليم";
+            }
+       
+    }
+         return $this->render('TransferHTML/movement_letter.html.twig', array(
+            'movement' => $movement,
+            'regional'=> $regional,
+            'region'=> $region,
+            'ofRegion'=> $ofRegion,
+            'name'=> $name,
+            'object'=> $object,
+        ));
+    }
+
+
+
+
+
     /**
     * Check the selected accounts
     *

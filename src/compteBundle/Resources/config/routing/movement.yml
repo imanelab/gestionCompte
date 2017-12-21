@@ -27,3 +27,13 @@ movement_approve:
     path:     /{id}/process_movement
     defaults: { _controller: "compteBundle:Movement:processMovement" }
     methods:  POST
+
+movement_request:
+    path:     /{id}/movement_request
+    defaults: { _controller: "compteBundle:Movement:movementRequest" }
+    methods:  GET
+
+movement_letter:
+    path:     /{id}/movement_letter
+    defaults: { _controller: "compteBundle:Movement:movementLetter" }
+    methods:  GET
