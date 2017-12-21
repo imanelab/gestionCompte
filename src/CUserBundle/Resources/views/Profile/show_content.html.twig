@@ -1,16 +1,11 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
-
-{% block xTitle %}
-    <h2 class="pull-right">حساب المستخدم</h2>
-{% endblock %}
-{% block fos_user_content %}
 
   <div class="form-horizontal form-label-left" id="demo-form2">
   
       <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{ 'profile.show.firstName'|trans }}<span class="required"></span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> الاسم الشخصي<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         {{ user.firstName }}
@@ -18,7 +13,7 @@
         </div>
 
        <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12"> {{ 'profile.show.lastName'|trans }}<span class="required"></span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12"> الاسم العائلي<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         {{ user.lastName }}
@@ -26,7 +21,7 @@
         </div>
 
         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12"> {{ 'profile.show.roles'|trans }}<span class="required"></span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12"> الصفات<span class="required"></span>
          </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         {% for role in user.roles %}
@@ -61,10 +56,8 @@
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <a class="btn btn-info pull-right" href="{{ path('fos_user_profile_edit') }}">تعديل</a>
-                <a class="btn btn-primary pull-right" href="{{ path('users') }}">العودة إلى اللائحة</a>
                 <a class="btn btn-primary pull-right" href="{{ path('compte_homepage')}}">الرئيسية</a>
 
             </div>
         </div>
     </div>
-{% endblock fos_user_content %}

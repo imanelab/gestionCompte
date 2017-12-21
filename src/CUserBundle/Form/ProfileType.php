@@ -13,9 +13,10 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName','text')
-            ->add('lastName','text')
-            ->add('masterEntity','entity',['class'=>'compteBundle:masterEntity','property'=>'name','required'=>false]);
+            ->add('firstName','text',['required'=>false,'disabled'=>true,'label'=>'الاسم الشخصي'])
+            ->add('lastName','text',['required'=>false,'disabled'=>true,'label'=>'الاسم العائلي'])
+            ->add('username','text',['required'=>true,'disabled'=>true,'label'=>'اسم المستخدم'])
+            ->add('masterEntity','entity',['class'=>'compteBundle:masterEntity','property'=>'name','required'=>false,'disabled'=>true,'label'=>'الوحدة الإدارية']);
     }
 
  public function getParent()

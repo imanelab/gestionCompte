@@ -1,7 +1,12 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "compteBundle::layout.html.twig" %}
 {%block title%}
     {{parent()}} - Editer profile
 {%endblock%}
-{% block fos_user_content %}
+
+{% block content %}
+
+{% block xTitle %}
+ <h2 dir='rtl'> بيانات المستخدم </h2>
+{% endblock %}
 {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock content %}

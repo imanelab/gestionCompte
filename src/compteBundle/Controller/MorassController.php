@@ -9,7 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 use CUserBundle\Entity\User;
 use compteBundle\Entity\ExpenseTransfer;
+use compteBundle\Entity\Paragraph;
+use compteBundle\Entity\Line;
+
 use compteBundle\Form\ExpenseTransferType;
+use compteBundle\Form\ParagraphType;
+use compteBundle\Form\LineType;
+
+
 
 
 /**
@@ -194,10 +201,18 @@ class MorassController extends Controller
     public function showAction(Morass $morass)
     {
         $user=$this->getUser();
+        $paragraph= new Paragraph();
+        $paragraph->setMorass($morass);
+        $line = new Line();
+
+        $paragraphForm = $this->createForm(new ParagraphType(), $paragraph); 
+        $lineForm = $this->createForm(new LineType(), $line); 
         $deleteForm = $this->createDeleteForm($morass);
         $morassArray= $this->getMorass($morass,$user);
         return $this->render('morass/show.html.twig', array(
             'morass' => $morass,
+            'paragraphForm' => $paragraphForm->createView(),
+            'lineForm' => $lineForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'paragraphs'=>$morassArray['paragraphs'],
             'lines'=>$morassArray['lines'],

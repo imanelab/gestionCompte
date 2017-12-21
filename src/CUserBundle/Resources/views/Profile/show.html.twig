@@ -1,7 +1,11 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "compteBundle::layout.html.twig" %}
 {%block title%}
     {{parent()}} - Profile
 {%endblock%}
-{% block fos_user_content %}
+
+{% block xTitle %}
+    <h2 class="pull-right">حساب المستخدم</h2>
+{% endblock %}
+{% block content %}
 {% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% endblock content %}

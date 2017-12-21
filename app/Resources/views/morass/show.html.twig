@@ -74,23 +74,22 @@
             <tr>
 			    
                
-				 <th>توقعات المداخيل لسنة 2017</th>
-                 		<th>الفقرة</th>
-                 
+				 <th>توقعات المداخيل لسنة {{morass.year}}</th>
+                 <th>الفقرة</th>
                  <th>السطر</th> 
                  <th>نوع العمليات</th>
-                <th>توقعات النفقات لسنة 2017</th>
-                <th>المبلغ المصروف</th>
+                <th>توقعات النفقات لسنة {{morass.year}}</th>
+                <th>المبلغ الملتزم</th>
 				 
                 
             </tr>
 			</thead>
 			<tbody>
-                 <tr><td rowspan="{{colspan}}">{{morassAmount|number_format}}</td>  </tr>
+                 <tr><td rowspan="{{colspan}}">{{morassAmount|number_format}}{% if is_granted('ROLE_SUPER_ADMIN')%} <a class="btn btn-success addParagraphButton" href="#" title="إضافة فقرة جديدة"><i class="glyphicon glyphicon-plus-sign" ></i></a> {% endif %}</td>  </tr>
                  {% if paragraphs%}
 				 {% for paragraph in paragraphs %}
                 <tr>
-                <td><a href="{{ path('paragraph_edit', { 'id': paragraph.id }) }}"> {{ paragraph.idp }} </a></td>
+                <td><a href="{{ path('paragraph_edit', { 'id': paragraph.id }) }}"> {{ paragraph.idp }} </a> {% if is_granted('ROLE_SUPER_ADMIN')%} <a class="btn btn-success addLineButton" href="#" title="إضافة سطر جديد"><i class="glyphicon glyphicon-plus-sign" ></i></a> {% endif %}</td>
                 <td></td>
 				
 				<td> {{ paragraph.title }}</td>
@@ -111,6 +110,106 @@
 
         </tbody>
     </table>
+
+
+<div id="addParagraphForm" style="display: none;">
+
+     {{ form_start(paragraphForm, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(paragraphForm.title, "إسم الفقرة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(paragraphForm.title,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(paragraphForm.idp, "رقم الفقرة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(paragraphForm.idp,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(paragraphForm.morass, "المصنفة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(paragraphForm.morass,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+        <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+        {{ form_end(paragraphForm) }}
+</div>
+
+<div id="addLineForm" class="col-md-12 col-sm-12 col-xs-12">
+	 {{ form_start(lineForm, {'attr': {'class': 'form-horizontal form-label-left', 'id':'demo-form2'}}) }}
+	  
+      <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(lineForm.title, "إسم السطر")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(lineForm.title,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(lineForm.idl, "رقم السطر")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(lineForm.idl,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(lineForm.amount, "الرصيد")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(lineForm.amount,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(lineForm.masterEntities, "الوحدة الإدارية")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(lineForm.masterEntities,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+		 <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> {{form_label(lineForm.paragraph, "الفقرة")}}<span class="required"></span>
+         </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        {{ form_widget(lineForm.paragraph,{'attr': {'class': 'form-control col-md-7 col-xs-12'}}) }}
+        </div>
+        </div>
+		
+        <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <input type="submit" class="btn btn-success" value="إحداث">
+
+            </div>
+        </div>
+
+
+    {{ form_end(lineForm) }}
+</div>
+
+
+
+
+
+
      <a class="btn btn-primary pull-right" href="{{ path('morass_index') }}">العودة إلى اللائحة </a>
      <a class="btn btn-primary pull-right" href="{{ path('morass_line_transfer' , { 'id': morass.id }) }}">ترحيل النفقات بين السطور</a>
 {% endblock %}
@@ -128,6 +227,12 @@
     <!-- Datatables -->
     <script>
       $(document).ready(function() {
+      	$('#addParagraphForm').hide();
+      	$('#addLineForm').hide();
+
+
+      	$('.addParagraphButton').click(function(){$('#addParagraphForm').toggle();})
+      	$('.addLineButton').click(function(){$('#addLineForm').toggle();})
 
         $('#datatable').dataTable({
 		language:{

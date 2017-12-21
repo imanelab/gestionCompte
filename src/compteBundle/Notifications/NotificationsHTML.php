@@ -50,7 +50,7 @@ class NotificationsHTML
 
     // Insertion du code dans la page, dans le premier <h1>
 
-    $content = preg_replace('#<li id="notifications">(.*?)</li>#is',$html,$content);
+    $content = preg_replace('#<li dir="rtl" id="notifications">(.*?)</li>#is',$html,$content);
     $content = preg_replace('#<span id="notificationsNumber" class="badge bg-green">(.*?)</span>#is',$notificationsNumber,$content);
    // $content = preg_replace('#<body">(.*)</body>#iU',$html,$content,1);
 

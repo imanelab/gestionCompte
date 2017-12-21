@@ -21,7 +21,7 @@ class NotificationsController extends Controller
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $movements = $em->getRepository('compteBundle:Movement')->findByValidator($user);
+        $movements = $em->getRepository('compteBundle:Movement')->findBy(['validator'=>$user,'approved'=>null]);
 
         return $this->render('notifications/index.html.twig', array(
             'movements' => $movements,
