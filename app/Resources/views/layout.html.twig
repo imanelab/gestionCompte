@@ -79,7 +79,11 @@
       
       {% if not is_granted("ROLE_SUPER_ADMIN") %}
        <li><a href="{{path('movement_index')}}"><i class="fa fa-retweet"></i> التحويلات </a> </li>
-          {%endif%}      
+          {%endif%}  
+
+{% if is_granted("ROLE_SUPER_ADMIN") %}
+          <li><a href="{{path('compte_history')}}"><i class="fa fa-history"></i> سجل العمليات </a> </li>
+      {%endif%}		  
                   
                  
                 </ul>
