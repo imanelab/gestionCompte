@@ -33,6 +33,9 @@ class ParagraphController extends Controller
      */
     public function newAction(Request $request)
     {
+        
+        $route= $request->headers->get('referer');
+
         $paragraph = new Paragraph();
         $form = $this->createForm('compteBundle\Form\ParagraphType', $paragraph);
         $form->handleRequest($request);
@@ -42,6 +45,9 @@ class ParagraphController extends Controller
             $em->persist($paragraph);
             $em->flush($paragraph); 
         $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+        if (strpos($route,'morass')) 
+        return $this->redirectToRoute('morass_show', array('id' => $paragraph->getMorass()->getId())); 
+        else      
         return $this->redirectToRoute('paragraph_show', array('id' => $paragraph->getId()));
 
         }
@@ -50,7 +56,8 @@ class ParagraphController extends Controller
             $this->addFlash('error', 'هناك مشكل في إتمام العملية');
 
         }
-
+        if (strpos($route,'morass')) 
+        return $this->redirectToRoute('morass_show', array('id' => $paragraph->getMorass()->getId())); 
         return $this->render('paragraph/new.html.twig', array(
             'paragraph' => $paragraph,
             'form' => $form->createView(),

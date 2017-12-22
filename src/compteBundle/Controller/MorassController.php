@@ -205,8 +205,17 @@ class MorassController extends Controller
         $paragraph->setMorass($morass);
         $line = new Line();
 
-        $paragraphForm = $this->createForm(new ParagraphType(), $paragraph); 
-        $lineForm = $this->createForm(new LineType(), $line); 
+        //create paragraph form and change default route to allow adding paragraph
+        $paragraphForm = $this->createForm(new ParagraphType(), $paragraph,array(
+            'action' => $this->generateUrl('paragraph_new'),
+            'method' => 'POST',
+        )); 
+
+         //create line form and change default route to allow adding line
+        $lineForm = $this->createForm(new LineType(), $line,array(
+            'action' => $this->generateUrl('line_new'),
+            'method' => 'POST',
+        )); 
         $deleteForm = $this->createDeleteForm($morass);
         $morassArray= $this->getMorass($morass,$user);
         return $this->render('morass/show.html.twig', array(
