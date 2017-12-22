@@ -27,10 +27,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				
 					 {{ form_start(delete_form) }}
-                           <input type="submit" value="حذف" class="btn btn-danger">
+                           
+						   <button value="حذف" class="btn btn-danger " > حذف
+						   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						   </button>
 						  
 						    <a class="btn btn-info" href="{{ path('morass_edit', { 'id': morass.id }) }}">تعديل
-							
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
                              {{ form_end(delete_form) }}
 							 
@@ -50,7 +53,7 @@
     </table>
 
 	 <a class="btn btn-primary pull-right" href="{{ path('morass_index') }}">العودة إلى اللائحة
-	 
+	 <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 	 </a>
 	
 	
@@ -206,12 +209,13 @@
 </div>
 
 
-
-
-
-
-     <a class="btn btn-primary pull-right" href="{{ path('morass_index') }}">العودة إلى اللائحة </a>
-     <a class="btn btn-primary pull-right" href="{{ path('morass_line_transfer' , { 'id': morass.id }) }}">ترحيل النفقات بين السطور</a>
+   
+     <a class="btn btn-danger pull-right" href="{{ path('morass_line_transfer' , { 'id': morass.id }) }}">ترحيل النفقات بين السطور
+	 <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+	 </a>
+	   <a class="btn btn-primary pull-right" href="{{ path('morass_index') }}">العودة إلى اللائحة 
+	 <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+	 </a>
 {% endblock %}
 
 {% block js %}
