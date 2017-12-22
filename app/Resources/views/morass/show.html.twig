@@ -231,8 +231,14 @@
       	$('#addLineForm').hide();
 
 
-      	$('.addParagraphButton').click(function(){$('#addParagraphForm').toggle();})
-      	$('.addLineButton').click(function(){$('#addLineForm').toggle();})
+      	$('.addParagraphButton').click(function(){$('#addParagraphForm').toggle(); $('#addLineForm').hide();
+      		$('html, body').animate({
+        scrollTop: $("#addParagraphForm").offset().top
+    }, 1500);})
+      	$('.addLineButton').click(function(){$('#addLineForm').toggle(); $('#addParagraphForm').hide(); 
+      $('html, body').animate({
+        scrollTop: $("#addLineForm").offset().top
+    }, 1500);})
 
         $('#datatable').dataTable({
 		language:{

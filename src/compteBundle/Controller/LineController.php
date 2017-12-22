@@ -34,6 +34,9 @@ class LineController extends Controller
     public function newAction(Request $request)
 
     {
+
+         $route= $request->headers->get('referer');
+
         $line = new Line();
         $form = $this->createForm('compteBundle\Form\LineType', $line);
         $form->handleRequest($request);
@@ -46,6 +49,9 @@ class LineController extends Controller
 
             
           $this->addFlash('notice', 'لقد تمت العملية بنجاح');
+          if (strpos($route,'morass')) 
+            return $this->redirectToRoute('morass_show', array('id' => $line->getParagraph()->getMorass()->getId())); 
+          else      
             return $this->redirectToRoute('line_show', array('id' => $line->getId()));
         }
         elseif ($form->isSubmitted()) {
@@ -55,6 +61,9 @@ class LineController extends Controller
         }
 
 
+        if (strpos($route,'morass')) 
+            return $this->redirectToRoute('morass_show', array('id' => $line->getParagraph()->getMorass()->getId())); 
+        else
         return $this->render('line/new.html.twig', array(
             'line' => $line,
             'form' => $form->createView(),
