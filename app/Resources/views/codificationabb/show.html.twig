@@ -11,8 +11,8 @@
            
       <thead>		
             <tr>
-			     <th>code</th>
-				 <th>label</th>
+			     <th>الرمز</th>
+				 <th>تسمية</th>
 			    <th>العمليات</th>
 				
                
@@ -35,10 +35,13 @@
 							 
 							 
 							 {{ form_start(delete_form) }}
-                           <input type="submit" value="حذف" class="btn btn-danger">
+                           
+						   <button value="حذف" class="btn btn-danger " > حذف
+						   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						   </button>
 						  
 						    <a class="btn btn-info" href="{{ path('codificationabb_edit', { 'id': codificationABB.id }) }}">تعديل
-							
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
                              {{ form_end(delete_form) }}
 							 
@@ -54,6 +57,8 @@
             </tr>
         </tbody>
     </table>
-	<a class="btn btn-primary pull-right" href="{{ path('codificationabb_index') }}">العودة إلى اللائحة</a>
+	<a class="btn btn-primary pull-right" href="{{ path('codificationabb_index') }}">العودة إلى اللائحة
+	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+	</a>
 
 {% endblock %}

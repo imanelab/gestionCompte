@@ -75,11 +75,13 @@
 			
 			<br><br><br>
 
-                <button class="btn btn-primary pull-right">
+                <button class="btn btn-success pull-right">
                     {{ 'registration.submit'|trans }}
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
-                <a class="btn btn-danger pull-right" href="{{ path('users')}}">
+                <a class="btn btn-primary pull-right" href="{{ path('users')}}">
                     العودة إلى القائمة
+					<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
                 </a>
         {{ form_rest(form) }}
         {{ form_end(form) }}
